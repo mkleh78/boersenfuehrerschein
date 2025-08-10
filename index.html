@@ -69,7 +69,7 @@
     .difficulty-star { color: var(--gold); font-size: 1rem; }
     /* Options */
     .options-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 1rem; }
-    .option-btn { background: rgba(255,255,255,.05); border: 2px solid var(--border); color: var(--text-primary); padding: 1.25rem; border-radius: 12px; cursor: pointer; transition: all .2s ease; text-align: left; font-size: 1.1rem; font-weight: 500; position: relative; overflow: hidden; }
+    .option-btn { background: rgba(255,255,255,.05); border: 2px solid var(--border); color: var(--text-primary); padding: 1.25rem; border-radius: 12px; cursor: pointer; transition: all .2s ease; text-align: left; font-size: 1.1rem; font-weight: 500; position: relative; overflow: hidden; display: flex; align-items: center; min-height: 80px; }
     .option-btn:hover:not(:disabled) { border-color: var(--primary); background: rgba(124,58,237,.1); transform: translateX(4px); }
     .option-btn:disabled { cursor: not-allowed; opacity: .8; }
     .option-btn.correct { border-color: var(--accent); background: rgba(16,185,129,.2); animation: correctPulse .6s ease; }
@@ -210,622 +210,622 @@
     const quizTopics = {
         "Börsen-Grundlagen 🎯": [
             { q: "Was ist eine Aktie?", a: [
-                { text: "Ein Anteil am Eigenkapital eines Unternehmens", correct: true, explain: "Genau! Du wirst zum Miteigentümer der Firma." },
-                { text: "Ein Schuldschein, den eine Firma ausgibt", correct: false, explain: "Das ist eine Anleihe. Hier bist du Kreditgeber, kein Eigentümer." },
-                { text: "Ein Recht, Produkte der Firma günstiger zu kaufen", correct: false, explain: "Das wäre ein Vorteilsprogramm, hat aber nichts mit Aktien zu tun." },
-                { text: "Ein Wettschein auf den Erfolg einer Firma", correct: false, explain: "Investieren ist keine Wette, sondern basiert auf dem realen Wert und Erfolg des Unternehmens." }
+                { text: "Ein verbriefter Anteil am Eigenkapital und damit am Vermögen einer Gesellschaft.", correct: true, explain: "Genau! Du wirst zum Miteigentümer der Firma." },
+                { text: "Ein verzinstes Darlehen, das Anleger einem Unternehmen gewähren.", correct: false, explain: "Das ist eine Anleihe. Hier bist du Kreditgeber, kein Eigentümer." },
+                { text: "Ein vertragliches Recht, Produkte einer Firma günstiger zu beziehen.", correct: false, explain: "Das wäre ein Vorteilsprogramm, hat aber nichts mit Aktien zu tun." },
+                { text: "Ein spekulatives Papier, dessen Wert sich aus Wettquoten ergibt.", correct: false, explain: "Investieren ist keine Wette, sondern basiert auf dem realen Wert und Erfolg des Unternehmens." }
             ], difficulty: 1 },
             { q: "Was ist die Börse?", a: [
-                { text: "Ein organisierter Marktplatz für Wertpapiere", correct: true, explain: "Korrekt! Hier treffen Angebot und Nachfrage für Aktien, Anleihen etc. aufeinander." },
-                { text: "Das Gebäude der Deutschen Bank in Frankfurt", correct: false, explain: "Nein, die Börse ist eine Institution, nicht das Gebäude einer einzelnen Bank." },
-                { text: "Ein staatliches Amt zur Regulierung von Firmen", correct: false, explain: "Die Regulierung erfolgt durch Aufsichtsbehörden wie die BaFin, nicht die Börse selbst." },
-                { text: "Ein Synonym für die gesamte Wirtschaft", correct: false, explain: "Die Börse ist ein wichtiger Teil der Wirtschaft, aber nicht die Wirtschaft als Ganzes." }
+                { text: "Ein organisierter Markt zum standardisierten Handel von Wertpapieren.", correct: true, explain: "Korrekt! Hier treffen Angebot und Nachfrage für Aktien, Anleihen etc. aufeinander." },
+                { text: "Die Zentrale der Bundesbank zur Ausgabe von neuem Geld.", correct: false, explain: "Nein, die Börse ist eine Handelsplattform, keine Institution der Geldpolitik." },
+                { text: "Eine staatliche Aufsichtsbehörde zur Regulierung von Unternehmen.", correct: false, explain: "Die Regulierung erfolgt durch Behörden wie die BaFin, nicht die Börse selbst." },
+                { text: "Ein Oberbegriff für die gesamte Finanzwirtschaft eines Landes.", correct: false, explain: "Die Börse ist ein wichtiger Teil der Finanzwirtschaft, aber nicht die Gesamtheit." }
             ], difficulty: 1 },
             { q: "Wer legt den Preis einer Aktie fest?", a: [
-                { text: "Angebot und Nachfrage der Marktteilnehmer", correct: true, explain: "Richtig, der Preis (Kurs) bildet sich ständig neu, je nachdem wie viele kaufen oder verkaufen wollen." },
-                { text: "Das Unternehmen selbst", correct: false, explain: "Das Unternehmen kann den Kurs durch gute Arbeit beeinflussen, ihn aber nicht direkt festlegen." },
-                { text: "Die Börsenaufsicht", correct: false, explain: "Die Aufsicht überwacht den fairen Handel, bestimmt aber keine Preise." },
-                { text: "Bankanalysten", correct: false, explain: "Analysten geben nur Schätzungen (Kursziele) ab, die den Markt beeinflussen können, aber den Preis nicht festlegen." }
+                { text: "Angebot und Nachfrage der Marktteilnehmer im elektronischen Handel.", correct: true, explain: "Richtig, der Preis (Kurs) bildet sich ständig neu, je nachdem wie viele kaufen oder verkaufen wollen." },
+                { text: "Das jeweilige Unternehmen durch einen Beschluss des Vorstands.", correct: false, explain: "Das Unternehmen kann den Kurs durch gute Arbeit beeinflussen, ihn aber nicht direkt festlegen." },
+                { text: "Die nationale Börsenaufsicht zur Gewährleistung fairer Preise.", correct: false, explain: "Die Aufsicht überwacht den fairen Handel, bestimmt aber keine Preise." },
+                { text: "Ein Konsortium von Bankanalysten durch die Festlegung von Kurszielen.", correct: false, explain: "Analysten geben nur Schätzungen (Kursziele) ab, die den Markt beeinflussen können, aber den Preis nicht festlegen." }
             ], difficulty: 2 },
             { q: "Was ist ein 'Index' wie der DAX?", a: [
-                { text: "Ein Korb von Aktien, der die Entwicklung eines Marktes oder einer Branche zeigt", correct: true, explain: "Perfekt! Der DAX ist quasi das Fieberthermometer für die 40 größten deutschen börsennotierten Unternehmen." },
-                { text: "Eine einzelne, sehr wichtige Aktie", correct: false, explain: "Nein, ein Index bündelt viele Aktien, um ein Gesamtbild zu zeigen." },
-                { text: "Ein von der Regierung verwalteter Fonds", correct: false, explain: "Nein, Indizes werden von Börsenbetreibern oder Finanzdienstleistern berechnet." },
-                { text: "Eine Liste aller handelbaren Aktien", correct: false, explain: "Ein Index enthält nur eine bestimmte Auswahl, nicht alle." }
+                { text: "Ein Kennzahl, die die durchschnittliche Entwicklung ausgewählter Aktien abbildet.", correct: true, explain: "Perfekt! Der DAX ist quasi das Fieberthermometer für die 40 größten deutschen börsennotierten Unternehmen." },
+                { text: "Ein Investmentfonds, der von einer staatlichen Stelle verwaltet wird.", correct: false, explain: "Nein, Indizes werden von Börsenbetreibern oder Finanzdienstleistern berechnet." },
+                { text: "Eine offizielle Liste aller an einer Börse zugelassenen Wertpapiere.", correct: false, explain: "Ein Index enthält nur eine bestimmte Auswahl, nicht alle." },
+                { text: "Die wichtigste Einzelaktie eines Landes mit der höchsten Marktkapitalisierung.", correct: false, explain: "Nein, ein Index bündelt viele Aktien, um ein Gesamtbild zu zeigen." }
             ], difficulty: 1 },
             { q: "Was ist eine Dividende?", a: [
-                { text: "Eine Gewinnausschüttung des Unternehmens an die Aktionäre", correct: true, explain: "Genau! Es ist dein Anteil am Gewinn, weil du Miteigentümer bist." },
-                { text: "Eine garantierte Zinszahlung auf die Aktie", correct: false, explain: "Dividenden sind nicht garantiert und ihre Höhe kann schwanken oder ganz ausfallen." },
-                { text: "Der Kursgewinn, den man beim Verkauf realisiert", correct: false, explain: "Das ist der Veräußerungsgewinn. Eine Dividende erhältst du, während du die Aktie hältst." },
-                { text: "Eine Gebühr, die man für den Aktienkauf zahlt", correct: false, explain: "Das sind Ordergebühren. Dividenden sind Einnahmen, keine Ausgaben." }
+                { text: "Der Teil des Unternehmensgewinns, der an die Aktionäre ausgeschüttet wird.", correct: true, explain: "Genau! Es ist dein Anteil am Gewinn, weil du Miteigentümer bist." },
+                { text: "Eine vertraglich garantierte Zinszahlung auf den Nennwert der Aktie.", correct: false, explain: "Dividenden sind nicht garantiert und ihre Höhe kann schwanken oder ganz ausfallen." },
+                { text: "Der Kursgewinn, den ein Anleger bei einem späteren Verkauf realisiert.", correct: false, explain: "Das ist der Veräußerungsgewinn. Eine Dividende erhältst du, während du die Aktie hältst." },
+                { text: "Eine Gebühr, die man beim Kauf der Aktie an den Broker entrichten muss.", correct: false, explain: "Das sind Ordergebühren. Dividenden sind Einnahmen, keine Ausgaben." }
             ], difficulty: 2 },
-            { q: "Was ist der Unterschied zwischen einer Stammaktie und einer Vorzugsaktie?", a: [
-                { text: "Stammaktien haben Stimmrecht, Vorzugsaktien oft eine höhere Dividende", correct: true, explain: "Richtig! Besitzer von Vorzugsaktien verzichten auf das Stimmrecht und erhalten dafür meist eine höhere Gewinnausschüttung." },
-                { text: "Vorzugsaktien dürfen vor Stammaktien verkauft werden", correct: false, explain: "Die Handelbarkeit ist für beide Aktiengattungen gleich." },
-                { text: "Stammaktien sind für Stammkunden, Vorzugsaktien für Neukunden", correct: false, explain: "Die Namen beziehen sich auf die Rechte, die mit der Aktie verbunden sind, nicht auf den Status des Aktionärs." },
-                { text: "Vorzugsaktien haben ein geringeres Risiko als Stammaktien", correct: false, explain: "Beide unterliegen dem gleichen unternehmerischen Risiko." }
+            { q: "Was unterscheidet Stammaktien von Vorzugsaktien?", a: [
+                { text: "Stammaktien gewähren ein Stimmrecht, Vorzugsaktien bieten oft eine höhere Dividende.", correct: true, explain: "Richtig! Besitzer von Vorzugsaktien verzichten auf das Stimmrecht und erhalten dafür meist eine höhere Gewinnausschüttung." },
+                { text: "Vorzugsaktien unterliegen geringeren Kursschwankungen als Stammaktien.", correct: false, explain: "Beide unterliegen dem gleichen unternehmerischen Risiko und ähnlichen Schwankungen." },
+                { text: "Stammaktien werden an Stammkunden, Vorzugsaktien an Neukunden ausgegeben.", correct: false, explain: "Die Namen beziehen sich auf die Rechte, die mit der Aktie verbunden sind, nicht auf den Status des Aktionärs." },
+                { text: "Vorzugsaktien müssen vor Stammaktien zum Verkauf angeboten werden.", correct: false, explain: "Eine solche Verkaufsreihenfolge oder ein Vorkaufsrecht existiert nicht." }
             ], difficulty: 3 },
             { q: "Was bedeutet 'Marktkapitalisierung'?", a: [
-                { text: "Der Gesamtwert aller Aktien eines Unternehmens (Aktienanzahl * Kurs)", correct: true, explain: "Korrekt! Dies ist die Kennzahl, die die 'Größe' eines börsennotierten Unternehmens angibt." },
-                { text: "Der Wert aller Gebäude und Maschinen der Firma", correct: false, explain: "Das wäre ein Teil des Anlagevermögens, nicht die Marktkapitalisierung." },
-                { text: "Der tägliche Handelsumsatz einer Aktie", correct: false, explain: "Das ist die Liquidität oder das Handelsvolumen, nicht der Gesamtwert." },
-                { text: "Der ursprünglich beim Börsengang erzielte Preis", correct: false, explain: "Das war der Emissionspreis. Die Marktkapitalisierung ändert sich täglich mit dem Kurs." }
+                { text: "Der aktuelle Börsenwert eines Unternehmens (Produkt aus Aktienkurs und Aktienanzahl).", correct: true, explain: "Korrekt! Dies ist die Kennzahl, die die 'Größe' eines börsennotierten Unternehmens angibt." },
+                { text: "Das bilanzierte Anlagevermögen eines Unternehmens (Gebäude, Maschinen etc.).", correct: false, explain: "Das ist der Buchwert des Anlagevermögens, nicht die Marktkapitalisierung." },
+                { text: "Der durchschnittliche Handelsumsatz einer Aktie pro Tag an der Heimatbörse.", correct: false, explain: "Das ist die Liquidität oder das Handelsvolumen, nicht der Gesamtwert." },
+                { text: "Der Gesamtwert, der beim Börsengang des Unternehmens eingenommen wurde.", correct: false, explain: "Das war der Emissionserlös. Die Marktkapitalisierung ändert sich täglich mit dem Kurs." }
             ], difficulty: 2 },
             { q: "Was ist ein 'IPO'?", a: [
-                { text: "Initial Public Offering - der erstmalige Börsengang eines Unternehmens", correct: true, explain: "Genau! Beim IPO werden die Aktien eines Unternehmens zum ersten Mal öffentlich zum Kauf angeboten." },
-                { text: "Eine interne Prüfung der Unternehmensfinanzen", correct: false, explain: "Das wäre ein 'Audit'." },
-                { text: "Ein Bonusprogramm für langjährige Aktionäre", correct: false, explain: "Nein, ein IPO ist der Startpunkt für alle öffentlichen Aktionäre." },
-                { text: "Ein Index für besonders innovative Unternehmen", correct: false, explain: "IPO ist ein Prozess, kein Index." }
+                { text: "Initial Public Offering, der erstmalige Gang eines Unternehmens an die Börse.", correct: true, explain: "Genau! Beim IPO werden die Aktien eines Unternehmens zum ersten Mal öffentlich zum Kauf angeboten." },
+                { text: "Internal Profit Obligation, eine interne Gewinnverpflichtung für das Management.", correct: false, explain: "Nein, ein IPO ist ein externer Vorgang am Kapitalmarkt." },
+                { text: "Investor Protection Organization, eine Organisation für den Anlegerschutz.", correct: false, explain: "Anlegerschutz ist wichtig, aber IPO bezeichnet den Börsengang selbst." },
+                { text: "Index Performance Oscillator, ein technischer Indikator in der Chartanalyse.", correct: false, explain: "IPO ist ein Prozess, kein technischer Indikator." }
             ], difficulty: 2 },
             { q: "Was ist ein 'Broker'?", a: [
-                { text: "Ein Finanzdienstleister, der als Vermittler für Wertpapiergeschäfte dient", correct: true, explain: "Richtig! Dein Broker führt deine Kauf- und Verkaufsaufträge an der Börse aus." },
-                { text: "Ein persönlicher Anlageberater, der dir sagt, was du kaufen sollst", correct: false, explain: "Ein Broker führt nur aus (Execution-Only). Ein Anlageberater berät dich aktiv, was meist teurer ist." },
-                { text: "Die Börse selbst", correct: false, explain: "Nein, der Broker ist dein Zugang zur Börse." },
-                { text: "Ein Algorithmus, der automatisch handelt", correct: false, explain: "Algorithmen können beim Handel eingesetzt werden, aber der Broker ist die lizenzierte Firma dahinter." }
+                { text: "Ein Finanzdienstleister, der als Mittler für Wertpapieraufträge an der Börse agiert.", correct: true, explain: "Richtig! Dein Broker führt deine Kauf- und Verkaufsaufträge an der Börse aus." },
+                { text: "Ein staatlich geprüfter Berater, der Anlageempfehlungen ausspricht.", correct: false, explain: "Ein Broker führt nur aus (Execution-Only). Ein Anlageberater berät dich aktiv, was meist teurer ist." },
+                { text: "Eine Abteilung innerhalb der Börse, die den Handel physisch abwickelt.", correct: false, explain: "Nein, der Broker ist dein externer Zugang zur Börse." },
+                { text: "Ein vollautomatisches Handelssystem, das auf künstlicher Intelligenz basiert.", correct: false, explain: "Algorithmen können beim Handel eingesetzt werden, aber der Broker ist die lizenzierte Firma dahinter." }
             ], difficulty: 1 },
             { q: "Was ist ein 'Portfolio'?", a: [
-                { text: "Die Gesamtheit aller Wertpapiere und Anlagen, die eine Person besitzt", correct: true, explain: "Perfekt! Dein Portfolio ist deine persönliche Sammlung von Aktien, ETFs, Anleihen etc." },
-                { text: "Der Ordner, in dem man seine Aktien-Dokumente aufbewahrt", correct: false, explain: "Obwohl das Wort 'Mappe' bedeutet, ist im Finanzkontext die Sammlung der Anlagen gemeint." },
-                { text: "Die Wertentwicklung der letzten 12 Monate", correct: false, explain: "Das ist die 'Performance', nicht das Portfolio selbst." },
-                { text: "Ein einzelner Fonds, der viele Aktien enthält", correct: false, explain: "Ein Fonds kann ein Teil deines Portfolios sein, ist aber nicht das Portfolio selbst." }
+                { text: "Die Gesamtheit aller Finanzanlagen und Vermögenswerte einer Person oder Institution.", correct: true, explain: "Perfekt! Dein Portfolio ist deine persönliche Sammlung von Aktien, ETFs, Anleihen etc." },
+                { text: "Ein spezieller Ordner zur sicheren Aufbewahrung von Wertpapierdokumenten.", correct: false, explain: "Obwohl das Wort 'Mappe' bedeutet, ist im Finanzkontext die Sammlung der Anlagen gemeint." },
+                { text: "Die grafische Darstellung der Wertentwicklung des Depots über die Zeit.", correct: false, explain: "Das ist die 'Performance-Kurve', nicht das Portfolio selbst." },
+                { text: "Ein einzelner Investmentfonds, der als Basisanlage für das Depot dient.", correct: false, explain: "Ein Fonds kann ein Teil deines Portfolios sein, ist aber nicht das Portfolio selbst." }
             ], difficulty: 1 }
         ],
         "Produkte & Anlageklassen 📊": [
             { q: "Was ist ein ETF?", a: [
-                { text: "Ein Fonds, der einen Index wie den DAX passiv nachbildet und an der Börse gehandelt wird", correct: true, explain: "Exakt! Exchange Traded Fund. Er ist wie ein Korb voller Aktien, der an der Börse ge- und verkauft werden kann." },
-                { text: "Eine besonders sichere Einzelaktie", correct: false, explain: "Ein ETF ist keine Einzelaktie, sondern bündelt viele. Das streut das Risiko." },
-                { text: "Ein aktiv von einem Manager verwalteter Fonds", correct: false, explain: "Das ist ein klassischer Investmentfonds. ETFs sind meist passiv und daher günstiger." },
-                { text: "Ein Sparkonto mit Aktienanteil", correct: false, explain: "Nein, ein ETF ist ein reines Wertpapier ohne die Garantien eines Sparkontos." }
+                { text: "Ein börsengehandelter Fonds, der passiv die Wertentwicklung eines Index abbildet.", correct: true, explain: "Exakt! Exchange Traded Fund. Er ist wie ein Korb voller Aktien, der an der Börse ge- und verkauft werden kann." },
+                { text: "Eine mündelsichere Anlageform, deren Wert von der Börsenaufsicht garantiert wird.", correct: false, explain: "Ein ETF ist ein Wertpapier ohne die Garantien eines Sparkontos und unterliegt Wertschwankungen." },
+                { text: "Ein aktiv von einem Fondsmanager verwaltetes Sondervermögen mit variablem Ausgabeaufschlag.", correct: false, explain: "Das ist ein klassischer Investmentfonds. ETFs sind meist passiv und daher günstiger." },
+                { text: "Eine spezielle Form einer Aktie mit eingebauter Risikostreuung über eine Branche.", correct: false, explain: "Ein ETF ist keine Einzelaktie, sondern bündelt viele." }
             ], difficulty: 1 },
             { q: "Was ist eine Anleihe (Bond)?", a: [
-                { text: "Du leihst einem Staat oder Unternehmen Geld und erhältst dafür Zinsen", correct: true, explain: "Genau. Du bist der Kreditgeber. Anleihen gelten oft als risikoärmer als Aktien." },
-                { text: "Ein Anteil an einem Unternehmen", correct: false, explain: "Das ist eine Aktie. Bei einer Anleihe bist du Fremdkapitalgeber, kein Eigenkapitalgeber." },
-                { text: "Ein Vertrag über zukünftige Rohstofflieferungen", correct: false, explain: "Das wäre ein Terminkontrakt (Future)." },
-                { text: "Ein anderes Wort für Dividende", correct: false, explain: "Nein, Zinsen (bei Anleihen) sind vertraglich fixiert, Dividenden (bei Aktien) sind variabel." }
+                { text: "Ein Wertpapier, das ein Gläubigerrecht auf Rückzahlung und Zins verbrieft.", correct: true, explain: "Genau. Du bist der Kreditgeber für einen Staat oder ein Unternehmen. Anleihen gelten oft als risikoärmer als Aktien." },
+                { text: "Ein Wertpapier, das ein Miteigentumsrecht an einem Unternehmen verbrieft.", correct: false, explain: "Das ist eine Aktie. Bei einer Anleihe bist du Fremdkapitalgeber, kein Eigenkapitalgeber." },
+                { text: "Ein standardisierter Vertrag über zukünftige Lieferungen von Rohstoffen oder Waren.", correct: false, explain: "Das wäre ein Terminkontrakt (Future)." },
+                { text: "Ein derivatives Finanzinstrument zur Absicherung gegen Zinsschwankungen.", correct: false, explain: "Nein, Zinsen (bei Anleihen) sind oft vertraglich fixiert. Zur Absicherung dienen andere Instrumente." }
             ], difficulty: 2 },
             { q: "Was sind 'Rohstoffe' (Commodities) als Anlageklasse?", a: [
-                { text: "Physische Güter wie Gold, Öl oder Weizen, in die man investieren kann", correct: true, explain: "Richtig. Man kann z.B. über spezielle ETFs (ETCs) oder Zertifikate in ihre Preisentwicklung investieren." },
-                { text: "Die Grundmaterialien, die eine Firma zur Produktion braucht", correct: false, explain: "Das ist zwar die Definition, aber als Anlageklasse meint man das Investment in diese Güter." },
-                { text: "Aktien von Unternehmen, die Rohstoffe fördern", correct: false, explain: "Das sind Rohstoff-Aktien, nicht die Rohstoffe selbst. Ein wichtiger Unterschied!" },
-                { text: "Eine besonders riskante Art von Anleihen", correct: false, explain: "Rohstoffe sind eine komplett eigene Anlageklasse, keine Anleihen." }
+                { text: "Standardisierte, physische Handelsgüter wie Öl, Gold oder landwirtschaftliche Erzeugnisse.", correct: true, explain: "Richtig. Man kann z.B. über spezielle ETFs (ETCs) oder Zertifikate in ihre Preisentwicklung investieren." },
+                { text: "Aktien von Unternehmen, die im Rohstoffsektor tätig sind, wie Minenbetreiber.", correct: false, explain: "Das sind Rohstoff-Aktien, nicht die Rohstoffe selbst. Ein wichtiger Unterschied!" },
+                { text: "Die industriellen Grundmaterialien, die nicht an einer Börse gehandelt werden können.", correct: false, explain: "Rohstoffe sind gerade dadurch gekennzeichnet, dass sie an spezialisierten Börsen gehandelt werden." },
+                { text: "Eine Form von hochverzinslichen Unternehmensanleihen mit erhöhtem Risiko.", correct: false, explain: "Rohstoffe sind eine komplett eigene Anlageklasse, keine Anleihen." }
             ], difficulty: 2 },
             { q: "Was ist ein 'REIT'?", a: [
-                { text: "Ein Real Estate Investment Trust – eine börsennotierte Immobiliengesellschaft", correct: true, explain: "Korrekt! Mit REITs kannst du wie mit Aktien in ein Portfolio von Immobilien investieren und erhältst oft hohe Ausschüttungen." },
-                { text: "Ein Bausparvertrag", correct: false, explain: "Nein, ein REIT ist ein Wertpapier, das an der Börse gehandelt wird und im Wert schwankt." },
-                { text: "Eine staatliche Förderung für den Hauskauf", correct: false, explain: "Nein, REITs sind private Investmentvehikel." },
-                { text: "Ein Index für Mietpreise", correct: false, explain: "REITs investieren in Immobilien, sie sind kein Index." }
+                { text: "Ein börsennotiertes Unternehmen, das in Immobilien investiert und Erträge daraus ausschüttet.", correct: true, explain: "Korrekt! Mit REITs (Real Estate Investment Trusts) kannst du wie mit Aktien in ein Portfolio von Immobilien investieren." },
+                { text: "Ein staatlich geförderter Bausparvertrag mit besonderen steuerlichen Vorteilen.", correct: false, explain: "Nein, ein REIT ist ein Wertpapier, das an der Börse gehandelt wird und im Wert schwankt." },
+                { text: "Eine Lizenz, die zum gewerblichen Handel mit Immobilien berechtigt.", correct: false, explain: "Nein, REITs sind private Investmentvehikel für Anleger." },
+                { text: "Ein Index, der die durchschnittliche Entwicklung der Mietpreise in einer Region abbildet.", correct: false, explain: "REITs investieren in Immobilien, sie sind kein Index." }
             ], difficulty: 3 },
             { q: "Was sind 'Blue-Chip-Aktien'?", a: [
-                { text: "Aktien großer, etablierter und finanzstarker Unternehmen", correct: true, explain: "Genau. Denkt an Konzerne wie Apple, Coca-Cola oder Siemens. Sie gelten als relativ wertstabil." },
-                { text: "Aktien, die weniger als 1€ kosten", correct: false, explain: "Das sind 'Penny Stocks' und sie sind extrem riskant, das Gegenteil von Blue Chips." },
-                { text: "Aktien von Tech-Unternehmen", correct: false, explain: "Ein Tech-Unternehmen kann ein Blue Chip sein (z.B. Microsoft), aber der Begriff ist nicht auf diese Branche beschränkt." },
-                { text: "Frisch an die Börse gegangene Unternehmen", correct: false, explain: "Nein, Blue Chips sind das genaue Gegenteil: altbewährt und etabliert." }
+                { text: "Aktien von großen, umsatzstarken und etablierten Unternehmen mit hoher Bonität.", correct: true, explain: "Genau. Denkt an Konzerne wie Apple, Coca-Cola oder Siemens. Sie gelten als relativ wertstabil." },
+                { text: "Spekulative Aktien von Unternehmen, deren Kurs unter einem Euro notiert.", correct: false, explain: "Das sind 'Penny Stocks' und sie sind extrem riskant, das Gegenteil von Blue Chips." },
+                { text: "Aktien von jungen Technologie-Unternehmen mit hohem prognostiziertem Wachstum.", correct: false, explain: "Das sind 'Growth Stocks'. Ein Blue Chip kann eine Tech-Firma sein, ist aber nicht darauf beschränkt." },
+                { text: "Aktien, die erst kürzlich an die Börse gegangen sind (sog. IPO-Aktien).", correct: false, explain: "Nein, Blue Chips sind das genaue Gegenteil: altbewährt und etabliert." }
             ], difficulty: 2 },
             { q: "Was sind 'Wachstumsaktien' (Growth Stocks)?", a: [
-                { text: "Aktien von Unternehmen, von denen ein überdurchschnittlich hohes Wachstum erwartet wird", correct: true, explain: "Richtig. Diese Firmen stecken ihre Gewinne oft direkt wieder ins Wachstum statt hohe Dividenden zu zahlen (z.B. viele Tech-Firmen)." },
-                { text: "Aktien, die jedes Jahr eine wachsende Dividende zahlen", correct: false, explain: "Das sind 'Dividendenaristokraten'. Wachstumsaktien zahlen oft gar keine Dividende." },
-                { text: "Aktien von sehr alten, langsam wachsenden Firmen", correct: false, explain: "Das sind 'Value-Aktien'." },
-                { text: "Aktien, deren Kurs garantiert wächst", correct: false, explain: "Eine Garantie für Wachstum gibt es an der Börse nie." }
+                { text: "Aktien von Firmen, bei denen der Markt ein stark überdurchschnittliches Gewinnwachstum erwartet.", correct: true, explain: "Richtig. Diese Firmen stecken ihre Gewinne oft direkt wieder ins Wachstum statt hohe Dividenden zu zahlen." },
+                { text: "Aktien von Unternehmen, die eine kontinuierlich wachsende Dividende ausschütten.", correct: false, explain: "Das sind 'Dividendenaristokraten'. Wachstumsaktien zahlen oft gar keine Dividende." },
+                { text: "Aktien von etablierten, langsam wachsenden Firmen mit stabiler Marktposition.", correct: false, explain: "Das sind 'Value-Aktien'." },
+                { text: "Aktien, deren Kursentwicklung durch einen Algorithmus ein Wachstum garantiert.", correct: false, explain: "Eine Garantie für Wachstum gibt es an der Börse nie." }
             ], difficulty: 2 },
             { q: "Was sind 'Value-Aktien'?", a: [
-                { text: "Aktien, die im Vergleich zu ihrem inneren Wert als günstig bewertet gelten", correct: true, explain: "Genau. Value-Investoren suchen nach 'Perlen im Staub' – solide Firmen, die vom Markt gerade übersehen oder unterbewertet werden." },
-                { text: "Aktien, die besonders wertvoll sind und hohe Kurse haben", correct: false, explain: "Nicht unbedingt. Es geht um das Verhältnis von Preis zu Substanz, nicht um den absoluten Preis." },
-                { text: "Aktien von Unternehmen ohne Wachstumspotenzial", correct: false, explain: "Sie wachsen oft langsamer, aber das Ziel ist, dass der Markt ihren wahren, höheren Wert erkennt." },
-                { text: "Nur Aktien, die eine hohe Dividende zahlen", correct: false, explain: "Viele Value-Aktien zahlen Dividenden, aber das ist kein Muss. Die Unterbewertung ist das Hauptkriterium." }
+                { text: "Aktien von Unternehmen, die nach fundamentalen Kennzahlen als unterbewertet gelten.", correct: true, explain: "Genau. Value-Investoren suchen nach 'Perlen im Staub' – solide Firmen, die vom Markt gerade übersehen werden." },
+                { text: "Aktien von Unternehmen, die einen besonders hohen Börsenwert aufweisen.", correct: false, explain: "Nicht unbedingt. Es geht um das Verhältnis von Preis zu Substanz, nicht um den absoluten Preis." },
+                { text: "Aktien von Unternehmen, deren Geschäftsmodell als besonders wertvoll für die Gesellschaft gilt.", correct: false, explain: "Das ist 'Socially Responsible Investing'. Value bezieht sich auf die finanzielle Bewertung." },
+                { text: "Aktien, die ausschließlich über ihren inneren Wert und nicht über den Markt gehandelt werden.", correct: false, explain: "Alle börsennotierten Aktien werden am Markt gehandelt. Die Value-Strategie versucht, Ineffizienzen dabei zu nutzen." }
             ], difficulty: 2 },
             { q: "Was ist ein 'Zertifikat'?", a: [
-                { text: "Eine Schuldverschreibung des Emittenten, deren Wert von einem Basiswert (z.B. Aktie, Index) abhängt", correct: true, explain: "Korrekt. Aber Vorsicht: Geht der Herausgeber (Emittent) pleite, kann dein Zertifikat wertlos werden (Emittentenrisiko)!" },
-                { text: "Ein garantierter Sparplan der Bank", correct: false, explain: "Zertifikate sind komplexe und oft riskante Wertpapiere, keine Sparpläne." },
-                { text: "Ein offizielles Dokument, das dir den Besitz einer Aktie bestätigt", correct: false, explain: "Nein, das wäre eine (heute unübliche) physische Aktienurkunde." },
-                { text: "Eine Art ETF mit eingebautem Airbag", correct: false, explain: "Manche Zertifikate haben Schutzmechanismen, sind aber fundamental anders und riskanter als ETFs." }
+                { text: "Eine von einer Bank ausgegebene Schuldverschreibung mit an einen Basiswert gekoppelter Rendite.", correct: true, explain: "Korrekt. Aber Vorsicht: Geht der Herausgeber (Emittent) pleite, kann dein Zertifikat wertlos werden!" },
+                { text: "Eine staatlich garantierte Sparanlage mit einem festen Zinssatz über die Laufzeit.", correct: false, explain: "Zertifikate sind komplexe und oft riskante Wertpapiere, keine Sparpläne." },
+                { text: "Eine physische Urkunde, die das Eigentum an einer Aktie oder einem Fondsanteil nachweist.", correct: false, explain: "Nein, das wäre eine (heute unübliche) effektive Stück-Urkunde." },
+                { text: "Eine spezielle Art von ETF, die ein zusätzliches Sicherheitsversprechen der Bank beinhaltet.", correct: false, explain: "Zertifikate sind fundamental anders und riskanter als ETFs, da sie ein Emittentenrisiko tragen." }
             ], difficulty: 3 },
-            { q: "Was ist der Unterschied zwischen einem ETF und einem klassischen Investmentfonds?", a: [
-                { text: "ETFs sind meist passiv und börsengehandelt, Fonds sind oft aktiv und werden über die Fondsgesellschaft gekauft", correct: true, explain: "Das ist der Kernunterschied! ETFs sind daher meist transparenter und deutlich günstiger." },
-                { text: "ETFs sind nur für Profis, Fonds für Anfänger", correct: false, explain: "Im Gegenteil: ETFs sind wegen ihrer Einfachheit und niedrigen Kosten ideal für Anfänger." },
-                { text: "ETFs investieren nur in Aktien, Fonds in alles", correct: false, explain: "Es gibt für beide Anlageformen Varianten für Aktien, Anleihen, Rohstoffe etc." },
-                { text: "ETFs sind sicherer als Fonds", correct: false, explain: "Das Risiko hängt vom Inhalt ab, nicht von der rechtlichen Hülle. Ein DAX-ETF ist so riskant wie ein DAX-Fonds." }
+            { q: "Was unterscheidet einen ETF von einem klassischen Investmentfonds?", a: [
+                { text: "ETFs sind meist passiv, börsengehandelt und kostengünstiger als aktiv gemanagte Fonds.", correct: true, explain: "Das ist der Kernunterschied! ETFs sind daher meist transparenter und deutlich günstiger." },
+                { text: "ETFs sind ausschließlich für professionelle Anleger, Fonds für Privatanleger.", correct: false, explain: "Im Gegenteil: ETFs sind wegen ihrer Einfachheit und niedrigen Kosten ideal für Privatanleger." },
+                { text: "ETFs investieren nur in Aktienindizes, während Fonds in alle Anlageklassen investieren.", correct: false, explain: "Es gibt für beide Anlageformen Varianten für Aktien, Anleihen, Rohstoffe etc." },
+                { text: "ETFs bieten eine Kapitalgarantie, während klassische Fonds dem Marktrisiko unterliegen.", correct: false, explain: "Das Risiko hängt vom Inhalt ab, nicht von der rechtlichen Hülle. Beide unterliegen dem vollen Marktrisiko." }
             ], difficulty: 2 },
             { q: "Was sind 'Derivate'?", a: [
-                { text: "Finanzinstrumente, deren Preis von einem Basiswert (z.B. Aktie) abgeleitet ist", correct: true, explain: "Genau. Optionen, Futures und Zertifikate sind Beispiele. Sie sind oft komplex und für Anfänger sehr riskant." },
-                { text: "Die sichersten Anlagen an der Börse", correct: false, explain: "Das Gegenteil ist der Fall. Derivate haben oft eine Hebelwirkung, die Gewinne und Verluste vervielfacht." },
-                { text: "Eine andere Bezeichnung für Aktien von Tochterunternehmen", correct: false, explain: "Nein, Derivate sind eigenständige Finanzprodukte." },
-                { text: "Die Abteilung für Kundenbeschwerden bei einer Bank", correct: false, explain: "Das hat damit nichts zu tun." }
+                { text: "Finanzinstrumente, deren Wert sich vom Preis eines zugrundeliegenden Basiswerts ableitet.", correct: true, explain: "Genau. Optionen, Futures und Zertifikate sind Beispiele. Sie sind oft komplex und für Anfänger sehr riskant." },
+                { text: "Besonders sichere Anlagen, die zur Risikominderung im Depot eingesetzt werden.", correct: false, explain: "Das Gegenteil ist oft der Fall. Derivate haben meist eine Hebelwirkung, die Gewinne und Verluste vervielfacht." },
+                { text: "Aktien von Tochtergesellschaften, deren Kurs vom Mutterkonzern abhängt.", correct: false, explain: "Nein, Derivate sind eigenständige Finanzprodukte, keine Aktien." },
+                { text: "Die ertragreichsten Anlageklassen, die aus Dividenden und Zinsen bestehen.", correct: false, explain: "Nein, der Begriff leitet sich von 'derivare' (lat. für ableiten) ab." }
             ], difficulty: 3 }
         ],
         "Depot & Handelspraxis 🛠️": [
             { q: "Was ist ein 'Depot'?", a: [
-                { text: "Ein Konto zur Aufbewahrung und Verwaltung von Wertpapieren", correct: true, explain: "Genau, es ist quasi dein digitaler Tresor oder dein Bücherregal für Aktien und ETFs." },
-                { text: "Das Gebäude, in dem die Server deines Brokers stehen", correct: false, explain: "Nein, das Depot ist dein persönlicher Account." },
-                { text: "Ein festverzinstes Sparkonto", correct: false, explain: "Nein, im Depot liegen Wertpapiere, deren Wert schwankt. Geld liegt auf dem Verrechnungskonto." },
-                { text: "Ein Synonym für Portfolio", correct: false, explain: "Sehr ähnlich, aber das Depot ist der technische Ort der Verwahrung, das Portfolio ist die inhaltliche Sammlung deiner Anlagen." }
+                { text: "Ein spezielles Konto zur elektronischen Verwahrung und Verwaltung von Wertpapieren.", correct: true, explain: "Genau, es ist quasi dein digitaler Tresor oder dein Bücherregal für Aktien und ETFs." },
+                { text: "Ein physisches Schließfach bei einer Bank zur sicheren Lagerung von Aktienurkunden.", correct: false, explain: "Nein, heute sind Depots rein digital und die Wertpapiere liegen als Sondereigentum bei einer Zentralverwahrstelle." },
+                { text: "Ein Unterkonto des Girokontos, das für Aktiengeschäfte reserviert ist.", correct: false, explain: "Ein Depot ist ein eigenständiges Konto, das aber mit einem Verrechnungskonto verbunden ist." },
+                { text: "Die Gesamtheit der Finanzanlagen, die eine Person besitzt (Portfolio).", correct: false, explain: "Sehr ähnlich, aber das Depot ist der technische Ort der Verwahrung, das Portfolio ist die inhaltliche Sammlung deiner Anlagen." }
             ], difficulty: 1 },
-            { q: "Was ist der Unterschied zwischen einer 'Market'- und einer 'Limit'-Order?", a: [
-                { text: "Market-Order kauft sofort zum bestmöglichen Preis, Limit-Order nur bis zu einem festgelegten Preis", correct: true, explain: "Exakt! Limit-Orders schützen dich vor unerwartet hohen Kaufpreisen und sind fast immer die bessere Wahl." },
-                { text: "Market-Orders sind kostenlos, Limit-Orders kosten extra", correct: false, explain: "Die Kosten sind bei den meisten Brokern für beide Ordertypen gleich." },
-                { text: "Market-Orders sind für große, Limit-Orders für kleine Mengen", correct: false, explain: "Der Ordertyp hat nichts mit der Menge zu tun." },
-                { text: "Market-Orders kann man nicht stornieren, Limit-Orders schon", correct: false, explain: "Solange eine Order nicht ausgeführt ist, kann man sie normalerweise stornieren." }
+            { q: "Was unterscheidet eine 'Market'- von einer 'Limit'-Order?", a: [
+                { text: "Market-Order führt zum nächsten verfügbaren Kurs, Limit-Order nur bis zu einem definierten Preislimit.", correct: true, explain: "Exakt! Limit-Orders schützen dich vor unerwartet hohen Kaufpreisen und sind fast immer die bessere Wahl." },
+                { text: "Market-Orders haben garantierte Ausführung, Limit-Orders sind nur eine Reservierung.", correct: false, explain: "Eine Limit-Order wird auch garantiert ausgeführt, wenn das Limit erreicht wird. Eine Market-Order ist keine Garantie, wenn kein Handel stattfindet." },
+                { text: "Market-Orders sind für Profis, Limit-Orders sind für Anfänger vorgesehen.", correct: false, explain: "Beide Ordertypen stehen allen Anlegern zur Verfügung und Limits sind gerade für Anfänger sehr wichtig." },
+                { text: "Market-Orders werden vor Limit-Orders bearbeitet, auch bei gleichem Preis.", correct: false, explain: "Die Ausführung richtet sich nach Preis und Zeit, nicht primär nach dem Ordertyp." }
             ], difficulty: 2 },
             { q: "Was ist der 'Spread' (Geld-Brief-Spanne)?", a: [
-                { text: "Die Differenz zwischen dem höchsten Kaufpreis (Geld) und dem niedrigsten Verkaufspreis (Brief)", correct: true, explain: "Korrekt. Diese Spanne ist ein indirekter Kostenfaktor – du kaufst immer zum höheren (Brief) und verkaufst zum niedrigeren (Geld) Kurs." },
-                { text: "Die Gebühr, die der Broker pro Trade verlangt", correct: false, explain: "Das sind die Ordergebühren. Der Spread entsteht am Markt selbst." },
-                { text: "Die Schwankungsbreite einer Aktie an einem Tag", correct: false, explain: "Das ist die 'Volatilität'." },
-                { text: "Ein Bonus, den man für häufiges Handeln bekommt", correct: false, explain: "Der Spread ist immer ein Nachteil für den Anleger, nie ein Bonus." }
+                { text: "Die Differenz zwischen dem höchsten Kauf- und dem niedrigsten Verkaufskurs im Orderbuch.", correct: true, explain: "Korrekt. Diese Spanne ist ein indirekter Kostenfaktor – du kaufst immer zum höheren (Brief) und verkaufst zum niedrigeren (Geld) Kurs." },
+                { text: "Die explizite Gebühr, die ein Broker für die Ausführung eines Handelsauftrags berechnet.", correct: false, explain: "Das sind die Ordergebühren. Der Spread entsteht am Markt selbst." },
+                { text: "Die prozentuale Schwankungsbreite des Aktienkurses während eines Handelstages.", correct: false, explain: "Das ist die 'Volatilität'." },
+                { text: "Ein Rabatt, den Market Maker für die Bereitstellung von Liquidität erhalten.", correct: false, explain: "Der Spread ist die Gewinnmarge des Market Makers, kein Rabatt für den Anleger." }
             ], difficulty: 2 },
             { q: "Was ist eine 'Stop-Loss'-Order?", a: [
-                { text: "Verkauft eine Aktie automatisch, wenn ihr Kurs auf einen bestimmten Wert fällt", correct: true, explain: "Genau, sie dient zur Begrenzung von Verlusten. Eine Art Notbremse." },
-                { text: "Stoppt den Handel der Aktie für alle Marktteilnehmer", correct: false, explain: "Nein, es ist eine persönliche Order nur für deine Aktien." },
-                { text: "Kauft eine Aktie automatisch, wenn sie 'zu billig' wird", correct: false, explain: "Das wäre eine 'Limit-Buy'-Order." },
-                { text: "Garantiert, dass man keinen Verlust macht", correct: false, explain: "Nein, sie begrenzt den Verlust nur. Bei sehr schnellen Kursstürzen (Gaps) kann der Verkaufspreis auch unter dem Stop-Kurs liegen." }
+                { text: "Ein Verkaufsauftrag, der bei Erreichen eines festgelegten Kurses automatisch zu einer Market-Order wird.", correct: true, explain: "Genau, sie dient zur Begrenzung von Verlusten. Eine Art Notbremse." },
+                { text: "Ein Kaufauftrag, der ausgeführt wird, sobald eine Aktie auf ein bestimmtes Niveau gefallen ist.", correct: false, explain: "Das wäre eine 'Limit-Buy'-Order." },
+                { text: "Eine garantierte Verkaufsorder, die exakt zum Stop-Preis ausgeführt wird.", correct: false, explain: "Nein, bei schnellen Stürzen (Gaps) kann der Ausführungskurs auch unter dem Stop-Kurs liegen. Schutz davor bietet eine Stop-Limit-Order." },
+                { text: "Eine Anweisung an den Broker, den Handel mit einer Aktie bei hohen Verlusten auszusetzen.", correct: false, explain: "Nein, es ist eine automatische Verkaufsorder, keine Handelsaussetzung." }
             ], difficulty: 2 },
             { q: "Was ist eine 'ISIN'?", a: [
-                { text: "Eine eindeutige, internationale Kennnummer für ein Wertpapier", correct: true, explain: "Richtig. Wie ein Fingerabdruck. So stellst du sicher, dass du auch wirklich die VW-Aktie kaufst und nicht die von Vodafone." },
-                { text: "Die persönliche Identifikationsnummer deines Depots", correct: false, explain: "Nein, die ISIN gehört zum Wertpapier, nicht zu deinem Depot." },
-                { text: "Eine europäische Steuernummer für Kapitalerträge", correct: false, explain: "Nein, das ist eine reine Identifikationsnummer für Wertpapiere." },
-                { text: "Die interne Auftragsnummer deines Brokers", correct: false, explain: "Nein, die ISIN ist ein internationaler Standard." }
+                { text: "Eine internationale, zwölfstellige Kennnummer zur eindeutigen Identifikation eines Wertpapiers.", correct: true, explain: "Richtig. Wie ein Fingerabdruck. So stellst du sicher, dass du auch wirklich die VW-Aktie kaufst und nicht die von Vodafone." },
+                { text: "Die persönliche Identifikationsnummer, die jeder Depotinhaber von seiner Bank erhält.", correct: false, explain: "Nein, die ISIN gehört zum Wertpapier, nicht zu deinem Depot." },
+                { text: "Eine von der EU vergebene Steuernummer zur Erfassung von Kapitalerträgen.", correct: false, explain: "Nein, das ist eine reine Identifikationsnummer für Wertpapiere." },
+                { text: "Die interne Referenznummer eines Handelsauftrags bei einem Broker oder einer Börse.", correct: false, explain: "Nein, die ISIN ist ein internationaler Standard." }
             ], difficulty: 2 },
             { q: "Welche Handelszeiten hat die Xetra-Börse in Deutschland?", a: [
-                { text: "Montag bis Freitag, ca. 9:00 bis 17:30 Uhr", correct: true, explain: "Korrekt. Außerhalb dieser Zeiten und am Wochenende kannst du zwar Orders aufgeben, sie werden aber nicht ausgeführt." },
-                { text: "Rund um die Uhr, 24/7", correct: false, explain: "Das gilt für Kryptowährungen, aber nicht für den traditionellen Aktienhandel." },
-                { text: "Nur vormittags von 8:00 bis 12:00 Uhr", correct: false, explain: "Nein, der Handel läuft den ganzen Werktag." },
-                { text: "Täglich von 15:30 bis 22:00 Uhr, wenn die US-Börse offen ist", correct: false, explain: "Das sind die Haupthandelszeiten in den USA. Xetra hat eigene, frühere Zeiten." }
+                { text: "An Werktagen von 9:00 Uhr morgens bis 17:30 Uhr abends.", correct: true, explain: "Korrekt. Außerhalb dieser Zeiten und am Wochenende kannst du zwar Orders aufgeben, sie werden aber nicht ausgeführt." },
+                { text: "Täglich und rund um die Uhr, inklusive der Wochenenden.", correct: false, explain: "Das gilt für Kryptowährungen, aber nicht für den traditionellen Aktienhandel." },
+                { text: "An Werktagen von 8:00 Uhr morgens bis 20:00 Uhr abends.", correct: false, explain: "Andere Handelsplätze (z.B. Tradegate) haben längere Zeiten, aber nicht der Referenzmarkt Xetra." },
+                { text: "Synchron zu den US-Börsen von 15:30 Uhr bis 22:00 Uhr deutscher Zeit.", correct: false, explain: "Das sind die Haupthandelszeiten in den USA. Xetra hat eigene, frühere Zeiten." }
             ], difficulty: 2 },
             { q: "Was ist das 'Verrechnungskonto'?", a: [
-                { text: "Das Konto, über das alle Geldbewegungen für dein Depot abgewickelt werden", correct: true, explain: "Genau. Hierhin überweist du Geld zum Investieren und hier landen auch deine Dividenden und Verkaufserlöse." },
-                { text: "Dein normales Girokonto", correct: false, explain: "Nein, es ist ein separates, an das Depot gekoppeltes Konto." },
-                { text: "Ein Konto, auf dem deine Gewinne steuerfrei verrechnet werden", correct: false, explain: "Die Verrechnung passiert hier, aber steuerfrei sind die Gewinne leider nicht." },
-                { text: "Ein virtuelles Konto nur für die Anzeige in der App", correct: false, explain: "Nein, es ist ein echtes Konto, auf dem echtes Geld liegt." }
+                { text: "Ein an das Depot gekoppeltes Geldkonto für die Abwicklung aller Wertpapiertransaktionen.", correct: true, explain: "Genau. Hierhin überweist du Geld zum Investieren und hier landen auch deine Dividenden und Verkaufserlöse." },
+                { text: "Ein alternatives Girokonto, das für den täglichen Zahlungsverkehr genutzt wird.", correct: false, explain: "Nein, es ist ein separates, an das Depot gekoppeltes Konto und nicht für den Alltag gedacht." },
+                { text: "Ein virtuelles Konto, auf dem Gewinne und Verluste steuerlich miteinander verrechnet werden.", correct: false, explain: "Die Verrechnung passiert hier, aber es ist ein echtes Konto mit echtem Geld." },
+                { text: "Ein Treuhandkonto, das von der Börsenaufsicht zur Sicherung der Anlegergelder verwaltet wird.", correct: false, explain: "Nein, es wird von deiner Depotbank geführt." }
             ], difficulty: 1 },
             { q: "Was bedeutet 'Volumen' im Börsenchart?", a: [
-                { text: "Die Anzahl der gehandelten Aktien in einem bestimmten Zeitraum", correct: true, explain: "Richtig. Ein hohes Volumen bei einer Kursbewegung gilt oft als Bestätigung für die Stärke dieser Bewegung." },
-                { text: "Der Gesamtwert aller gehandelten Aktien", correct: false, explain: "Das wäre der 'Umsatz' (Volumen * Kurs)." },
-                { text: "Die Lautstärke der Händler im Börsensaal", correct: false, explain: "Haha, nein. Der Handel ist heute fast ausschließlich digital und leise." },
-                { text: "Die Menge an offenen Kauf- und Verkaufsaufträgen", correct: false, explain: "Das ist das 'Orderbuch'." }
+                { text: "Die summierte Stückzahl aller gehandelten Wertpapiere in einem bestimmten Zeitraum.", correct: true, explain: "Richtig. Ein hohes Volumen bei einer Kursbewegung gilt oft als Bestätigung für die Stärke dieser Bewegung." },
+                { text: "Der in Euro ausgedrückte Gesamtwert aller gehandelten Wertpapiere.", correct: false, explain: "Das wäre der 'Umsatz' (Volumen * Kurs)." },
+                { text: "Die Gesamtzahl aller ausstehenden Aktien eines Unternehmens.", correct: false, explain: "Das ist die 'Anzahl der Aktien', die zur Berechnung der Marktkapitalisierung dient." },
+                { text: "Die Anzahl der offenen, aber noch nicht ausgeführten Aufträge im Orderbuch.", correct: false, explain: "Das ist das 'Orderbuchvolumen'." }
             ], difficulty: 2 },
             { q: "Was ist ein 'Aktiensplit'?", a: [
-                { text: "Die Anzahl der Aktien wird erhöht, der Wert je Aktie sinkt entsprechend", correct: true, explain: "Genau. Aus einer Aktie für 200€ werden z.B. zwei für 100€. Der Gesamtwert deines Anteils bleibt gleich, die Aktie wirkt aber günstiger." },
-                { text: "Ein Unternehmen teilt sich in zwei neue Unternehmen auf", correct: false, explain: "Das wäre ein 'Spin-off'." },
-                { text: "Die Hälfte aller Aktien wird vom Markt genommen", correct: false, explain: "Das wäre ein Aktienrückkauf oder eine Kapitalherabsetzung." },
-                { text: "Deine Aktien werden auf zwei Depots aufgeteilt", correct: false, explain: "Ein Aktiensplit passiert innerhalb deines Depots." }
+                { text: "Eine Erhöhung der Aktienanzahl bei gleichzeitiger proportionaler Reduzierung des Nennwerts.", correct: true, explain: "Genau. Aus einer Aktie für 200€ werden z.B. zwei für 100€. Der Gesamtwert deines Anteils bleibt gleich, die Aktie wirkt aber günstiger." },
+                { text: "Eine Aufspaltung eines Unternehmens in mehrere rechtlich eigenständige Firmen.", correct: false, explain: "Das wäre ein 'Spin-off'." },
+                { text: "Ein Rückkaufprogramm, bei dem das Unternehmen einen Teil der eigenen Aktien einzieht.", correct: false, explain: "Das ist ein 'Aktienrückkauf', der die Anzahl der Aktien verringert." },
+                { text: "Die Aufteilung von Aktienpaketen eines Großaktionärs an viele Kleinanleger.", correct: false, explain: "Das wäre eine 'Umplatzierung'." }
             ], difficulty: 3 },
-            { q: "Was sind 'Hauptversammlungen'?", a: [
-                { text: "Das jährliche Treffen der Aktionäre eines Unternehmens", correct: true, explain: "Korrekt. Als Aktionär (mit Stammaktien) hast du hier Rederecht und Stimmrecht, z.B. über die Verwendung des Gewinns." },
-                { text: "Ein Treffen aller Börsenmakler", correct: false, explain: "Nein, es ist ein unternehmensinternes Event für die Eigentümer." },
-                { text: "Eine Konferenz zur Vorstellung neuer Produkte", correct: false, explain: "Neue Produkte können vorgestellt werden, aber der Hauptzweck sind formelle Beschlüsse der Eigentümer." },
-                { text: "Eine Fernsehsendung über die Börse", correct: false, explain: "Nein, es ist eine reale Veranstaltung." }
+            { q: "Was ist eine 'Hauptversammlung'?", a: [
+                { text: "Das oberste Beschlussorgan einer Aktiengesellschaft, bei dem Aktionäre ihre Rechte ausüben.", correct: true, explain: "Korrekt. Als Aktionär (mit Stammaktien) hast du hier Rederecht und Stimmrecht, z.B. über die Verwendung des Gewinns." },
+                { text: "Eine jährliche Konferenz der Börse für alle zugelassenen Broker und Händler.", correct: false, explain: "Nein, es ist ein unternehmensinternes Event für die Eigentümer." },
+                { text: "Eine öffentliche Veranstaltung zur Präsentation der neuesten Produkte eines Unternehmens.", correct: false, explain: "Neue Produkte können vorgestellt werden, aber der Hauptzweck sind formelle Beschlüsse der Eigentümer." },
+                { text: "Ein vom Management organisiertes Treffen, um die Anlagestrategie zu diskutieren.", correct: false, explain: "Die Strategie wird vorgestellt, aber die Aktionäre stimmen über formale Punkte ab." }
             ], difficulty: 2 }
         ],
         "Strategie & Vermögensaufbau 🧠": [
             { q: "Was ist der Zinseszinseffekt?", a: [
-                { text: "Erträge (Zinsen, Dividenden) erwirtschaften selbst wieder Erträge", correct: true, explain: "Genau! Das führt zu exponentiellem Wachstum. Dein Geld arbeitet für dich, und die 'Kinder' deines Geldes arbeiten auch wieder." },
-                { text: "Ein Steuerrabatt auf Zinserträge", correct: false, explain: "Nein, der Effekt ist rein mathematisch." },
-                { text: "Die Verpflichtung, immer mehr Zinsen zahlen zu müssen", correct: false, explain: "Das gilt für Schulden. Beim Investieren arbeitet der Effekt für dich." },
-                { text: "Ein Effekt, der nur bei Sparbüchern funktioniert", correct: false, explain: "Er funktioniert mit jeder Anlage, deren Erträge man reinvestiert – bei Aktien durch Kursgewinne und reinvestierte Dividenden besonders stark." }
+                { text: "Das exponentielle Wachstum von Kapital, da erwirtschaftete Erträge selbst wieder Erträge generieren.", correct: true, explain: "Genau! Das führt zu exponentiellem Wachstum. Dein Geld arbeitet für dich, und die 'Kinder' deines Geldes arbeiten auch wieder." },
+                { text: "Ein gesetzlicher Mechanismus, der die Höhe von Kreditzinsen begrenzt.", correct: false, explain: "Nein, der Effekt ist rein mathematisch und gilt für Guthaben wie für Schulden." },
+                { text: "Ein Steuervorteil, der auf langfristig gehaltene Kapitalanlagen gewährt wird.", correct: false, explain: "Nein, der Effekt ist unabhängig von der Besteuerung." },
+                { text: "Ein Prinzip, das ausschließlich bei festverzinslichen Anlagen wie Anleihen oder Sparbüchern wirkt.", correct: false, explain: "Er funktioniert mit jeder Anlage, deren Erträge man reinvestiert – bei Aktien durch Kursgewinne und reinvestierte Dividenden besonders stark." }
             ], difficulty: 2 },
             { q: "Was bedeutet die Strategie 'Buy and Hold'?", a: [
-                { text: "Wertpapiere kaufen und langfristig (viele Jahre) halten, unabhängig von kurzfristigen Schwankungen", correct: true, explain: "Richtig. Das ist eine sehr passive, aber oft erfolgreiche Strategie, die auf dem langfristigen Wachstum der Wirtschaft basiert." },
-                { text: "Morgens kaufen und abends wieder verkaufen", correct: false, explain: "Das ist 'Day-Trading' – das genaue Gegenteil." },
-                { text: "Eine Aktie kaufen und halten, bis sie 10% im Plus ist", correct: false, explain: "Das wäre ein kurzfristiges Gewinnziel, nicht die langfristige 'Buy and Hold'-Strategie." },
-                { text: "Nur Aktien kaufen und niemals Anleihen", correct: false, explain: "Man kann auch Anleihen oder ETFs nach der 'Buy and Hold'-Strategie halten." }
+                { text: "Der langfristige Kauf und das Halten von Wertpapieren ungeachtet kurzfristiger Marktschwankungen.", correct: true, explain: "Richtig. Das ist eine sehr passive, aber oft erfolgreiche Strategie, die auf dem langfristigen Wachstum der Wirtschaft basiert." },
+                { text: "Der kurzfristige Handel mit Wertpapieren innerhalb eines einzigen Handelstages.", correct: false, explain: "Das ist 'Day-Trading' – das genaue Gegenteil." },
+                { text: "Eine Strategie, bei der man Wertpapiere kauft und bis zum Erreichen eines fixen Gewinnziels hält.", correct: false, explain: "Das wäre ein kurzfristiges Gewinnziel, nicht die langfristige 'Buy and Hold'-Strategie." },
+                { text: "Der ausschließliche Kauf von Wertpapieren und der Verzicht auf den Verkauf (Halten bis zur Rente).", correct: false, explain: "Verkäufe sind nicht ausgeschlossen, z.B. bei Strategieänderung, aber der Anlagehorizont ist sehr lang." }
             ], difficulty: 1 },
             { q: "Was ist der 'Cost-Average-Effekt'?", a: [
-                { text: "Durch regelmäßige, gleichbleibende Sparraten kauft man bei niedrigen Kursen mehr und bei hohen Kursen weniger Anteile", correct: true, explain: "Exakt. Dadurch glättet sich der durchschnittliche Einkaufspreis über die Zeit, was besonders bei schwankenden Märkten vorteilhaft ist." },
-                { text: "Die durchschnittlichen Kosten eines ETFs", correct: false, explain: "Das ist die 'TER' (Total Expense Ratio)." },
-                { text: "Eine Methode, um die Ordergebühren zu senken", correct: false, explain: "Nein, es ist ein mathematischer Effekt, der sich auf den Kaufpreis der Anteile auswirkt." },
-                { text: "Dass man im Durchschnitt immer Gewinn macht", correct: false, explain: "Leider nein. Der Effekt schützt nicht vor Verlusten, kann aber das Timing-Risiko reduzieren." }
+                { text: "Der Effekt, dass bei regelmäßigen Investitionen eines festen Betrags ein günstiger Durchschnittspreis erzielt wird.", correct: true, explain: "Exakt. Man kauft bei niedrigen Kursen mehr und bei hohen Kursen weniger Anteile, was den Einstiegspreis glättet." },
+                { text: "Eine Methode zur Berechnung der durchschnittlichen Kosten eines Wertpapierdepots.", correct: false, explain: "Nein, es ist ein mathematischer Effekt, der sich auf den Kaufpreis der Anteile auswirkt." },
+                { text: "Eine Anlagestrategie, die darauf abzielt, die Transaktionskosten zu minimieren.", correct: false, explain: "Sparpläne sind oft günstig, aber der Effekt bezieht sich auf den Durchschnittspreis, nicht die Kosten." },
+                { text: "Die statistische Garantie, dass man bei regelmäßiger Anlage langfristig einen Gewinn erzielt.", correct: false, explain: "Leider nein. Der Effekt schützt nicht vor Verlusten, kann aber das Timing-Risiko reduzieren." }
             ], difficulty: 2 },
             { q: "Warum ist 'Diversifikation' (Streuung) so wichtig?", a: [
-                { text: "Sie reduziert das Risiko, weil man nicht alles auf eine Karte setzt", correct: true, explain: "Genau! Wenn eine Aktie oder Branche schlecht läuft, können andere Anlagen in deinem Portfolio das ausgleichen. 'Lege nicht alle Eier in einen Korb'." },
-                { text: "Sie garantiert höhere Gewinne", correct: false, explain: "Nein, sie begrenzt das Risiko. Höhere Gewinne hätte man, wenn man zufällig die eine Super-Aktie getroffen hätte – aber das ist pures Glück." },
-                { text: "Sie ist gesetzlich vorgeschrieben", correct: false, explain: "Nein, du könntest auch alles in eine Aktie stecken, es ist aber nicht empfehlenswert." },
-                { text: "Sie senkt die Steuern auf Kapitalerträge", correct: false, explain: "Die Besteuerung hat nichts mit der Streuung deines Portfolios zu tun." }
+                { text: "Sie verteilt das Anlagerisiko auf verschiedene, möglichst unabhängige Anlageklassen oder Titel.", correct: true, explain: "Genau! 'Lege nicht alle Eier in einen Korb'. Wenn eine Anlage schlecht läuft, können andere das ausgleichen." },
+                { text: "Sie maximiert die Rendite, indem sie sich auf die gewinnbringendsten Anlagen konzentriert.", correct: false, explain: "Nein, sie begrenzt das Risiko. Konzentration auf eine Anlage würde die Rendite maximieren - aber auch das Risiko." },
+                { text: "Sie ist eine gesetzliche Anforderung für alle privaten Wertpapierdepots in der EU.", correct: false, explain: "Nein, du könntest auch alles in eine Aktie stecken, es ist aber nicht empfehlenswert." },
+                { text: "Sie führt zu einer automatischen Reduzierung der Kapitalertragsteuer auf Gewinne.", correct: false, explain: "Die Besteuerung hat nichts mit der Streuung deines Portfolios zu tun." }
             ], difficulty: 1 },
-            { q: "Was meint der Spruch 'Time in the market beats timing the market'?", a: [
-                { text: "Langfristig investiert zu sein ist wichtiger als zu versuchen, den perfekten Kauf-/Verkaufszeitpunkt zu finden", correct: true, explain: "Perfekt zusammengefasst. Die besten Tage an der Börse zu verpassen, kostet mehr Rendite als zu einem 'schlechten' Zeitpunkt einzusteigen." },
-                { text: "Man sollte den Markt genau timen, um erfolgreich zu sein", correct: false, explain: "Das ist das, wovon der Spruch abrät. Market Timing scheitert fast immer." },
-                { text: "Die Zeit, die man mit Analyse verbringt, ist entscheidend", correct: false, explain: "Analyse ist gut, aber der Spruch bezieht sich auf die Dauer, die dein Geld investiert ist." },
-                { text: "Man muss schneller sein als die anderen Marktteilnehmer", correct: false, explain: "Das ist die Idee des Hochfrequenzhandels, nicht die einer soliden Langfriststrategie." }
+            { q: "Was meint 'Time in the market beats timing the market'?", a: [
+                { text: "Die Anlagedauer ist für den Erfolg entscheidender als der Versuch, den perfekten Einstiegszeitpunkt zu finden.", correct: true, explain: "Perfekt zusammengefasst. Die besten Tage an der Börse zu verpassen, kostet mehr Rendite als zu einem 'schlechten' Zeitpunkt einzusteigen." },
+                { text: "Der Erfolg an der Börse hängt hauptsächlich vom präzisen Timing der Käufe und Verkäufe ab.", correct: false, explain: "Das ist das, wovon der Spruch abrät. Market Timing scheitert fast immer." },
+                { text: "Die Zeit, die man täglich für die Marktanalyse aufwendet, schlägt passives Investieren.", correct: false, explain: "Analyse ist gut, aber der Spruch bezieht sich auf die Dauer, die dein Geld investiert ist." },
+                { text: "Man muss schneller als der Markt agieren, um eine überdurchschnittliche Rendite zu erzielen.", correct: false, explain: "Das ist die Idee des Hochfrequenzhandels, nicht die einer soliden Langfriststrategie." }
             ], difficulty: 3 },
             { q: "Was ist ein ETF-Sparplan?", a: [
-                { text: "Ein Dauerauftrag, mit dem monatlich automatisch für einen festen Betrag ETF-Anteile gekauft werden", correct: true, explain: "Richtig. Das ist eine sehr einfache und kostengünstige Methode, um den Zinseszinseffekt und den Cost-Average-Effekt zu nutzen." },
-                { text: "Ein spezielles, verzinstes Sparkonto", correct: false, explain: "Nein, du kaufst echte Wertpapiere, die im Wert schwanken. Es gibt keine Zinsgarantie." },
-                { text: "Ein Vertrag, der dich zum Sparen verpflichtet", correct: false, explain: "Nein, einen Sparplan kann man in der Regel jederzeit kostenlos ändern, pausieren oder stoppen." },
-                { text: "Eine Anlage, die nur einmal im Jahr bespart wird", correct: false, explain: "Das Sparintervall ist meist flexibel (monatlich, quartalsweise etc.)." }
+                { text: "Ein automatisierter Dauerauftrag zum regelmäßigen Kauf von ETF-Anteilen für einen festen Betrag.", correct: true, explain: "Richtig. Das ist eine sehr einfache und kostengünstige Methode, um den Zinseszinseffekt und den Cost-Average-Effekt zu nutzen." },
+                { text: "Ein spezielles Bankkonto mit einer festen Verzinsung und einem ETF-Anteil.", correct: false, explain: "Nein, du kaufst echte Wertpapiere, die im Wert schwanken. Es gibt keine Zinsgarantie." },
+                { text: "Ein bindender Vertrag mit einer Bank, der zum monatlichen Sparen in ETFs verpflichtet.", correct: false, explain: "Nein, einen Sparplan kann man in der Regel jederzeit kostenlos ändern, pausieren oder stoppen." },
+                { text: "Ein Anlageprodukt, das einmalig bespart und dann bis zur Rente gehalten wird.", correct: false, explain: "Das Sparintervall ist meist flexibel (monatlich, quartalsweise etc.)." }
             ], difficulty: 1 },
             { q: "Was ist 'Rebalancing'?", a: [
-                { text: "Das Wiederherstellen der ursprünglichen prozentualen Aufteilung im Portfolio", correct: true, explain: "Genau. Wenn z.B. Aktien stark gestiegen sind, verkauft man einen Teil und kauft Anleihen, um wieder die Ziel-Quote (z.B. 70/30) zu erreichen." },
-                { text: "Alle Aktien im Depot verkaufen und neu anfangen", correct: false, explain: "Nein, es geht um eine Anpassung, nicht um einen kompletten Neustart." },
-                { text: "Das Depot auf einen neuen Broker umziehen", correct: false, explain: "Das ist ein Depotübertrag." },
-                { text: "Die schwächsten Aktien im Portfolio durch neue ersetzen", correct: false, explain: "Das wäre 'Umschichten', aber Rebalancing orientiert sich an der prozentualen Ziel-Allokation." }
+                { text: "Das gezielte Umschichten im Portfolio, um die ursprüngliche prozentuale Aufteilung wiederherzustellen.", correct: true, explain: "Genau. Wenn z.B. Aktien stark gestiegen sind, verkauft man einen Teil und kauft Anleihen, um wieder die Ziel-Quote zu erreichen." },
+                { text: "Der vollständige Verkauf aller Positionen im Depot, um Gewinne zu sichern und neu zu starten.", correct: false, explain: "Nein, es geht um eine Anpassung, nicht um einen kompletten Neustart." },
+                { text: "Der Übertrag eines bestehenden Wertpapierdepots zu einem neuen, günstigeren Broker.", correct: false, explain: "Das ist ein Depotübertrag." },
+                { text: "Der regelmäßige Austausch der schwächsten Aktien im Portfolio gegen aussichtsreichere Titel.", correct: false, explain: "Das wäre 'Umschichten', aber Rebalancing orientiert sich an der prozentualen Ziel-Allokation, nicht an Einzeltiteln." }
             ], difficulty: 3 },
             { q: "Was ist eine 'Core-Satellite'-Strategie?", a: [
-                { text: "Ein großer, breit gestreuter Kern (Core) wird mit kleineren, riskanteren Einzelwetten (Satellites) kombiniert", correct: true, explain: "Korrekt. Der Kern (z.B. ein MSCI World ETF) sorgt für Stabilität, die Satelliten (z.B. Einzelaktien, Themen-ETFs) für die Chance auf höhere Renditen." },
-                { text: "Man investiert nur in die allergrößten Unternehmen", correct: false, explain: "Das wäre eine 'Large Cap'-Strategie." },
-                { text: "Man umkreist den Markt wie ein Satellit und steigt nur kurz ein", correct: false, explain: "Nein, es geht um die Struktur des Portfolios." },
-                { text: "Man investiert nur in Raumfahrt-Unternehmen", correct: false, explain: "Haha, nein, der Name ist eine Metapher für die Portfolio-Struktur." }
+                { text: "Eine Portfoliostruktur mit einem stabilen Kern (Core) und spekulativeren Beimischungen (Satellites).", correct: true, explain: "Korrekt. Der Kern (z.B. ein MSCI World ETF) sorgt für Stabilität, die Satelliten (z.B. Einzelaktien) für Renditechancen." },
+                { text: "Eine Strategie, bei der man ausschließlich in die größten und wichtigsten Unternehmen investiert.", correct: false, explain: "Das wäre eine reine 'Large Cap'-Strategie." },
+                { text: "Eine Handelsstrategie, bei der man den Markt umkreist und nur für kurze Zeit investiert.", correct: false, explain: "Nein, es geht um die Struktur des Portfolios." },
+                { text: "Eine Anlagestrategie, die sich ausschließlich auf Unternehmen der Luft- und Raumfahrt konzentriert.", correct: false, explain: "Haha, nein, der Name ist eine Metapher für die Portfolio-Struktur." }
             ], difficulty: 3 },
-            { q: "Was bedeutet es, sein 'Humankapital' bei der Anlagestrategie zu berücksichtigen?", a: [
-                { text: "Die zukünftige Arbeits- und Ertragskraft als Teil des Gesamtvermögens zu sehen", correct: true, explain: "Genau. Als junger Mensch mit sicherem Job (hohes Humankapital) kannst du bei deinen Geldanlagen ein höheres Risiko eingehen als ein Rentner." },
-                { text: "Nur in Firmen zu investieren, die ihre Mitarbeiter gut behandeln", correct: false, explain: "Das ist 'Socially Responsible Investing', aber nicht die Bedeutung von Humankapital in diesem Kontext." },
-                { text: "Geld in die eigene Bildung zu investieren statt in Aktien", correct: false, explain: "Bildungsinvestitionen sind wichtig, aber hier geht es darum, das Humankapital bei der Risikoanalyse der Geldanlage zu berücksichtigen." },
-                { text: "In Aktien von Personal-Dienstleistern zu investieren", correct: false, explain: "Das wäre eine Branchenwette." }
+            { q: "Was bedeutet es, sein 'Humankapital' zu berücksichtigen?", a: [
+                { text: "Die zukünftige Arbeits- und Verdienstfähigkeit als Teil des Gesamtvermögens zu betrachten.", correct: true, explain: "Genau. Als junger Mensch mit sicherem Job (hohes Humankapital) kannst du bei deinen Geldanlagen ein höheres Risiko eingehen." },
+                { text: "Ausschließlich in Unternehmen zu investieren, die ihre Mitarbeiter vorbildlich behandeln.", correct: false, explain: "Das ist 'Socially Responsible Investing', aber nicht die Bedeutung von Humankapital in diesem Kontext." },
+                { text: "Das eigene Geld primär in die persönliche Bildung statt in den Aktienmarkt zu investieren.", correct: false, explain: "Bildungsinvestitionen sind wichtig, aber hier geht es darum, das Humankapital bei der Risikoanalyse der Geldanlage zu berücksichtigen." },
+                { text: "Vorrangig in Aktien von Unternehmen aus der Personal- und Bildungsbranche zu investieren.", correct: false, explain: "Das wäre eine Branchenwette." }
             ], difficulty: 3 },
             { q: "Was ist die '4-Prozent-Regel'?", a: [
-                { text: "Eine Faustregel, die besagt, wie viel man jährlich aus seinem Depot im Ruhestand entnehmen kann", correct: true, explain: "Richtig. Die ursprüngliche Studie besagte, dass man 30 Jahre lang 4% des Anfangskapitals (plus Inflationsanpassung) entnehmen kann, ohne pleite zu gehen." },
-                { text: "Man sollte nie mehr als 4% seines Geldes in eine Aktie stecken", correct: false, explain: "Das ist eine Regel zur Diversifikation, aber nicht die '4-Prozent-Regel'." },
-                { text: "Die jährliche Rendite von Aktien beträgt im Schnitt 4%", correct: false, explain: "Die historische Rendite liegt eher bei 7-9%." },
-                { text: "Man muss mindestens 4% Steuern auf Gewinne zahlen", correct: false, explain: "Die Kapitalertragsteuer in Deutschland liegt bei ca. 25%." }
+                { text: "Eine Faustregel für die jährliche Entnahmerate aus dem Depotvermögen im Ruhestand.", correct: true, explain: "Richtig. Die ursprüngliche Studie besagte, dass man 30 Jahre lang 4% des Anfangskapitals (plus Inflationsanpassung) entnehmen kann, ohne pleite zu gehen." },
+                { text: "Die Vorgabe, dass nicht mehr als 4% des Depotvolumens in einer einzelnen Aktie stecken dürfen.", correct: false, explain: "Das ist eine Regel zur Diversifikation, aber nicht die '4-Prozent-Regel'." },
+                { text: "Die Annahme, dass die durchschnittliche jährliche Rendite von Aktien bei 4% nach Inflation liegt.", correct: false, explain: "Die historische Rendite liegt eher bei 7-9%." },
+                { text: "Die gesetzliche Regel, dass mindestens 4% des Gewinns als Kapitalertragsteuer abgeführt werden müssen.", correct: false, explain: "Die Kapitalertragsteuer in Deutschland liegt bei ca. 25%." }
             ], difficulty: 2 }
         ],
         "Markt & Wirtschaft 💹": [
             { q: "Was ist 'Inflation'?", a: [
-                { text: "Der Prozess, bei dem das Geld an Kaufkraft verliert und die Preise allgemein steigen", correct: true, explain: "Genau. Für 1€ kannst du dir heute weniger kaufen als letztes Jahr. Deshalb ist es so wichtig, eine Rendite über der Inflationsrate zu erzielen." },
-                { text: "Wenn die Aktienkurse stark ansteigen", correct: false, explain: "Das ist eine 'Hausse' oder ein 'Bullenmarkt'." },
-                { text: "Eine Erhöhung der Steuern", correct: false, explain: "Steuererhöhungen können Preise treiben, sind aber nicht die Inflation selbst." },
-                { text: "Wenn ein Unternehmen seine Bilanz 'aufbläst'", correct: false, explain: "Das wäre Bilanzfälschung." }
+                { text: "Ein andauernder Prozess der Geldentwertung, der sich in einem allgemeinen Preisanstieg zeigt.", correct: true, explain: "Genau. Für 1€ kannst du dir heute weniger kaufen als letztes Jahr. Deshalb ist es so wichtig, eine Rendite über der Inflationsrate zu erzielen." },
+                { text: "Eine von der Zentralbank gesteuerte Erhöhung der im Umlauf befindlichen Geldmenge.", correct: false, explain: "Eine Erhöhung der Geldmenge kann Inflation verursachen, ist aber nicht die Inflation selbst." },
+                { text: "Die positive Wertentwicklung des Aktienmarktes über einen längeren Zeitraum.", correct: false, explain: "Das ist eine 'Hausse' oder ein 'Bullenmarkt'." },
+                { text: "Eine von der Regierung beschlossene Anhebung der Mehrwertsteuer auf Waren.", correct: false, explain: "Steuererhöhungen können Preise treiben, sind aber nicht die Inflation selbst." }
             ], difficulty: 1 },
             { q: "Was ist ein 'Bullenmarkt' (Hausse)?", a: [
-                { text: "Eine Phase langanhaltend steigender Kurse an der Börse", correct: true, explain: "Richtig. Der Bulle stößt mit seinen Hörnern von unten nach oben – ein Symbol für Aufwärtstrend." },
-                { text: "Ein Markt, an dem nur Agrarprodukte gehandelt werden", correct: false, explain: "Nein, der Begriff gilt für den gesamten Aktienmarkt." },
-                { text: "Eine Phase sehr hoher Volatilität", correct: false, explain: "Ein Bullenmarkt kann volatil sein, aber das Kernmerkmal ist die steigende Tendenz." },
-                { text: "Wenn die Zinsen steigen", correct: false, explain: "Steigende Zinsen können einen Bullenmarkt sogar beenden." }
+                { text: "Eine langanhaltende Periode mit optimistischen Erwartungen und steigenden Aktienkursen.", correct: true, explain: "Richtig. Der Bulle stößt mit seinen Hörnern von unten nach oben – ein Symbol für Aufwärtstrend." },
+                { text: "Ein Marktsegment, das sich auf Aktien aus der Landwirtschaft und Viehzucht konzentriert.", correct: false, explain: "Nein, der Begriff gilt für den gesamten Aktienmarkt." },
+                { text: "Eine Marktphase mit besonders geringen Kursschwankungen und hoher Stabilität.", correct: false, explain: "Ein Bullenmarkt kann volatil sein, aber das Kernmerkmal ist die steigende Tendenz." },
+                { text: "Eine Phase steigender Zinsen, die das Vertrauen der Anleger in den Markt stärkt.", correct: false, explain: "Steigende Zinsen können einen Bullenmarkt sogar beenden." }
             ], difficulty: 1 },
             { q: "Was ist ein 'Bärenmarkt' (Baisse)?", a: [
-                { text: "Eine Phase langanhaltend fallender Kurse an der Börse", correct: true, explain: "Genau. Der Bär schlägt mit seiner Tatze von oben nach unten – ein Symbol für Abwärtstrend." },
-                { text: "Ein Markt mit sehr wenigen Handelsaktivitäten", correct: false, explain: "In einem Bärenmarkt kann aus Panik sogar sehr viel gehandelt (verkauft) werden." },
-                { text: "Ein Markt für Aktien von Firmen, die vom Aussterben bedroht sind", correct: false, explain: "Nein, der Begriff beschreibt die allgemeine Marktlage." },
-                { text: "Wenn die Dividenden ausfallen", correct: false, explain: "Ausfallende Dividenden können eine Folge eines Bärenmarktes sein, sind aber nicht die Definition." }
+                { text: "Eine langanhaltende Periode mit pessimistischen Erwartungen und fallenden Aktienkursen.", correct: true, explain: "Genau. Der Bär schlägt mit seiner Tatze von oben nach unten – ein Symbol für Abwärtstrend." },
+                { text: "Eine Marktphase mit extrem niedrigem Handelsvolumen und geringer Liquidität.", correct: false, explain: "In einem Bärenmarkt kann aus Panik sogar sehr viel gehandelt (verkauft) werden." },
+                { text: "Ein Markt für Aktien von Unternehmen, die sich in einem Insolvenzverfahren befinden.", correct: false, explain: "Nein, der Begriff beschreibt die allgemeine Marktlage." },
+                { text: "Eine Phase, in der die meisten Unternehmen die Ausschüttung von Dividenden einstellen.", correct: false, explain: "Ausfallende Dividenden können eine Folge eines Bärenmarktes sein, sind aber nicht die Definition." }
             ], difficulty: 1 },
             { q: "Was ist eine 'Rezession'?", a: [
-                { text: "Eine Phase, in der die Wirtschaftsleistung eines Landes schrumpft", correct: true, explain: "Korrekt. Technisch gesehen spricht man oft von einer Rezession, wenn das Bruttoinlandsprodukt (BIP) in zwei aufeinanderfolgenden Quartalen sinkt." },
-                { text: "Ein anderes Wort für Börsencrash", correct: false, explain: "Ein Börsencrash kann eine Rezession einleiten oder begleiten, ist aber nicht dasselbe. Eine Rezession ist ein realwirtschaftliches Phänomen." },
-                { text: "Wenn die Regierung ihre Schulden nicht mehr bezahlen kann", correct: false, explain: "Das ist ein 'Staatsbankrott'." },
-                { text: "Eine Periode extrem hoher Inflation", correct: false, explain: "Manchmal ja (Stagflation), aber eine Rezession kann auch mit fallenden Preisen (Deflation) einhergehen." }
+                { text: "Ein signifikanter Rückgang der gesamtwirtschaftlichen Aktivität über mehrere Monate.", correct: true, explain: "Korrekt. Technisch spricht man oft von einer Rezession, wenn das BIP in zwei aufeinanderfolgenden Quartalen sinkt." },
+                { text: "Ein starker Einbruch der Aktienkurse von mehr als 20% vom letzten Hochpunkt.", correct: false, explain: "Das ist die Definition eines Bärenmarktes, der eine Rezession begleiten kann, aber nicht muss." },
+                { text: "Die Unfähigkeit eines Staates, seine fälligen Schulden zu bedienen (Staatsbankrott).", correct: false, explain: "Das ist ein 'Staatsbankrott'." },
+                { text: "Eine Periode, in der die Inflationsrate über die Marke von 5% ansteigt.", correct: false, explain: "Manchmal ja (Stagflation), aber eine Rezession kann auch mit fallenden Preisen (Deflation) einhergehen." }
             ], difficulty: 2 },
-            { q: "Wie beeinflusst eine Leitzinserhöhung durch die Zentralbank (z.B. EZB) tendenziell den Aktienmarkt?", a: [
-                { text: "Eher negativ, weil Kredite für Firmen teurer werden und Sparen attraktiver wird", correct: true, explain: "Genau. Höhere Zinsen wirken wie eine Bremse für die Wirtschaft und machen zinsbasierte Anlagen wie Festgeld attraktiver im Vergleich zu Aktien." },
-                { text: "Eher positiv, weil es ein Zeichen für eine starke Wirtschaft ist", correct: false, explain: "Die Zinserhöhung erfolgt zwar oft in einer starken Wirtschaft, wirkt aber dämpfend auf die zukünftige Entwicklung und die Aktienkurse." },
-                { text: "Gar nicht, der Aktienmarkt ist davon unabhängig", correct: false, explain: "Die Leitzinsen sind eines der wichtigsten Steuerungsinstrumente und haben einen riesigen Einfluss auf den Aktienmarkt." },
-                { text: "Alle Aktienkurse steigen um genau diesen Zinssatz", correct: false, explain: "Nein, so ein direkter Zusammenhang besteht nicht." }
+            { q: "Wie beeinflusst eine Leitzinserhöhung der Zentralbank den Aktienmarkt?", a: [
+                { text: "Sie verteuert Kredite für Unternehmen und macht festverzinsliche Anlagen attraktiver.", correct: true, explain: "Genau. Höhere Zinsen wirken wie eine Bremse für die Wirtschaft und machen Festgeld attraktiver im Vergleich zu Aktien." },
+                { text: "Sie führt zu einer positiven Neubewertung, da sie eine Überhitzung der Wirtschaft verhindert.", correct: false, explain: "Die Zinserhöhung erfolgt zwar oft in einer starken Wirtschaft, wirkt aber dämpfend auf die zukünftige Entwicklung." },
+                { text: "Sie hat keinen direkten Einfluss, da der Aktienmarkt von den Unternehmensgewinnen abhängt.", correct: false, explain: "Die Leitzinsen sind eines der wichtigsten Steuerungsinstrumente und beeinflussen die Unternehmensgewinne stark." },
+                { text: "Sie führt zu einem automatischen Anstieg der Dividendenrenditen um den gleichen Prozentsatz.", correct: false, explain: "Nein, so ein direkter Zusammenhang besteht nicht." }
             ], difficulty: 2 },
             { q: "Was ist 'Volatilität'?", a: [
-                { text: "Das Maß für die Schwankungsintensität von Aktienkursen", correct: true, explain: "Richtig. Eine hohe Volatilität bedeutet starke Kursschwankungen nach oben und unten – eine wilde Achterbahnfahrt." },
-                { text: "Das Handelsvolumen einer Aktie", correct: false, explain: "Nein, das ist die Anzahl der gehandelten Stücke." },
-                { text: "Die Geschwindigkeit, mit der eine Order ausgeführt wird", correct: false, explain: "Nein, das hat nichts damit zu tun." },
-                { text: "Ein Indikator, der die zukünftige Rendite vorhersagt", correct: false, explain: "Volatilität misst das Risiko (die Schwankung), nicht die Rendite." }
+                { text: "Ein statistisches Maß für die Intensität der Schwankungen von Kursen oder Preisen.", correct: true, explain: "Richtig. Eine hohe Volatilität bedeutet starke Kursschwankungen nach oben und unten – eine wilde Achterbahnfahrt." },
+                { text: "Die Gesamtzahl der gehandelten Wertpapiere an einem Handelstag (Handelsvolumen).", correct: false, explain: "Nein, das ist das 'Volumen'." },
+                { text: "Die Geschwindigkeit, mit der sich der Preis einer Aktie einem neuen fairen Wert annähert.", correct: false, explain: "Das wäre die 'Markteffizienz'." },
+                { text: "Ein Risikomaß, das die Wahrscheinlichkeit eines Totalverlustes einer Anlage angibt.", correct: false, explain: "Volatilität misst die Schwankung, nicht die Ausfallwahrscheinlichkeit." }
             ], difficulty: 2 },
             { q: "Was ist ein 'Flash Crash'?", a: [
-                { text: "Ein extrem schneller und tiefer Börseneinbruch, der sich oft innerhalb von Minuten wieder erholt", correct: true, explain: "Korrekt. Solche Ereignisse werden oft durch computergesteuerte Handelsprogramme (Algorithmen) ausgelöst oder verstärkt." },
-                { text: "Ein Stromausfall an der Börse", correct: false, explain: "Nein, der Handel bricht aus Verkaufsdruck zusammen, nicht wegen technischer Pannen an der Börse selbst." },
-                { text: "Ein Crash, der durch eine Eilmeldung (Flash) ausgelöst wird", correct: false, explain: "Der Name bezieht sich auf die Geschwindigkeit ('blitzartig'), nicht auf eine Nachricht." },
-                { text: "Ein geplanter Test des Börsensystems", correct: false, explain: "Nein, Flash Crashes sind unbeabsichtigte und chaotische Ereignisse." }
+                { text: "Ein extrem schneller und tiefgreifender Kurseinbruch, der meist durch algorithmischen Handel ausgelöst wird.", correct: true, explain: "Korrekt. Solche Ereignisse erholen sich oft binnen Minuten, werden aber durch Computerprogramme ausgelöst oder verstärkt." },
+                { text: "Ein technischer Totalausfall der Computersysteme einer gesamten Börse.", correct: false, explain: "Nein, der Handel bricht aus Verkaufsdruck zusammen, nicht wegen technischer Pannen an der Börse selbst." },
+                { text: "Ein Börsencrash, der durch die Veröffentlichung einer einzigen negativen Eilmeldung ausgelöst wird.", correct: false, explain: "Der Name bezieht sich auf die Geschwindigkeit ('blitzartig'), nicht auf eine Nachricht." },
+                { text: "Ein von der Börsenaufsicht initiierter, geplanter Test der Notfallsysteme.", correct: false, explain: "Nein, Flash Crashes sind unbeabsichtigte und chaotische Ereignisse." }
             ], difficulty: 3 },
             { q: "Was bedeutet 'Konjunkturzyklus'?", a: [
-                { text: "Die wellenförmige Entwicklung der Wirtschaft zwischen Aufschwung, Boom, Abschwung und Rezession", correct: true, explain: "Genau. Die Wirtschaft wächst nicht geradlinig, sondern in diesen Zyklen, die auch den Aktienmarkt stark beeinflussen." },
-                { text: "Der jährliche Berichtszyklus eines Unternehmens", correct: false, explain: "Das ist der Geschäfts- oder Berichtszyklus (Quartalsberichte etc.)." },
-                { text: "Der Lebenszyklus einer Aktie von IPO bis Delisting", correct: false, explain: "Nein, Konjunktur bezieht sich auf die Gesamtwirtschaft." },
-                { text: "Die Abfolge von Bullen- und Bärenmärkten", correct: false, explain: "Bullen- und Bärenmärkte sind Teil des Konjunkturzyklus, aber der Begriff umfasst die gesamte wirtschaftliche Aktivität." }
+                { text: "Die periodische Schwankung der gesamtwirtschaftlichen Aktivität um ihren langfristigen Wachstumstrend.", correct: true, explain: "Genau. Die Wirtschaft wächst nicht geradlinig, sondern in Zyklen aus Aufschwung, Boom, Abschwung und Rezession." },
+                { text: "Der vierjährige Berichtszyklus, dem börsennotierte Unternehmen unterliegen.", correct: false, explain: "Das ist der Geschäfts- oder Berichtszyklus (Quartalsberichte etc.)." },
+                { text: "Der typische Lebenszyklus einer Aktie vom Börsengang bis zum eventuellen Delisting.", correct: false, explain: "Nein, Konjunktur bezieht sich auf die Gesamtwirtschaft." },
+                { text: "Die regelmäßige Abfolge von Bullen- und Bärenmärkten, die im Schnitt sieben Jahre dauert.", correct: false, explain: "Bullen- und Bärenmärkte sind Teil des Konjunkturzyklus, aber der Begriff umfasst die gesamte wirtschaftliche Aktivität." }
             ], difficulty: 2 },
             { q: "Was ist 'Deflation'?", a: [
-                { text: "Ein Prozess sinkender Preise und ein Anstieg der Geldkaufkraft", correct: true, explain: "Richtig. Klingt erstmal gut, ist aber Gift für die Wirtschaft, weil Unternehmen und Verbraucher Investitionen aufschieben in Erwartung noch weiter fallender Preise." },
-                { text: "Ein anderes Wort für Rezession", correct: false, explain: "Deflation kann zu einer Rezession führen, ist aber nicht dasselbe. Es beschreibt die Preisentwicklung." },
-                { text: "Der Abbau von Staatsschulden", correct: false, explain: "Nein, das hat nichts mit dem allgemeinen Preisniveau zu tun." },
-                { text: "Wenn die Luft aus einer Spekulationsblase entweicht", correct: false, explain: "Das Platzen einer Blase kann zu Deflation führen, ist aber die Ursache, nicht die Deflation selbst." }
+                { text: "Ein Prozess stetig sinkender Preise für Waren und Dienstleistungen über einen längeren Zeitraum.", correct: true, explain: "Richtig. Klingt gut, ist aber Gift für die Wirtschaft, weil Investitionen in Erwartung noch weiter fallender Preise aufgeschoben werden." },
+                { text: "Der gezielte Abbau von Staatsschulden durch Sparmaßnahmen der Regierung.", correct: false, explain: "Nein, das hat nichts mit dem allgemeinen Preisniveau zu tun." },
+                { text: "Eine negative Wertentwicklung des eigenen Portfolios über mehr als zwei Quartale.", correct: false, explain: "Das wäre eine persönliche Verlustphase, nicht ein gesamtwirtschaftliches Phänomen." },
+                { text: "Das Platzen einer Spekulationsblase an den Finanzmärkten.", correct: false, explain: "Das Platzen einer Blase kann zu Deflation führen, ist aber die Ursache, nicht die Deflation selbst." }
             ], difficulty: 2 },
             { q: "Was sind 'Frühindikatoren' für die Wirtschaft?", a: [
-                { text: "Wirtschaftsdaten, die eine zukünftige Entwicklung der Konjunktur andeuten", correct: true, explain: "Genau. Beispiele sind der ifo-Geschäftsklimaindex, Auftragseingänge in der Industrie oder die Anzahl der Baugenehmigungen." },
-                { text: "Indikatoren, die nur morgens veröffentlicht werden", correct: false, explain: "Der Name bezieht sich auf die zeitliche Vorhersagekraft, nicht auf die Tageszeit." },
-                { text: "Aktien, die immer als erstes steigen", correct: false, explain: "Sogenannte 'zyklische Aktien' reagieren früh, aber der Begriff 'Frühindikator' bezieht sich auf makroökonomische Daten." },
-                { text: "Die Wettervorhersage", correct: false, explain: "Nein, auch wenn gutes Wetter manchmal die Stimmung hebt." }
+                { text: "Wirtschaftsstatistiken, die eine zukünftige Entwicklung der Konjunktur vorwegnehmen.", correct: true, explain: "Genau. Beispiele sind der ifo-Geschäftsklimaindex, Auftragseingänge in der Industrie oder die Anzahl der Baugenehmigungen." },
+                { text: "Technische Indikatoren in der Chartanalyse, die einen Trendwechsel frühzeitig signalisieren.", correct: false, explain: "Das sind charttechnische Indikatoren, nicht makroökonomische." },
+                { text: "Aktien von zyklischen Unternehmen, deren Kurse der allgemeinen Wirtschaft vorauseilen.", correct: false, explain: "Aktienkurse sind selbst ein Frühindikator, aber der Begriff meint meist makroökonomische Daten." },
+                { text: "Wirtschaftsdaten, die die aktuelle ökonomische Situation beschreiben (Präsenzindikatoren).", correct: false, explain: "Das sind Präsenzindikatoren (z.B. aktuelle Arbeitslosenquote), keine Frühindikatoren." }
             ], difficulty: 3 }
         ],
         "Unternehmensanalyse 🧐": [
             { q: "Was sagt das 'KGV' (Kurs-Gewinn-Verhältnis) aus?", a: [
-                { text: "Wie oft der Jahresgewinn pro Aktie im aktuellen Aktienkurs enthalten ist", correct: true, explain: "Richtig. Ein KGV von 15 bedeutet, dass das Unternehmen 15 Jahre bräuchte, um seinen aktuellen Börsenwert zu verdienen (theoretisch)." },
-                { text: "Das Verhältnis von Kurs zu Gesamtumsatz", correct: false, explain: "Das wäre das KUV (Kurs-Umsatz-Verhältnis)." },
-                { text: "Wie viel Gewinn ein Unternehmen pro Kunde macht", correct: false, explain: "Nein, das KGV bezieht sich auf den Aktienkurs." },
-                { text: "Die Wachstumsrate des Gewinns", correct: false, explain: "Die Wachstumsrate kann helfen, das KGV zu bewerten (PEG-Ratio), ist aber nicht das KGV selbst." }
+                { text: "Mit dem wievielfachen ihres Jahresgewinns eine Aktie an der Börse bewertet wird.", correct: true, explain: "Richtig. Ein KGV von 15 bedeutet, dass das Unternehmen 15 Jahre bräuchte, um seinen aktuellen Börsenwert zu verdienen (theoretisch)." },
+                { text: "Das Verhältnis des aktuellen Aktienkurses zum Umsatz pro Aktie.", correct: false, explain: "Das wäre das KUV (Kurs-Umsatz-Verhältnis)." },
+                { text: "Die prognostizierte Wachstumsrate des Gewinns für die nächsten Jahre.", correct: false, explain: "Die Wachstumsrate kann helfen, das KGV zu bewerten (PEG-Ratio), ist aber nicht das KGV selbst." },
+                { text: "Das Verhältnis des Aktienkurses zum bilanziellen Eigenkapital pro Aktie.", correct: false, explain: "Das wäre das KBV (Kurs-Buchwert-Verhältnis)." }
             ], difficulty: 2 },
             { q: "Wann gilt eine Aktie nach dem KGV als potenziell 'günstig'?", a: [
-                { text: "Wenn das KGV niedrig ist (im Vergleich zur Branche und zur eigenen Historie)", correct: true, explain: "Genau. Ein niedriges KGV kann auf eine Unterbewertung hindeuten. Es kann aber auch bedeuten, dass der Markt dem Unternehmen wenig Wachstum zutraut." },
-                { text: "Wenn das KGV sehr hoch ist (z.B. über 100)", correct: false, explain: "Ein hohes KGV deutet auf hohe Wachstumserwartungen (und eine 'teure' Bewertung) hin." },
-                { text: "Wenn das KGV negativ ist", correct: false, explain: "Ein negatives KGV gibt es nicht. Wenn ein Unternehmen Verlust macht, ist das KGV nicht anwendbar." },
-                { text: "Das KGV hat nichts mit der Bewertung zu tun", correct: false, explain: "Doch, es ist eine der bekanntesten und wichtigsten Bewertungskennzahlen." }
+                { text: "Wenn das KGV im Branchenvergleich und zur eigenen Historie niedrig ist.", correct: true, explain: "Genau. Ein niedriges KGV kann auf eine Unterbewertung hindeuten. Es kann aber auch bedeuten, dass der Markt dem Unternehmen wenig Wachstum zutraut." },
+                { text: "Wenn das KGV einen hohen Wert von über 50 aufweist.", correct: false, explain: "Ein hohes KGV deutet auf hohe Wachstumserwartungen (und eine 'teure' Bewertung) hin." },
+                { text: "Wenn ein Unternehmen Verluste schreibt und das KGV daher negativ ist.", correct: false, explain: "Ein negatives KGV gibt es nicht. Wenn ein Unternehmen Verlust macht, ist das KGV nicht anwendbar." },
+                { text: "Wenn das KGV exakt dem durchschnittlichen Marktwachstum entspricht.", correct: false, explain: "Ein solcher direkter Zusammenhang ist nicht das Kriterium für eine günstige Bewertung." }
             ], difficulty: 2 },
             { q: "Was ist ein 'Wirtschaftsgraben' (Moat)?", a: [
-                { text: "Ein nachhaltiger Wettbewerbsvorteil, der ein Unternehmen vor Konkurrenz schützt", correct: true, explain: "Perfekt! Wie eine Burg mit Wassergraben. Das können starke Marken, Patente, Netzwerkeffekte oder Kostenvorteile sein." },
-                { text: "Ein Unternehmen, das im Wasserbau tätig ist", correct: false, explain: "Nein, es ist eine Metapher von Starinvestor Warren Buffett." },
-                { text: "Die Schulden eines Unternehmens", correct: false, explain: "Schulden sind eher eine Belastung als ein Schutz." },
-                { text: "Ein besonders breites Produktangebot", correct: false, explain: "Das kann ein Vorteil sein, aber ein 'Moat' ist etwas, das die Konkurrenz nur sehr schwer kopieren kann." }
+                { text: "Ein nachhaltiger Wettbewerbsvorteil, der ein Unternehmen langfristig vor Konkurrenz schützt.", correct: true, explain: "Perfekt! Wie eine Burg mit Wassergraben. Das können starke Marken, Patente, Netzwerkeffekte oder Kostenvorteile sein." },
+                { text: "Eine gesetzliche Vorschrift, die den Markteintritt für neue Wettbewerber erschwert.", correct: false, explain: "Regulierung kann ein Moat sein, aber der Begriff ist viel breiter und umfasst auch unternehmensinterne Vorteile." },
+                { text: "Die Summe aller materiellen Vermögenswerte wie Gebäude und Grundstücke.", correct: false, explain: "Physische Werte können ein Vorteil sein, aber ein Moat ist oft immateriell (z.B. eine starke Marke)." },
+                { text: "Ein kurzfristiger Marketingvorteil durch eine besonders aggressive Werbekampagne.", correct: false, explain: "Ein Moat ist per Definition nachhaltig und langfristig, nicht kurzfristig." }
             ], difficulty: 3 },
             { q: "Was findest du in der 'Bilanz' eines Unternehmens?", a: [
-                { text: "Eine Gegenüberstellung von Vermögen (Mittelverwendung) und Kapital (Mittelherkunft)", correct: true, explain: "Richtig. Die Aktivseite zeigt, was die Firma besitzt (Gebäude, Geld), die Passivseite zeigt, wem es gehört (Eigen- und Fremdkapital)." },
-                { text: "Eine Auflistung aller Einnahmen und Ausgaben in einem Zeitraum", correct: false, explain: "Das ist die 'Gewinn- und Verlustrechnung' (GuV)." },
-                { text: "Die zukünftigen Pläne des Managements", correct: false, explain: "Das steht im 'Geschäftsbericht' oder 'Lagebericht'." },
-                { text: "Eine Liste aller Aktionäre", correct: false, explain: "Das ist das 'Aktienregister'." }
+                { text: "Eine stichtagsbezogene Gegenüberstellung von Vermögen (Aktiva) und Kapital (Passiva).", correct: true, explain: "Richtig. Die Aktivseite zeigt, was die Firma besitzt (Mittelverwendung), die Passivseite zeigt, wem es gehört (Mittelherkunft)." },
+                { text: "Eine Auflistung aller Erträge und Aufwendungen über einen bestimmten Zeitraum.", correct: false, explain: "Das ist die 'Gewinn- und Verlustrechnung' (GuV)." },
+                { text: "Eine Prognose der zukünftigen Geschäftsentwicklung durch das Management.", correct: false, explain: "Das steht im 'Geschäftsbericht' oder 'Lagebericht'." },
+                { text: "Eine detaillierte Aufstellung aller Geldzu- und -abflüsse einer Periode.", correct: false, explain: "Das ist die 'Kapitalflussrechnung' (Cashflow Statement)." }
             ], difficulty: 2 },
             { q: "Was ist das 'Eigenkapital'?", a: [
-                { text: "Das Geld, das den Eigentümern (Aktionären) gehört (Vermögen minus Schulden)", correct: true, explain: "Genau. Es ist die 'Substanz' des Unternehmens." },
-                { text: "Das gesamte Geld, das ein Unternehmen besitzt", correct: false, explain: "Nein, davon müssen noch die Schulden (Fremdkapital) abgezogen werden." },
-                { text: "Die Kredite, die ein Unternehmen aufgenommen hat", correct: false, explain: "Das ist das 'Fremdkapital'." },
-                { text: "Der Börsenwert des Unternehmens", correct: false, explain: "Der Börsenwert (Marktkapitalisierung) kann stark vom bilanziellen Eigenkapital abweichen." }
+                { text: "Die Differenz zwischen dem Vermögen und den Schulden eines Unternehmens.", correct: true, explain: "Genau. Es ist die 'Substanz' des Unternehmens, die den Eigentümern (Aktionären) zusteht." },
+                { text: "Das gesamte Kapital, das einem Unternehmen zur Verfügung steht, inklusive Krediten.", correct: false, explain: "Das ist die 'Bilanzsumme' oder das 'Gesamtkapital'." },
+                { text: "Die Summe aller Kredite und Verbindlichkeiten, die ein Unternehmen hat.", correct: false, explain: "Das ist das 'Fremdkapital'." },
+                { text: "Der aktuelle Börsenwert eines Unternehmens (Marktkapitalisierung).", correct: false, explain: "Der Börsenwert (Marktkapitalisierung) kann stark vom bilanziellen Eigenkapital abweichen." }
             ], difficulty: 2 },
             { q: "Was sagt die 'Eigenkapitalquote' aus?", a: [
-                { text: "Wie hoch der Anteil des Eigenkapitals am Gesamtkapital ist", correct: true, explain: "Korrekt. Eine hohe Eigenkapitalquote (z.B. > 30%) deutet auf eine solide Finanzierung und Krisenfestigkeit hin." },
-                { text: "Wie viel Gewinn mit dem Eigenkapital erzielt wird", correct: false, explain: "Das ist die 'Eigenkapitalrendite'." },
-                { text: "Wie viel Eigenkapital pro Aktionär vorhanden ist", correct: false, explain: "Das wäre der 'Buchwert je Aktie'." },
-                { text: "Wie schnell das Eigenkapital wächst", correct: false, explain: "Nein, es ist eine statische Kennzahl zu einem bestimmten Zeitpunkt." }
+                { text: "Den prozentualen Anteil des Eigenkapitals am Gesamtkapital eines Unternehmens.", correct: true, explain: "Korrekt. Eine hohe Eigenkapitalquote (z.B. > 30%) deutet auf eine solide Finanzierung und Krisenfestigkeit hin." },
+                { text: "Die Verzinsung, die ein Unternehmen auf sein Eigenkapital erwirtschaftet.", correct: false, explain: "Das ist die 'Eigenkapitalrendite'." },
+                { text: "Den Anteil des Eigenkapitals, der pro ausgegebener Aktie vorhanden ist.", correct: false, explain: "Das wäre der 'Buchwert je Aktie'." },
+                { text: "Die Geschwindigkeit, mit der das Eigenkapital durch Gewinne wächst.", correct: false, explain: "Nein, es ist eine statische Kennzahl der Finanzierungsstruktur zu einem bestimmten Zeitpunkt." }
             ], difficulty: 2 },
             { q: "Was ist der 'Cashflow'?", a: [
-                { text: "Der Geldzufluss oder -abfluss in einem Unternehmen", correct: true, explain: "Richtig. Er zeigt die tatsächliche finanzielle Kraft eines Unternehmens, da er weniger manipulierbar ist als der bilanzielle Gewinn." },
-                { text: "Der Bargeldbestand in der Kasse", correct: false, explain: "Das ist die 'Liquidität' oder der 'Kassenbestand'." },
-                { text: "Ein Synonym für Gewinn", correct: false, explain: "Nicht ganz. Der Gewinn enthält auch unbare Posten (z.B. Abschreibungen), der Cashflow nicht." },
-                { text: "Der Fluss von Informationen im Unternehmen", correct: false, explain: "Nein, 'Cash' bedeutet 'Bargeld'." }
+                { text: "Der Nettozufluss liquider Mittel aus der operativen Geschäftstätigkeit einer Periode.", correct: true, explain: "Richtig. Er zeigt die tatsächliche finanzielle Kraft, da er weniger manipulierbar ist als der bilanzielle Gewinn." },
+                { text: "Der Kassenbestand und die kurzfristigen Bankguthaben eines Unternehmens.", correct: false, explain: "Das ist die 'Liquidität' oder der 'Finanzmittelbestand'." },
+                { text: "Ein anderes Wort für den Periodengewinn nach Abzug aller Steuern.", correct: false, explain: "Nicht ganz. Der Gewinn enthält auch unbare Posten (z.B. Abschreibungen), der Cashflow nicht." },
+                { text: "Der Informationsfluss zwischen der Finanzabteilung und dem Vorstand.", correct: false, explain: "Nein, 'Cash' bedeutet 'Bargeld'." }
             ], difficulty: 3 },
             { q: "Was ist der Unterschied zwischen 'Umsatz' und 'Gewinn'?", a: [
-                { text: "Umsatz ist alles, was eingenommen wird, Gewinn ist das, was nach Abzug aller Kosten übrig bleibt", correct: true, explain: "Perfekt! Hoher Umsatz ist gut, aber ohne Gewinn ist er wertlos." },
-                { text: "Umsatz und Gewinn sind dasselbe", correct: false, explain: "Absolut nicht. Das ist einer der häufigsten Fehler." },
-                { text: "Umsatz wird täglich, Gewinn nur jährlich berechnet", correct: false, explain: "Beides wird für die gleichen Perioden (Quartal, Jahr) berechnet und berichtet." },
-                { text: "Umsatz ist für den Staat, Gewinn für die Aktionäre", correct: false, explain: "Beide Zahlen sind für alle wichtig. Steuern werden auf den Gewinn gezahlt." }
+                { text: "Umsatz ist der Gesamtwert der Verkäufe, Gewinn ist der Rest nach Abzug aller Kosten.", correct: true, explain: "Perfekt! Hoher Umsatz ist gut, aber ohne Gewinn ist er wertlos." },
+                { text: "Umsatz wird vor Steuern, Gewinn wird nach Steuern ausgewiesen.", correct: false, explain: "Es gibt verschiedene Gewinnstufen (vor und nach Steuern), aber der Umsatz ist immer die oberste Zeile." },
+                { text: "Umsatz ist die Summe der Einnahmen, Gewinn ist die Summe der Ausgaben.", correct: false, explain: "Absolut nicht. Gewinn = Einnahmen - Ausgaben." },
+                { text: "Umsatz ist eine Schätzung, während der Gewinn eine exakte Kennzahl ist.", correct: false, explain: "Beides sind exakte Kennzahlen, die aus der Buchhaltung stammen." }
             ], difficulty: 1 },
             { q: "Was bedeutet 'Quartalszahlen'?", a: [
-                { text: "Der Geschäftsbericht, den ein börsennotiertes Unternehmen alle drei Monate veröffentlicht", correct: true, explain: "Genau. Diese Berichte über Umsatz, Gewinn etc. sorgen oft für starke Kursbewegungen, wenn sie von den Erwartungen abweichen." },
-                { text: "Die vier wichtigsten Kennzahlen eines Unternehmens", correct: false, explain: "Nein, es bezieht sich auf den Berichtszeitraum (ein Quartal)." },
-                { text: "Eine Sonderdividende, die nur einmal im Quartal gezahlt wird", correct: false, explain: "Nein, es ist ein Bericht." },
-                { text: "Die Aufteilung des Jahresgewinns auf vier Teile", correct: false, explain: "Nein, es ist ein Zwischenbericht über die Geschäftsentwicklung." }
+                { text: "Ein Zwischenbericht über die Geschäftsentwicklung eines Unternehmens für drei Monate.", correct: true, explain: "Genau. Diese Berichte über Umsatz, Gewinn etc. sorgen oft für starke Kursbewegungen, wenn sie von den Erwartungen abweichen." },
+                { text: "Die vier wichtigsten Kennzahlen, die ein Unternehmen jährlich veröffentlichen muss.", correct: false, explain: "Nein, es bezieht sich auf den Berichtszeitraum (ein Quartal)." },
+                { text: "Eine Sonderdividende, die von manchen Unternehmen viermal im Jahr gezahlt wird.", correct: false, explain: "Nein, es ist ein Bericht." },
+                { text: "Die Aufteilung des prognostizierten Jahresgewinns auf die vier Quartale.", correct: false, explain: "Nein, es ist ein Zwischenbericht über die bereits vergangene Geschäftsentwicklung." }
             ], difficulty: 2 },
             { q: "Was ist eine 'SWOT-Analyse'?", a: [
-                { text: "Eine Analyse der Stärken (Strengths), Schwächen (Weaknesses), Chancen (Opportunities) und Risiken (Threats) eines Unternehmens", correct: true, explain: "Korrekt. Es ist ein strategisches Werkzeug, um die Position eines Unternehmens im Markt zu bewerten." },
-                { text: "Eine Analyse der Social-Media-Aktivitäten", correct: false, explain: "Nein, auch wenn Social Media eine Chance oder ein Risiko sein kann." },
-                { text: "Eine technische Chartanalyse", correct: false, explain: "Nein, es ist eine fundamentale, strategische Analyse." },
-                { text: "Eine Überprüfung durch die Steuerbehörde", correct: false, explain: "Nein, es ist ein internes oder externes Analyse-Tool." }
+                { text: "Ein Instrument zur Analyse von Stärken, Schwächen, Chancen und Risiken.", correct: true, explain: "Korrekt. Es ist ein strategisches Werkzeug, um die Position eines Unternehmens im Markt zu bewerten." },
+                { text: "Ein Software-Tool zur technischen Analyse von Wertpapier-Charts.", correct: false, explain: "Nein, es ist eine fundamentale, strategische Analysemethode." },
+                { text: "Ein standardisiertes Prüfverfahren der Finanzaufsicht für Bankbilanzen.", correct: false, explain: "Nein, es ist ein internes oder externes Analyse-Tool für Unternehmen." },
+                { text: "Eine Methode zur Bewertung der Social-Media-Präsenz eines Unternehmens.", correct: false, explain: "Nein, auch wenn Social Media eine Chance oder ein Risiko sein kann." }
             ], difficulty: 3 }
         ],
         "Risiko & Psychologie 🤯": [
             { q: "Was ist 'FOMO' (Fear of Missing Out)?", a: [
-                { text: "Die Angst, einen Kursanstieg zu verpassen, was zu unüberlegten Käufen führt", correct: true, explain: "Genau. Wenn eine Aktie (z.B. GameStop, Bitcoin) durch die Decke geht und man aus Gier auf den fahrenden Zug aufspringt, ist das FOMO. Ein sehr schlechter Ratgeber!" },
-                { text: "Die Angst, sein ganzes Geld zu verlieren", correct: false, explain: "Das ist 'Verlustaversion'." },
-                { text: "Ein offizieller Börsenalarm", correct: false, explain: "Nein, es ist ein psychologisches Phänomen bei Anlegern." },
-                { text: "Eine Strategie, um Trends frühzeitig zu erkennen", correct: false, explain: "Nein, FOMO bedeutet, dass man dem Trend meist schon hinterherläuft." }
+                { text: "Die giergetriebene Angst, eine gewinnbringende Kursbewegung zu verpassen.", correct: true, explain: "Genau. Wenn eine Aktie durch die Decke geht und man aus Gier aufspringt, ist das FOMO. Ein sehr schlechter Ratgeber!" },
+                { text: "Die grundsätzliche Angst, durch falsche Anlageentscheidungen Geld zu verlieren.", correct: false, explain: "Das ist 'Verlustaversion'." },
+                { text: "Eine offizielle Warnung der Börse vor einer bevorstehenden Marktkorrektur.", correct: false, explain: "Nein, es ist ein psychologisches Phänomen bei Anlegern." },
+                { text: "Eine Anlagestrategie, die gezielt auf stark gehypte Trendaktien setzt.", correct: false, explain: "Das wäre eine 'Momentum'-Strategie, aber FOMO beschreibt die emotionale Reaktion darauf." }
             ], difficulty: 1 },
             { q: "Was ist 'Verlustaversion' (Loss Aversion)?", a: [
-                { text: "Die Tendenz, dass Verluste psychologisch stärker schmerzen als Gewinne gleicher Höhe freuen", correct: true, explain: "Richtig. Ein Verlust von 100€ tut mehr weh, als ein Gewinn von 100€ Freude bereitet. Das führt oft zu irrationalen Entscheidungen." },
-                { text: "Eine Versicherung gegen Depot-Verluste", correct: false, explain: "So eine Versicherung gibt es nicht. Es ist ein psychologisches Phänomen." },
-                { text: "Die Abneigung, überhaupt Aktien zu kaufen", correct: false, explain: "Das kann eine Folge davon sein, aber der Begriff beschreibt die unterschiedliche Wahrnehmung von Gewinn und Verlust." },
-                { text: "Eine Strategie, nur Aktien zu kaufen, die nie fallen", correct: false, explain: "Solche Aktien gibt es nicht." }
+                { text: "Die menschliche Tendenz, Verluste stärker zu gewichten als gleich hohe Gewinne.", correct: true, explain: "Richtig. Ein Verlust von 100€ tut mehr weh, als ein Gewinn von 100€ Freude bereitet. Das führt oft zu irrationalen Entscheidungen." },
+                { text: "Eine spezielle Depot-Versicherung gegen unvorhergesehene Kursverluste.", correct: false, explain: "So eine Versicherung gibt es nicht. Es ist ein psychologisches Phänomen." },
+                { text: "Die generelle Abneigung einer Person, finanzielle Risiken einzugehen.", correct: false, explain: "Das ist 'Risikoaversion'. Verlustaversion beschreibt die unterschiedliche Wahrnehmung von Gewinn und Verlust." },
+                { text: "Eine Handelsstrategie, bei der Verlustpositionen sofort verkauft werden.", correct: false, explain: "Das wäre diszipliniertes Risikomanagement. Verlustaversion führt oft dazu, dass man Verluste zu lange laufen lässt." }
             ], difficulty: 2 },
             { q: "Was ist 'Herdenverhalten' an der Börse?", a: [
-                { text: "Anleger orientieren sich an der Masse und tun das, was alle anderen tun (kaufen/verkaufen)", correct: true, explain: "Genau. Das kann Trends verstärken und zu Blasen oder Panikverkäufen führen, oft ohne fundamentale Grundlage." },
-                { text: "Eine Software, die das Verhalten von Anlegern analysiert", correct: false, explain: "Nein, es ist das Verhalten selbst." },
-                { text: "Eine Anlagestrategie, die auf Tierhaltungs-Aktien setzt", correct: false, explain: "Nein, es ist eine Metapher für das Verhalten von Menschenmassen." },
-                { text: "Ein Treffen für Börsen-Anfänger", correct: false, explain: "Nein." }
+                { text: "Die Neigung von Anlegern, den Entscheidungen einer großen Gruppe zu folgen.", correct: true, explain: "Genau. Das kann Trends verstärken und zu Blasen oder Panikverkäufen führen, oft ohne fundamentale Grundlage." },
+                { text: "Eine computergestützte Analyse, die das Kaufverhalten von Anlegern vorhersagt.", correct: false, explain: "Nein, es ist das Verhalten selbst." },
+                { text: "Eine Anlagestrategie, die auf Unternehmen aus der Agrarwirtschaft setzt.", correct: false, explain: "Nein, es ist eine Metapher für das Verhalten von Menschenmassen." },
+                { text: "Ein regelmäßiges Treffen von Mitgliedern eines Aktienclubs zum Informationsaustausch.", correct: false, explain: "Nein." }
             ], difficulty: 2 },
             { q: "Was ist der 'Confirmation Bias' (Bestätigungsfehler)?", a: [
-                { text: "Man sucht und interpretiert Informationen so, dass sie die eigene, bereits bestehende Meinung bestätigen", correct: true, explain: "Korrekt. Wenn du von einer Aktie überzeugt bist, nimmst du positive Nachrichten stärker wahr und ignorierst negative. Das ist sehr gefährlich." },
-                { text: "Man bittet einen Experten um Bestätigung für seine Anlageidee", correct: false, explain: "Nein, es ist ein interner, unbewusster Denkfehler." },
-                { text: "Man wartet, bis der Broker eine Order bestätigt hat", correct: false, explain: "Das ist eine 'Orderbestätigung'." },
-                { text: "Man glaubt nur bestätigten Quellen", correct: false, explain: "Das ist klug, aber nicht der Confirmation Bias. Der Bias filtert, WAS man aus den Quellen liest." }
+                { text: "Die Neigung, Informationen zu bevorzugen, die die eigene Überzeugung bestätigen.", correct: true, explain: "Korrekt. Wenn du von einer Aktie überzeugt bist, nimmst du positive Nachrichten stärker wahr und ignorierst negative. Das ist sehr gefährlich." },
+                { text: "Der Zwang, sich jede Anlageentscheidung von einer dritten Person bestätigen zu lassen.", correct: false, explain: "Nein, es ist ein interner, unbewusster Denkfehler." },
+                { text: "Der Prozess der Überprüfung einer Orderausführung durch den Broker.", correct: false, explain: "Das ist eine 'Orderbestätigung'." },
+                { text: "Die Strategie, ausschließlich auf Basis von offiziell bestätigten Unternehmensmeldungen zu handeln.", correct: false, explain: "Das ist klug, aber nicht der Confirmation Bias. Der Bias filtert, WAS man aus den Quellen liest." }
             ], difficulty: 3 },
-            { q: "Warum sollte man NIEMALS mit Geld investieren, das man bald braucht?", a: [
-                { text: "Weil Aktienkurse kurzfristig stark schwanken können und man eventuell mit Verlust verkaufen muss", correct: true, explain: "Exakt. Geld für den Urlaub oder ein neues Handy gehört aufs Tagesgeldkonto. An der Börse sollte nur Geld sein, auf das du mindestens 5-10 Jahre verzichten kannst." },
-                { text: "Weil der Broker das Geld für eine bestimmte Zeit sperrt", correct: false, explain: "Nein, du kannst jederzeit verkaufen. Die Frage ist nur, zu welchem Kurs." },
-                { text: "Weil es illegal ist", correct: false, explain: "Es ist nicht illegal, aber sehr unklug." },
-                { text: "Weil man darauf höhere Steuern zahlen muss", correct: false, explain: "Die Haltedauer kann die Steuer beeinflussen (Spekulationsfrist bei Krypto etc.), aber das Hauptproblem ist das Kursrisiko." }
+            { q: "Warum sollte man nie Geld investieren, das man bald braucht?", a: [
+                { text: "Wegen des Risikos kurzfristiger Kursschwankungen und eines möglichen Zwangsverkaufs mit Verlust.", correct: true, explain: "Exakt. Geld für den Urlaub oder ein neues Handy gehört aufs Tagesgeldkonto. An der Börse sollte nur Geld mit langem Anlagehorizont sein." },
+                { text: "Weil der Broker das investierte Kapital für einen Mindestzeitraum von einem Jahr sperrt.", correct: false, explain: "Nein, du kannst jederzeit verkaufen. Die Frage ist nur, zu welchem Kurs." },
+                { text: "Weil kurzfristige Spekulationsgewinne mit dem persönlichen Einkommensteuersatz versteuert werden.", correct: false, explain: "Das gilt in DEU nur noch für wenige Anlagen, nicht für Aktien. Das Hauptproblem ist das Kursrisiko." },
+                { text: "Weil für kurzfristige Anlagen deutlich höhere Ordergebühren anfallen als für langfristige.", correct: false, explain: "Die Gebühren sind unabhängig von der Haltedauer." }
             ], difficulty: 1 },
             { q: "Was ist ein 'Klumpenrisiko'?", a: [
-                { text: "Wenn ein zu großer Teil des Portfolios in einer einzigen Aktie oder Branche steckt", correct: true, explain: "Genau. Das ist das Gegenteil von Diversifikation. Wenn diese eine Position abstürzt, reißt sie dein ganzes Depot mit nach unten." },
-                { text: "Das Risiko, in ein betrügerisches Unternehmen zu investieren", correct: false, explain: "Das ist Betrugsrisiko. Ein Klumpenrisiko kann man auch mit einer Top-Firma wie Apple haben." },
-                { text: "Wenn alle Aktien im Depot gleichzeitig fallen", correct: false, explain: "Das ist 'systematisches' oder 'Marktrisiko'." },
-                { text: "Ein Depot, das nur aus ETFs besteht", correct: false, explain: "Im Gegenteil, ETFs helfen, Klumpenrisiken zu vermeiden." }
+                { text: "Die hohe Konzentration des Depotvermögens auf wenige Einzelwerte oder eine einzelne Branche.", correct: true, explain: "Genau. Das ist das Gegenteil von Diversifikation. Wenn diese eine Position abstürzt, reißt sie dein ganzes Depot mit nach unten." },
+                { text: "Das Risiko, das durch den Kauf von Aktien betrügerischer oder unseriöser Unternehmen entsteht.", correct: false, explain: "Das ist Betrugsrisiko. Ein Klumpenrisiko kann man auch mit einer Top-Firma wie Apple haben." },
+                { text: "Das allgemeine Marktrisiko, dass alle Aktien im Zuge einer Krise gleichzeitig fallen.", correct: false, explain: "Das ist 'systematisches' oder 'Marktrisiko'." },
+                { text: "Das spezifische Risiko, das mit der Anlage in sehr kleinen und illiquiden Unternehmen einhergeht.", correct: false, explain: "Das ist 'Small-Cap-Risiko' oder 'Liquiditätsrisiko'." }
             ], difficulty: 2 },
             { q: "Was ist der 'Ankereffekt'?", a: [
-                { text: "Man orientiert sich bei Entscheidungen unbewusst an einer zuerst wahrgenommenen Information (dem 'Anker')", correct: true, explain: "Richtig. Beispiel: Du siehst, eine Aktie stand mal bei 200€. Jetzt steht sie bei 100€ und du denkst 'super billig', obwohl sie vielleicht immer noch überbewertet ist. Der alte Kurs war dein Anker." },
-                { text: "Man investiert nur in Reederei-Aktien", correct: false, explain: "Nein, es ist ein psychologischer Effekt." },
-                { text: "Man sichert sein Portfolio mit stabilen 'Anker-Investments' ab", correct: false, explain: "Das ist eine Strategie, aber nicht der psychologische Ankereffekt." },
-                { text: "Der Kurs einer Aktie wird an den eines Index 'geankert'", correct: false, explain: "Nein, so etwas gibt es nicht." }
+                { text: "Eine kognitive Verzerrung, bei der eine zuerst erhaltene Information eine Entscheidung übermäßig beeinflusst.", correct: true, explain: "Richtig. Beispiel: Du siehst, eine Aktie stand mal bei 200€. Jetzt steht sie bei 100€ und du denkst 'super billig'. Der alte Kurs war dein Anker." },
+                { text: "Eine Anlagestrategie, die auf sehr stabile und wertbeständige 'Anker-Investments' setzt.", correct: false, explain: "Das ist eine Strategie, aber nicht der psychologische Ankereffekt." },
+                { text: "Die Praxis, den Wert einer Aktie an den Kurs eines Leitindex wie dem DAX zu koppeln.", correct: false, explain: "Nein, so etwas gibt es nicht." },
+                { text: "Die Tendenz von Anlegern, ihr Portfolio an dem ihres erfolgreichsten Freundes zu orientieren.", correct: false, explain: "Das wäre eher 'Herdenverhalten'." }
             ], difficulty: 3 },
             { q: "Was bedeutet 'FUD' in der Börsenwelt?", a: [
-                { text: "Fear, Uncertainty, and Doubt – das gezielte Streuen von Angst und Zweifeln, um Kurse zu drücken", correct: true, explain: "Genau. Das ist das Gegenteil von 'Hype'. Oft werden in Foren oder sozialen Medien bewusst negative Gerüchte gestreut." },
-                { text: "Fundamental Uncovered Data – neu entdeckte Fundamentaldaten", correct: false, explain: "Nein, FUD ist eine manipulative Taktik." },
-                { text: "Ein offizieller Warnhinweis der Börsenaufsicht", correct: false, explain: "Nein, FUD ist informell und oft böswillig." },
-                { text: "Eine Aufforderung, schnell zu verkaufen", correct: false, explain: "Es ist der Versuch, Panik auszulösen, damit andere verkaufen." }
+                { text: "Das gezielte Streuen von Angst, Unsicherheit und Zweifel (Fear, Uncertainty, and Doubt).", correct: true, explain: "Genau. Das ist das Gegenteil von 'Hype'. Oft werden in Foren oder sozialen Medien bewusst negative Gerüchte gestreut, um Kurse zu drücken." },
+                { text: "Die Analyse fundamentaler Unternehmensdaten (Fundamental Under- and Overvaluation Data).", correct: false, explain: "Nein, FUD ist eine manipulative Taktik." },
+                { text: "Ein offizieller Warnhinweis der Finanzaufsicht vor riskanten Anlageprodukten.", correct: false, explain: "Nein, FUD ist informell und oft böswillig." },
+                { text: "Die Forderung an Unternehmen, alle Daten offenzulegen (Full Uncovered Data).", correct: false, explain: "Nein, es ist eine Desinformations-Taktik." }
             ], difficulty: 2 },
-            { q: "Warum ist es oft keine gute Idee, bei Verlusten 'nachzukaufen', um den Einstiegskurs zu verbilligen?", a: [
-                { text: "Weil man damit sein Klumpenrisiko erhöht und 'gutes Geld schlechtem hinterherwirft'", correct: true, explain: "Richtig. Man sollte nur nachkaufen, wenn man nach erneuter, objektiver Analyse immer noch von der Firma überzeugt ist – nicht nur, um den alten Verlust auszubügeln." },
-                { text: "Weil es verboten ist", correct: false, explain: "Nein, es ist erlaubt." },
-                { text: "Weil der Broker dafür extra hohe Gebühren verlangt", correct: false, explain: "Nein, die Gebühren sind normal." },
-                { text: "Weil man dadurch seine Gewinne aus der Vergangenheit verliert", correct: false, explain: "Nein, aber man kann seine zukünftigen Verluste vergrößern." }
+            { q: "Warum ist 'Nachkaufen zur Verbilligung' oft eine schlechte Idee?", a: [
+                { text: "Weil die Entscheidung irrational auf dem alten Verlust basiert, statt auf einer neuen Analyse.", correct: true, explain: "Richtig. Man sollte nur nachkaufen, wenn man nach erneuter, objektiver Analyse immer noch von der Firma überzeugt ist – nicht nur, um den alten Verlust auszubügeln." },
+                { text: "Weil es gesetzlich verboten ist, Verlustpositionen weiter aufzustocken.", correct: false, explain: "Nein, es ist erlaubt." },
+                { text: "Weil Broker für das Nachkaufen in Verlustpositionen höhere Gebühren verlangen.", correct: false, explain: "Nein, die Gebühren sind normal." },
+                { text: "Weil dadurch die bisherigen Gewinne in anderen Positionen steuerlich verfallen.", correct: false, explain: "Nein, steuerlich hat das keine negativen Auswirkungen auf andere Positionen." }
             ], difficulty: 2 },
             { q: "Was ist der 'Overconfidence'-Bias?", a: [
-                { text: "Die eigene Fähigkeit, den Markt vorherzusagen und Aktien auszuwählen, wird systematisch überschätzt", correct: true, explain: "Korrekt. Ein paar Glückstreffer am Anfang führen oft dazu, dass Anleger denken, sie wären Genies. Das führt zu hohem Risiko und am Ende oft zu Verlusten." },
-                { text: "Man vertraut übermäßig auf die Meinung von Finanzexperten", correct: false, explain: "Das wäre eher 'Autoritätsglaube'." },
-                { text: "Man ist übermäßig zuversichtlich, dass der Markt immer steigen wird", correct: false, explain: "Das ist Optimismus, aber Overconfidence bezieht sich auf die eigenen Fähigkeiten." },
-                { text: "Man investiert nur in Unternehmen, die sehr selbstbewusst auftreten", correct: false, explain: "Nein, es ist ein Denkfehler des Anlegers selbst." }
+                { text: "Die systematische Überschätzung der eigenen Fähigkeiten und Kenntnisse bei Anlageentscheidungen.", correct: true, explain: "Korrekt. Ein paar Glückstreffer am Anfang führen oft dazu, dass Anleger denken, sie wären Genies. Das führt zu hohem Risiko." },
+                { text: "Das übermäßige Vertrauen in die Prognosen von renommierten Finanzexperten und Analysten.", correct: false, explain: "Das wäre eher 'Autoritätsglaube'." },
+                { text: "Die zuversichtliche Annahme, dass der Aktienmarkt langfristig immer steigen wird.", correct: false, explain: "Das ist Optimismus, aber Overconfidence bezieht sich auf die eigenen Fähigkeiten." },
+                { text: "Die Bevorzugung von Aktien von Unternehmen, deren Management besonders selbstbewusst auftritt.", correct: false, explain: "Nein, es ist ein Denkfehler des Anlegers selbst." }
             ], difficulty: 2 }
         ],
         "ETFs im Detail 🧺": [
             { q: "Was bedeutet 'thesaurierend' bei einem ETF?", a: [
-                { text: "Der ETF schüttet Dividenden nicht aus, sondern reinvestiert sie direkt wieder", correct: true, explain: "Genau. Das nutzt den Zinseszinseffekt optimal und ist ideal für den langfristigen Vermögensaufbau." },
-                { text: "Der ETF spendet die Dividenden für einen guten Zweck", correct: false, explain: "Nein, das Geld wird für dich reinvestiert." },
-                { text: "Der ETF zahlt die Dividenden auf dein Verrechnungskonto aus", correct: false, explain: "Das wäre ein 'ausschüttender' ETF." },
-                { text: "Der ETF investiert nur in Schatzbriefe (Thesaur Papiere)", correct: false, explain: "Nein, 'thesaurieren' kommt vom griechischen Wort für 'Schatz ansammeln' und bedeutet reinvestieren." }
+                { text: "Der ETF legt die erwirtschafteten Erträge (Dividenden) automatisch wieder im Fondsvermögen an.", correct: true, explain: "Genau. Das nutzt den Zinseszinseffekt optimal und ist ideal für den langfristigen Vermögensaufbau." },
+                { text: "Der ETF zahlt die Erträge regelmäßig an die Anleger aus.", correct: false, explain: "Das wäre ein 'ausschüttender' ETF." },
+                { text: "Der ETF investiert ausschließlich in Staatsanleihen (Schatzbriefe).", correct: false, explain: "Nein, 'thesaurieren' kommt vom griechischen Wort für 'Schatz ansammeln' und bedeutet reinvestieren." },
+                { text: "Der ETF wird nach einer festgelegten Laufzeit aufgelöst und das Kapital ausgeschüttet.", correct: false, explain: "Nein, es beschreibt die laufende Verwendung der Erträge." }
             ], difficulty: 2 },
             { q: "Was bedeutet 'ausschüttend' bei einem ETF?", a: [
-                { text: "Der ETF überweist die gesammelten Dividenden regelmäßig (z.B. quartalsweise) auf dein Konto", correct: true, explain: "Richtig. Das ist gut, wenn du einen regelmäßigen Geldfluss aus deinen Anlagen erzielen möchtest." },
-                { text: "Der ETF schüttet seine Anteile an die Anleger aus", correct: false, explain: "Nein, nur die Erträge (Dividenden) werden ausgeschüttet." },
-                { text: "Der ETF investiert nur in Aktien mit hoher Ausschüttungsquote", correct: false, explain: "Das kann ein 'High Dividend' ETF sein, aber der Begriff 'ausschüttend' beschreibt nur die Art der Ertragsverwendung." },
-                { text: "Der ETF wird bald aufgelöst (ausgeschüttet)", correct: false, explain: "Nein, es ist eine normale Form der Ertragsverwendung." }
+                { text: "Der ETF zahlt die erwirtschafteten Erträge (Dividenden) direkt an die Anleger aus.", correct: true, explain: "Richtig. Das ist gut, wenn du einen regelmäßigen Geldfluss aus deinen Anlagen erzielen möchtest." },
+                { text: "Der ETF reinvestiert alle Erträge automatisch in neue Anteile.", correct: false, explain: "Das wäre ein 'thesaurierender' ETF." },
+                { text: "Der ETF wird gerade liquidiert und das Vermögen an die Anleger ausgeschüttet.", correct: false, explain: "Nein, es ist eine normale Form der Ertragsverwendung." },
+                { text: "Der ETF investiert nur in Unternehmen mit sehr hoher Dividendenrendite.", correct: false, explain: "Das kann ein 'High Dividend' ETF sein, aber der Begriff 'ausschüttend' beschreibt nur die Art der Ertragsverwendung." }
             ], difficulty: 2 },
-            { q: "Was ist der Unterschied zwischen einem MSCI World und einem MSCI ACWI ETF?", a: [
-                { text: "Der ACWI enthält zusätzlich zum MSCI World auch Schwellenländer wie China oder Brasilien", correct: true, explain: "Perfekt! ACWI steht für 'All-Country World Index'. Er ist also noch breiter diversifiziert als der 'normale' MSCI World." },
-                { text: "Der ACWI investiert nur in Agrar- und Chemie-Unternehmen", correct: false, explain: "Nein, die Abkürzung steht für All-Country World Index." },
-                { text: "Der MSCI World ist aktiv gemanagt, der ACWI ist passiv", correct: false, explain: "Beide sind Indizes und die darauf basierenden ETFs sind in der Regel passiv." },
-                { text: "Es gibt keinen Unterschied, es sind nur zwei Namen für dasselbe", correct: false, explain: "Der Unterschied (Schwellenländer ja/nein) ist fundamental für die Diversifikation." }
+            { q: "Was unterscheidet MSCI World und MSCI ACWI ETFs?", a: [
+                { text: "Der ACWI (All-Country World Index) schließt im Gegensatz zum MSCI World auch Schwellenländer mit ein.", correct: true, explain: "Perfekt! Der ACWI ist also noch breiter diversifiziert und bildet die globale Wirtschaft umfassender ab." },
+                { text: "Der ACWI ist eine aktiv gemanagte Variante des passiven MSCI World Index.", correct: false, explain: "Beide sind Indizes und die darauf basierenden ETFs sind in der Regel passiv." },
+                { text: "Der MSCI World investiert in Aktien, der ACWI investiert zusätzlich in Anleihen.", correct: false, explain: "Nein, beide sind reine Aktienindizes." },
+                { text: "ACWI ist die amerikanische, MSCI World die europäische Bezeichnung für denselben Index.", correct: false, explain: "Nein, es sind zwei unterschiedliche Indizes mit unterschiedlicher Zusammensetzung." }
             ], difficulty: 3 },
             { q: "Was bedeutet 'physische Replikation' bei einem ETF?", a: [
-                { text: "Der ETF kauft tatsächlich (fast) alle Aktien, die im zugrundeliegenden Index enthalten sind", correct: true, explain: "Genau. Das ist die direkteste und transparenteste Methode, einen Index nachzubilden." },
-                { text: "Der ETF wird in physischem Gold als Sicherheit hinterlegt", correct: false, explain: "Nein, es geht um den Kauf der Aktien selbst." },
-                { text: "Der ETF bildet den Index durch ein Tauschgeschäft (Swap) mit einer Bank nach", correct: false, explain: "Das wäre 'synthetische Replikation'." },
-                { text: "Der ETF wird nur an physischen Börsenplätzen gehandelt", correct: false, explain: "Nein, es bezieht sich auf die Methode der Index-Nachbildung." }
+                { text: "Der ETF-Anbieter kauft die im Index enthaltenen Aktien tatsächlich physisch.", correct: true, explain: "Genau. Das ist die direkteste und transparenteste Methode, einen Index nachzubilden." },
+                { text: "Der ETF wird durch physisch hinterlegtes Gold oder andere Edelmetalle abgesichert.", correct: false, explain: "Nein, es geht um den Kauf der Aktien selbst." },
+                { text: "Der ETF bildet den Index durch ein Tauschgeschäft (Swap) mit einer Bank nach.", correct: false, explain: "Das wäre 'synthetische Replikation'." },
+                { text: "Der ETF kann nur an physischen Parkettbörsen und nicht elektronisch gehandelt werden.", correct: false, explain: "Nein, es bezieht sich auf die Methode der Index-Nachbildung." }
             ], difficulty: 2 },
             { q: "Was bedeutet 'synthetische Replikation' bei einem ETF?", a: [
-                { text: "Der ETF bildet den Index über ein Tauschgeschäft (Swap) ab, ohne die Aktien selbst zu besitzen", correct: true, explain: "Korrekt. Der ETF hält ein Trägerportfolio und tauscht dessen Rendite mit einer Bank gegen die Rendite des Index. Das birgt ein (geringes) Kontrahentenrisiko." },
-                { text: "Der ETF wird künstlich am Leben erhalten", correct: false, explain: "Nein, es ist eine gängige und legale Replikationsmethode." },
-                { text: "Der ETF investiert in synthetische Drogen-Hersteller", correct: false, explain: "Absolut nicht. 'Synthetisch' bedeutet hier 'künstlich nachgebildet'." },
-                { text: "Der ETF kauft nur einen kleinen, repräsentativen Teil der Aktien (Sampling)", correct: false, explain: "Das ist eine Form der physischen Replikation, die 'Optimized Sampling' genannt wird." }
+                { text: "Der ETF bildet die Indexrendite durch ein Tauschgeschäft (Swap) mit einem Finanzpartner nach.", correct: true, explain: "Korrekt. Der ETF hält ein Trägerportfolio und tauscht dessen Rendite gegen die Indexrendite. Das birgt ein Kontrahentenrisiko." },
+                { text: "Der ETF wird von einer künstlichen Intelligenz gesteuert, die den Index zu übertreffen versucht.", correct: false, explain: "Nein, 'synthetisch' bedeutet hier 'künstlich nachgebildet', nicht KI-gesteuert." },
+                { text: "Der ETF investiert in künstlich erzeugte Vermögenswerte statt in echte Aktien.", correct: false, explain: "Nein, es ist eine legale und gängige Replikationsmethode über Tauschgeschäfte." },
+                { text: "Der ETF kauft nur eine kleine, repräsentative Auswahl der Indexaktien (Sampling).", correct: false, explain: "Das ist eine Form der physischen Replikation, die 'Optimized Sampling' genannt wird." }
             ], difficulty: 3 },
             { q: "Was ist die 'TER' (Total Expense Ratio) eines ETFs?", a: [
-                { text: "Die Gesamtkostenquote, die die jährlichen Kosten des ETFs in Prozent angibt", correct: true, explain: "Richtig. Eine TER von 0,2% bedeutet, dass pro 1.000€ Anlage jedes Jahr 2€ Kosten anfallen. Je niedriger, desto besser." },
-                { text: "Die erwartete Rendite des ETFs", correct: false, explain: "Nein, die TER ist eine Kostenkennzahl." },
-                { text: "Die Steuerrate, die auf ETF-Gewinne anfällt", correct: false, explain: "Nein, die Kosten haben mit der Steuer nichts zu tun." },
-                { text: "Der 'Tracking Error' zur Rendite", correct: false, explain: "Nein, das ist die 'Tracking Difference'." }
+                { text: "Eine Kennzahl für die jährlichen Gesamtkosten eines Fonds in Prozent des Fondsvolumens.", correct: true, explain: "Richtig. Eine TER von 0,2% bedeutet, dass pro 1.000€ Anlage jedes Jahr 2€ Kosten anfallen. Je niedriger, desto besser." },
+                { text: "Die tatsächlich erzielte Rendite eines Fonds nach Abzug aller Kosten und Steuern.", correct: false, explain: "Nein, die TER ist eine reine Kostenkennzahl vor Steuern." },
+                { text: "Die auf die Erträge des ETFs anfallende Quellensteuer (Tax Expense Ratio).", correct: false, explain: "Nein, Steuern sind nicht Teil der TER." },
+                { text: "Die erwartete Abweichung der Fondsrendite von der Indexrendite (Tracking Error Ratio).", correct: false, explain: "Nein, das ist die 'Tracking Difference' oder der 'Tracking Error'." }
             ], difficulty: 2 },
             { q: "Was ist die 'Tracking Difference' (TD)?", a: [
-                { text: "Die tatsächliche Abweichung der ETF-Rendite von der Index-Rendite", correct: true, explain: "Genau. Die TD ist oft aussagekräftiger als die TER, da sie alle Kosten und auch Erträge (z.B. aus Wertpapierleihe) berücksichtigt. Eine negative TD bedeutet, der ETF war sogar besser als der Index." },
-                { text: "Die Differenz zwischen Kauf- und Verkaufskurs", correct: false, explain: "Das ist der 'Spread'." },
-                { text: "Ein Maß für die Beliebtheit eines ETFs", correct: false, explain: "Nein, es ist eine Qualitätskennzahl." },
-                { text: "Der Unterschied zwischen einem physischen und synthetischen ETF", correct: false, explain: "Nein, beide haben eine Tracking Difference." }
+                { text: "Die reale Renditeabweichung des ETFs von seinem Referenzindex über einen Zeitraum.", correct: true, explain: "Genau. Die TD ist oft aussagekräftiger als die TER, da sie alle Kosten und auch Erträge (z.B. aus Wertpapierleihe) berücksichtigt." },
+                { text: "Die Differenz zwischen dem höchsten und niedrigsten Kurs des ETFs an einem Handelstag.", correct: false, explain: "Das ist die 'Tagesschwankung'." },
+                { text: "Ein Maß für die Abweichung der Branchengewichtung des ETFs vom Index.", correct: false, explain: "Nein, es ist eine reine Renditekennzahl." },
+                { text: "Der prozentuale Unterschied in den Kosten zwischen einem physischen und synthetischen ETF.", correct: false, explain: "Nein, beide haben eine Tracking Difference." }
             ], difficulty: 3 },
             { q: "Was ist ein 'Sektor-ETF' oder 'Themen-ETF'?", a: [
-                { text: "Ein ETF, der sich auf eine bestimmte Branche (z.B. Technologie) oder ein Thema (z.B. Erneuerbare Energien) konzentriert", correct: true, explain: "Richtig. Damit kann man gezielt auf Trends setzen, hat aber ein viel höheres Klumpenrisiko als mit einem breit gestreuten Welt-ETF." },
-                { text: "Ein ETF, der in alle Wirtschaftssektoren investiert", correct: false, explain: "Das wäre ein breit gestreuter Markt-ETF (z.B. auf den MSCI World)." },
-                { text: "Ein ETF, der von einer bestimmten Firma aufgelegt wird", correct: false, explain: "Nein, es geht um den Inhalt." },
-                { text: "Ein ETF, der nur in einem Land investiert", correct: false, explain: "Das ist ein 'Länder-ETF'." }
+                { text: "Ein ETF, der gezielt in Unternehmen einer bestimmten Branche oder eines Anlagethemas investiert.", correct: true, explain: "Richtig. Damit kann man gezielt auf Trends setzen, hat aber ein viel höheres Klumpenrisiko als mit einem breit gestreuten Welt-ETF." },
+                { text: "Ein ETF, der alle elf Haupt-Wirtschaftssektoren gleichgewichtet abbildet.", correct: false, explain: "Das wäre ein breit gestreuter Markt-ETF mit einer speziellen Gewichtungsmethode." },
+                { text: "Ein ETF, der von einer Non-Profit-Organisation zu einem bestimmten Thema aufgelegt wird.", correct: false, explain: "Nein, es geht um den Inhalt." },
+                { text: "Ein ETF, der nur in einem bestimmten geografischen Sektor, z.B. Südostasien, anlegt.", correct: false, explain: "Das ist ein 'Regionen-ETF'." }
             ], difficulty: 2 },
             { q: "Warum sind ETFs auf den S&P 500 so beliebt?", a: [
-                { text: "Er bündelt die 500 größten US-Unternehmen und hat historisch eine starke Rendite erzielt", correct: true, explain: "Genau. Die USA sind der größte Kapitalmarkt der Welt und der S&P 500 ist ein einfacher und günstiger Weg, daran teilzuhaben." },
-                { text: "Weil er weltweit in 500 Länder investiert", correct: false, explain: "Nein, er investiert nur in die USA." },
-                { text: "Weil er keine Kosten hat", correct: false, explain: "S&P 500 ETFs sind sehr günstig, aber nicht komplett kostenlos." },
-                { text: "Weil er von der US-Regierung garantiert wird", correct: false, explain: "Kein ETF wird von einer Regierung garantiert." }
+                { text: "Weil er kostengünstig die 500 größten und wichtigsten US-Unternehmen abbildet.", correct: true, explain: "Genau. Die USA sind der größte Kapitalmarkt der Welt und der S&P 500 ist ein einfacher und günstiger Weg, daran teilzuhaben." },
+                { text: "Weil er die 500 wachstumsstärksten Unternehmen aus der ganzen Welt bündelt.", correct: false, explain: "Nein, er investiert nur in die USA." },
+                { text: "Weil er als einziger ETF von der US-Notenbank gegen Verluste abgesichert ist.", correct: false, explain: "Kein ETF wird von einer Regierung oder Notenbank garantiert." },
+                { text: "Weil er im Gegensatz zu anderen ETFs keine Managementgebühren (TER) hat.", correct: false, explain: "S&P 500 ETFs sind sehr günstig, aber nicht komplett kostenlos." }
             ], difficulty: 2 },
-            { q: "Was ist das Risiko bei einem '2x Leveraged' ETF?", a: [
-                { text: "Er hebelt die tägliche Bewegung des Index um den Faktor 2 – in beide Richtungen!", correct: true, explain: "Richtig. Steigt der Index an einem Tag um 2%, steigt der ETF um 4%. Fällt der Index aber um 2%, fällt der ETF um 4%! Durch die tägliche Berechnung (Pfadabhängigkeit) sind sie für langfristige Anlagen extrem ungeeignet und hochriskant." },
-                { text: "Das Risiko ist doppelt so hoch wie bei einem normalen ETF", correct: false, explain: "Es ist durch die Pfadabhängigkeit viel mehr als nur doppelt so hoch. Langfristig ist ein Totalverlust wahrscheinlich." },
-                { text: "Man kann nur die Hälfte seines Geldes verlieren", correct: false, explain: "Nein, man kann alles und sehr schnell verlieren." },
-                { text: "Der ETF kostet doppelt so viel wie ein normaler ETF", correct: false, explain: "Die Kosten sind meist höher, aber das Hauptrisiko ist die Hebelwirkung." }
+            { q: "Was ist das Risiko bei einem 'Leveraged ETF'?", a: [
+                { text: "Er hebelt die tägliche Indexbewegung, was bei Seitwärtsmärkten zu hohen Verlusten führt (Pfadabhängigkeit).", correct: true, explain: "Richtig. Steigt der Index z.B. um 2%, steigt ein 2x ETF um 4%. Fällt der Index aber um 2%, fällt der ETF um 4%! Sie sind für langfristige Anlagen extrem ungeeignet." },
+                { text: "Man kann mehr als das eingesetzte Kapital verlieren (Nachschusspflicht).", correct: false, explain: "Eine Nachschusspflicht gibt es bei ETFs nicht, aber ein Totalverlust ist möglich." },
+                { text: "Der Hebel wird nur auf Gewinne, nicht aber auf Verluste angewendet.", correct: false, explain: "Der Hebel wirkt gnadenlos in beide Richtungen." },
+                { text: "Die Kosten (TER) sind durch den Hebel um den entsprechenden Faktor höher.", correct: false, explain: "Die Kosten sind meist höher, aber das Hauptrisiko ist die Hebelwirkung und Pfadabhängigkeit." }
             ], difficulty: 3 }
         ],
         "Steuern & Rechtliches ⚖️": [
-            { q: "Wie hoch ist die Kapitalertragsteuer (plus Soli) in Deutschland ungefähr?", a: [
-                { text: "ca. 26,4%", correct: true, explain: "Korrekt. Es sind 25% Kapitalertragsteuer + 5,5% Solidaritätszuschlag darauf. Kirchensteuer kann noch dazukommen." },
-                { text: "So hoch wie dein persönlicher Einkommensteuersatz", correct: false, explain: "Nein, sie ist eine Abgeltungssteuer, die pauschal ist (Ausnahme: Günstigerprüfung)." },
-                { text: "10%", correct: false, explain: "Leider nicht so niedrig." },
-                { text: "42%", correct: false, explain: "Das ist der Spitzensteuersatz bei der Einkommensteuer, nicht bei Kapitalerträgen." }
+            { q: "Wie hoch ist die Kapitalertragsteuer (plus Soli) in Deutschland?", a: [
+                { text: "Pauschal ca. 26,4% (25% Abgeltungsteuer + 5,5% Soli darauf).", correct: true, explain: "Korrekt. Kirchensteuer kann noch dazukommen." },
+                { text: "Der persönliche Einkommensteuersatz, der je nach Einkommen variiert.", correct: false, explain: "Nein, sie ist eine Abgeltungsteuer, die pauschal ist (Ausnahme: Günstigerprüfung)." },
+                { text: "19%, was dem regulären Mehrwertsteuersatz entspricht.", correct: false, explain: "Nein, die Sätze haben nichts miteinander zu tun." },
+                { text: "42%, was dem Spitzensteuersatz der Einkommensteuer entspricht.", correct: false, explain: "Der Spitzensteuersatz gilt für Arbeitseinkommen, nicht pauschal für Kapitalerträge." }
             ], difficulty: 2 },
             { q: "Was ist der 'Sparerpauschbetrag'?", a: [
-                { text: "Ein Freibetrag, bis zu dem Kapitalerträge (Zinsen, Dividenden, Kursgewinne) steuerfrei sind", correct: true, explain: "Genau. Seit 2023 liegt er bei 1.000€ für Singles und 2.000€ for Verheiratete pro Jahr. Super wichtig!" },
-                { text: "Ein Pauschalbetrag, den man für die Depotführung zahlen muss", correct: false, explain: "Nein, es ist ein Betrag, der dir Geld spart, nicht kostet." },
-                { text: "Ein Bonus vom Staat, wenn man viel spart", correct: false, explain: "Es ist kein Bonus, sondern ein Freibetrag auf deine Erträge." },
-                { text: "Ein fester Steuersatz für Sparer", correct: false, explain: "Nein, es ist ein Betrag, der von der Steuer befreit ist." }
+                { text: "Ein jährlicher Freibetrag, bis zu dessen Höhe Kapitalerträge steuerfrei bleiben.", correct: true, explain: "Genau. Seit 2023 liegt er bei 1.000€ für Singles und 2.000€ for Verheiratete pro Jahr. Super wichtig!" },
+                { text: "Ein Pauschalbetrag, den Anleger für die Kontoführung an die Bank zahlen müssen.", correct: false, explain: "Nein, es ist ein Betrag, der dir Geld spart, nicht kostet." },
+                { text: "Eine staatliche Prämie, die man erhält, wenn man einen bestimmten Betrag pro Jahr spart.", correct: false, explain: "Es ist kein Bonus, sondern ein Freibetrag auf deine Erträge." },
+                { text: "Ein fester, ermäßigter Steuersatz, der für alle Kleinsparer gilt.", correct: false, "Nein, es ist ein Betrag, der von der Steuer befreit ist." }
             ], difficulty: 1 },
             { q: "Was musst du tun, um den Sparerpauschbetrag zu nutzen?", a: [
-                { text: "Einen Freistellungsauftrag bei deiner Bank/deinem Broker einrichten", correct: true, explain: "Richtig. Ohne diesen Auftrag führt der Broker automatisch Steuern ab. Du kannst ihn auf mehrere Banken aufteilen, aber nicht die Gesamtsumme überschreiten." },
-                { text: "Nichts, das geht automatisch", correct: false, explain: "Leider nicht. Du musst selbst aktiv werden und den Auftrag einrichten." },
-                { text: "Einen Antrag beim Finanzamt stellen", correct: false, explain: "Nein, das geht direkt und einfach bei deiner Bank." },
-                { text: "Mindestens 18 Jahre alt sein", correct: false, explain: "Auch Minderjährige haben Anspruch auf den Sparerpauschbetrag." }
+                { text: "Bei jeder Bank mit Kapitalerträgen einen Freistellungsauftrag einrichten.", correct: true, explain: "Richtig. Ohne diesen Auftrag führt der Broker automatisch Steuern ab. Du kannst ihn auf mehrere Banken aufteilen, aber nicht die Gesamtsumme überschreiten." },
+                { text: "Nichts, der Freibetrag wird von der Bank automatisch berücksichtigt.", correct: false, explain: "Leider nicht. Du musst selbst aktiv werden und den Auftrag einrichten." },
+                { text: "Jährlich einen formlosen Antrag beim zuständigen Finanzamt einreichen.", correct: false, explain: "Nein, das geht direkt und einfach bei deiner Bank." },
+                { text: "In der Steuererklärung die Anlage KAP ausfüllen und den Betrag eintragen.", correct: false, explain: "Das ist der Weg, um zu viel gezahlte Steuern zurückzuholen. Besser ist es, den Auftrag direkt einzurichten." }
             ], difficulty: 2 },
             { q: "Was passiert, wenn du Aktien mit Gewinn verkaufst, aber keinen Freistellungsauftrag eingerichtet hast?", a: [
-                { text: "Die Bank führt die Steuer automatisch an das Finanzamt ab", correct: true, explain: "Genau. Du kannst dir das Geld aber über die Steuererklärung im nächsten Jahr zurückholen. Bequemer ist es mit Freistellungsauftrag." },
-                { text: "Das Geld ist für immer verloren", correct: false, explain: "Nein, du kannst es dir über die Steuererklärung zurückholen." },
-                { text: "Du machst dich strafbar", correct: false, explain: "Nein, du hast ja Steuern gezahlt, eventuell sogar zu viel. Strafbar macht man sich, wenn man Gewinne nicht versteuert." },
-                { text: "Die Bank informiert dich und wartet auf deine Anweisung", correct: false, explain: "Nein, die Bank ist gesetzlich verpflichtet, die Steuer sofort abzuführen." }
+                { text: "Die Bank führt automatisch die fällige Kapitalertragsteuer an das Finanzamt ab.", correct: true, explain: "Genau. Du kannst dir das Geld aber über die Steuererklärung im nächsten Jahr zurückholen. Bequemer ist es mit Freistellungsauftrag." },
+                { text: "Der Gewinn wird von der Bank einbehalten, bis der Auftrag nachgereicht wird.", correct: false, explain: "Nein, die Bank ist gesetzlich verpflichtet, die Steuer sofort abzuführen." },
+                { text: "Du erhältst eine Mahnung vom Finanzamt und musst eine Strafe zahlen.", correct: false, explain: "Nein, du hast ja Steuern gezahlt, eventuell sogar zu viel. Strafbar macht man sich, wenn man Gewinne nicht versteuert." },
+                { text: "Der Verkauf wird von der Bank blockiert, bis der steuerliche Status geklärt ist.", correct: false, explain: "Nein, der Verkauf wird normal ausgeführt." }
             ], difficulty: 2 },
             { q: "Was ist die 'Vorabpauschale' bei thesaurierenden ETFs?", a: [
-                { text: "Eine vorweggenommene Besteuerung von zukünftigen Gewinnen, auch wenn du nicht verkaufst", correct: true, explain: "Korrekt. Damit will der Staat sicherstellen, dass auch bei nicht-ausschüttenden Fonds regelmäßig Steuern anfallen. Sie wird aber beim Verkauf angerechnet." },
-                { text: "Eine Gebühr, die der ETF-Anbieter vorab verlangt", correct: false, explain: "Nein, es ist eine Steuer, keine Gebühr." },
-                { text: "Ein Pauschalbetrag, den du für die Eröffnung eines Sparplans zahlst", correct: false, explain: "Nein, es ist eine jährliche Steuer." },
-                { text: "Eine Schätzung deiner zukünftigen Steuerlast", correct: false, explain: "Es ist keine Schätzung, sondern eine konkrete Steuerzahlung, die von deinem Depot abgebucht wird." }
+                { text: "Eine fiktive, vorweggenommene Besteuerung von Kursgewinnen bei nicht-ausschüttenden Fonds.", correct: true, explain: "Korrekt. Damit will der Staat sicherstellen, dass auch bei thesaurierenden Fonds regelmäßig Steuern anfallen. Sie wird aber beim Verkauf angerechnet." },
+                { text: "Eine vom ETF-Anbieter vorab erhobene Pauschale zur Deckung der Verwaltungskosten.", correct: false, explain: "Nein, es ist eine Steuer, keine Gebühr." },
+                { text: "Eine pauschale Vorauszahlung auf die zukünftige Einkommensteuer des Anlegers.", correct: false, explain: "Nein, sie bezieht sich nur auf die Kapitalerträge aus dem Fonds." },
+                { text: "Ein fester Strafbetrag, der bei vorzeitigem Verkauf von thesaurierenden Fonds anfällt.", correct: false, explain: "Nein, es ist eine jährliche Steuer, keine Strafe." }
             ], difficulty: 3 },
             { q: "Darfst du als 15-Jähriger ein eigenes Depot eröffnen?", a: [
-                { text: "Ja, aber nur mit Zustimmung und Mitwirkung aller gesetzlichen Vertreter (meist beide Eltern)", correct: true, explain: "Richtig. Deine Eltern eröffnen das Depot auf deinen Namen (sog. 'Junior-Depot') und haften dafür." },
-                { text: "Nein, man muss 18 Jahre alt sein", correct: false, explain: "Nicht für ein Junior-Depot. Komplett alleine geht es aber erst mit 18." },
-                { text: "Ja, wenn man mindestens 1.000€ eigenes Geld hat", correct: false, explain: "Eine Mindestsumme ist keine Voraussetzung, die Zustimmung der Eltern schon." },
-                { text: "Ja, aber man darf nur in ETFs und nicht in Aktien investieren", correct: false, explain: "Die Anlagemöglichkeiten können eingeschränkt sein (keine riskanten Derivate), aber Aktien und ETFs sind meist erlaubt." }
+                { text: "Ja, wenn alle gesetzlichen Vertreter (in der Regel die Eltern) zustimmen und mitwirken.", correct: true, explain: "Richtig. Deine Eltern eröffnen das Depot auf deinen Namen (sog. 'Junior-Depot') und haften dafür." },
+                { text: "Nein, die Eröffnung eines Wertpapierdepots ist ausnahmslos erst mit 18 Jahren möglich.", correct: false, explain: "Nicht für ein Junior-Depot. Komplett alleine geht es aber erst mit 18." },
+                { text: "Ja, sofern eine Bescheinigung über die Teilnahme an einem Finanzkurs vorgelegt wird.", correct: false, explain: "Eine solche Anforderung gibt es nicht, die Zustimmung der Eltern ist entscheidend." },
+                { text: "Ja, aber es dürfen nur festverzinsliche Wertpapiere und keine Aktien gehandelt werden.", correct: false, explain: "Die Anlagemöglichkeiten können eingeschränkt sein (keine Derivate), aber Aktien und ETFs sind meist erlaubt." }
             ], difficulty: 2 },
-            { q: "Was passiert mit Aktienverlusten?", a: [
-                { text: "Sie werden in einem 'Verlusttopf' bei der Bank gesammelt und können mit zukünftigen Gewinnen verrechnet werden", correct: true, explain: "Genau. Wenn du also in einem Jahr 500€ Verlust machst und im nächsten 800€ Gewinn, musst du nur 300€ versteuern. Das macht die Bank automatisch." },
-                { text: "Sie sind einfach Pech und verfallen am Jahresende", correct: false, explain: "Nein, sie sind steuerlich relevant und können vorgetragen werden." },
-                { text: "Der Staat erstattet dir die Verluste", correct: false, explain: "Schön wär's! Du kannst sie nur mit Gewinnen verrechnen." },
-                { text: "Man kann sie vom normalen Einkommen (z.B. Lohn) abziehen", correct: false, explain: "Nein, Aktienverluste können (bis auf wenige Ausnahmen) nur mit Aktiengewinnen und anderen Kapitalerträgen verrechnet werden." }
+            { q: "Was passiert mit Aktienverlusten steuerlich?", a: [
+                { text: "Sie werden im 'Verlustverrechnungstopf' der Bank mit Gewinnen verrechnet.", correct: true, explain: "Genau. Wenn du 500€ Verlust machst und 800€ Gewinn, musst du nur 300€ versteuern. Das macht die Bank automatisch." },
+                { text: "Sie können vom zu versteuernden Arbeitseinkommen abgezogen werden.", correct: false, explain: "Nein, Aktienverluste können (bis auf wenige Ausnahmen) nur mit Kapitalerträgen verrechnet werden." },
+                { text: "Sie werden vom Finanzamt anteilig erstattet, um das Risiko zu mindern.", correct: false, explain: "Schön wär's! Du kannst sie nur mit Gewinnen verrechnen." },
+                { text: "Sie verfallen am Ende des Jahres, wenn sie nicht mit Gewinnen ausgeglichen wurden.", correct: false, explain: "Nein, sie sind steuerlich relevant und können von der Bank auf die Folgejahre vorgetragen werden." }
             ], difficulty: 2 },
             { q: "Was ist die 'Teilfreistellung' bei Aktien-ETFs?", a: [
-                { text: "Ein Teil der Erträge (Dividenden und Kursgewinne) aus Aktien-ETFs ist steuerfrei", correct: true, explain: "Korrekt. Bei einem ETF mit über 50% Aktienanteil sind 30% der Erträge steuerfrei. Das soll eine Doppelbesteuerung auf Unternehmens- und Anlegerebene ausgleichen." },
-                { text: "Man ist für einen Teil des Jahres von der Steuer befreit", correct: false, explain: "Nein, es bezieht sich auf die Höhe der Erträge, nicht auf die Zeit." },
-                { text: "Man darf einen Teil seiner Aktien steuerfrei verkaufen", correct: false, explain: "Nein, es ist ein prozentualer Abschlag auf die Erträge des Fonds." },
-                { text: "Eine Befreiung von den Ordergebühren", correct: false, explain: "Nein, es ist ein Steuervorteil." }
+                { text: "Ein gesetzlich festgelegter Anteil der Erträge, der pauschal steuerfrei gestellt wird.", correct: true, explain: "Korrekt. Bei einem ETF mit über 50% Aktienanteil sind 30% der Erträge steuerfrei. Das soll eine Doppelbesteuerung ausgleichen." },
+                { text: "Eine Regelung, die es erlaubt, einen Teil des Depots steuerfrei auf Kinder zu übertragen.", correct: false, explain: "Nein, es bezieht sich auf die Erträge des Fonds." },
+                { text: "Die Befreiung von der Steuerpflicht für die ersten drei Jahre nach dem Kauf eines ETFs.", correct: false, explain: "Nein, es ist ein prozentualer Abschlag auf die Erträge des Fonds, der immer gilt." },
+                { text: "Eine teilweise Befreiung von den Verwaltungsgebühren (TER) für Kleinanleger.", correct: false, explain: "Nein, es ist ein Steuervorteil." }
             ], difficulty: 3 },
             { q: "Was ist die 'BaFin'?", a: [
-                { text: "Die Bundesanstalt für Finanzdienstleistungsaufsicht, die deutsche Finanzmarktaufsicht", correct: true, explain: "Genau. Die BaFin passt auf, dass bei Banken, Versicherungen und im Wertpapierhandel alles mit rechten Dingen zugeht und schützt so die Verbraucher." },
-                { text: "Eine private Rating-Agentur für Aktien", correct: false, explain: "Nein, sie ist eine staatliche Behörde." },
-                { text: "Der Verband der deutschen Finanzberater", correct: false, explain: "Nein, sie ist die Aufsicht, nicht ein Interessenverband." },
-                { text: "Ein Gütesiegel für besonders sichere Anlagen", correct: false, explain: "Nein, die BaFin vergibt keine Gütesiegel, sondern Lizenzen und überwacht die Einhaltung von Gesetzen." }
+                { text: "Die Bundesanstalt für Finanzdienstleistungsaufsicht, die den deutschen Finanzmarkt überwacht.", correct: true, explain: "Genau. Die BaFin passt auf, dass bei Banken, Versicherungen und im Wertpapierhandel alles mit rechten Dingen zugeht." },
+                { text: "Eine private Rating-Agentur, die die Kreditwürdigkeit von Unternehmen bewertet.", correct: false, explain: "Nein, sie ist eine staatliche Behörde." },
+                { text: "Ein Branchenverband, der die Interessen der deutschen Finanzindustrie vertritt.", correct: false, explain: "Nein, sie ist die Aufsicht, nicht ein Interessenverband." },
+                { text: "Ein Schiedsgericht zur Beilegung von Streitigkeiten zwischen Anlegern und Banken.", correct: false, explain: "Es gibt Schlichtungsstellen, aber die BaFin ist die übergeordnete Aufsichtsbehörde." }
             ], difficulty: 2 },
             { q: "Was passiert mit deinem Depot, wenn du stirbst?", a: [
-                { text: "Es geht an deine gesetzlichen oder im Testament bestimmten Erben über", correct: true, explain: "Korrekt. Dein Depot ist Teil deines Vermögens und wird vererbt. Die Erben müssen dann Erbschaftssteuer zahlen." },
-                { text: "Es wird automatisch aufgelöst und an eine gemeinnützige Organisation gespendet", correct: false, explain: "Nein, das passiert nur, wenn es absolut keine Erben gibt." },
-                { text: "Es fällt an die Bank oder den Broker", correct: false, explain: "Auf keinen Fall. Das Depot ist dein Eigentum." },
-                { text: "Es wird vom Staat eingezogen", correct: false, explain: "Nur, wenn es keine Erben gibt und kein Testament existiert." }
+                { text: "Es wird Teil der Erbmasse und geht auf die im Testament oder gesetzlich bestimmten Erben über.", correct: true, explain: "Korrekt. Dein Depot ist Teil deines Vermögens und wird vererbt. Die Erben müssen dann Erbschaftssteuer zahlen." },
+                { text: "Es wird automatisch liquidiert und der Erlös an gemeinnützige Organisationen gespendet.", correct: false, explain: "Nein, das passiert nur, wenn es absolut keine Erben gibt." },
+                { text: "Es geht automatisch in das Eigentum der depotführenden Bank oder des Brokers über.", correct: false, explain: "Auf keinen Fall. Das Depot ist dein Eigentum und als Sondervermögen geschützt." },
+                { text: "Es wird vom Staat eingezogen und zur Tilgung von Staatsschulden verwendet.", correct: false, explain: "Nur, wenn es keine Erben gibt und kein Testament existiert." }
             ], difficulty: 2 }
         ],
         "Krypto & alternative Investments 🪙": [
-            { q: "Was ist der fundamentale Unterschied zwischen einer Aktie und Bitcoin?", a: [
-                { text: "Eine Aktie ist ein Anteil an einem produktiven Unternehmen, Bitcoin ist ein dezentrales, digitales Gut ohne Erträge", correct: true, explain: "Genau. Eine Firma erwirtschaftet Gewinne. Der Wert von Bitcoin basiert allein auf Angebot und Nachfrage (und dem Glauben der Leute daran)." },
-                { text: "Bitcoin ist sicherer als eine Aktie, da er nicht gehackt werden kann", correct: false, explain: "Die Blockchain ist sicher, aber dein Zugang (Wallet, Börse) kann gehackt werden. Zudem ist die Volatilität extrem hoch." },
-                { text: "Es gibt keinen Unterschied, beides sind digitale Anlagen", correct: false, explain: "Der Unterschied ist fundamental: produktiver Vermögenswert (Aktie) vs. nicht-produktiver Vermögenswert (Bitcoin)." },
-                { text: "Bitcoin zahlt eine höhere Dividende als Aktien", correct: false, explain: "Bitcoin zahlt gar keine Dividende oder Zinsen." }
+            { q: "Was unterscheidet eine Aktie fundamental von Bitcoin?", a: [
+                { text: "Die Aktie verbrieft einen Anteil an einem produktiven Unternehmen, Bitcoin ist ein unproduktives digitales Gut.", correct: true, explain: "Genau. Eine Firma erwirtschaftet Gewinne. Der Wert von Bitcoin basiert allein auf Angebot und Nachfrage." },
+                { text: "Bitcoin unterliegt keinerlei Wertschwankungen, während Aktien sehr volatil sind.", correct: false, explain: "Im Gegenteil, Bitcoin ist extrem volatil und unterliegt massiven Wertschwankungen." },
+                { text: "Der Besitz von Aktien ist anonym, während Bitcoin-Transaktionen öffentlich sind.", correct: false, explain: "Der Aktienbesitz ist registriert. Bitcoin-Transaktionen sind pseudonym, nicht komplett anonym." },
+                { text: "Bitcoin zahlt eine feste, garantierte Rendite (Staking), Aktien zahlen eine variable Dividende.", correct: false, explain: "Staking-Rewards sind nicht garantiert und Dividenden sind es auch nicht. Der fundamentale Unterschied liegt in der Produktivität." }
             ], difficulty: 2 },
             { q: "Was ist eine 'Blockchain'?", a: [
-                { text: "Eine dezentrale, fälschungssichere Datenbank, die aus einer Kette von Datenblöcken besteht", correct: true, explain: "Richtig. Sie ist die technologische Grundlage für Kryptowährungen wie Bitcoin und ermöglicht Transaktionen ohne eine zentrale Instanz wie eine Bank." },
-                { text: "Ein besonders sicheres Depot für Kryptowährungen", correct: false, explain: "Nein, die Blockchain ist das 'Kassenbuch', nicht der Tresor." },
-                { text: "Ein Algorithmus zum Handeln von Kryptowährungen", correct: false, explain: "Nein, es ist die zugrundeliegende Technologie." },
-                { text: "Die Kette von Besitzern einer einzelnen Münze", correct: false, explain: "Die Transaktionshistorie ist Teil der Blockchain, aber der Begriff beschreibt die gesamte Datenbankstruktur." }
+                { text: "Ein dezentrales, chronologisches und unveränderliches Transaktionsregister (Kassenbuch).", correct: true, explain: "Richtig. Sie ist die technologische Grundlage für Kryptowährungen und ermöglicht Transaktionen ohne eine zentrale Instanz wie eine Bank." },
+                { text: "Eine spezielle Art von Hochleistungscomputer, der für das Schürfen von Kryptowährungen benötigt wird.", correct: false, explain: "Nein, die Blockchain ist die Software-Architektur, nicht die Hardware." },
+                { text: "Ein verschlüsselter Cloud-Speicher zur sicheren Aufbewahrung von digitalen Vermögenswerten.", correct: false, explain: "Nein, die Blockchain ist das 'Kassenbuch', nicht der Tresor." },
+                { text: "Die Kette von Programmierbefehlen, aus der eine Kryptowährung besteht.", correct: false, explain: "Die Transaktionshistorie ist Teil der Blockchain, aber der Begriff beschreibt die gesamte Datenbankstruktur." }
             ], difficulty: 2 },
             { q: "Was ist ein 'Wallet' für Kryptowährungen?", a: [
-                { text: "Eine digitale Brieftasche zur Aufbewahrung der privaten Schlüssel, die den Zugriff auf deine Coins ermöglichen", correct: true, explain: "Genau. Es gibt Software-Wallets (auf dem Handy/PC) und Hardware-Wallets (sicherere USB-Sticks)." },
-                { text: "Die Börse, an der du Kryptowährungen kaufst", correct: false, explain: "Die Börse bietet oft ein 'Wallet' an (Hot Wallet), aber es ist sicherer, ein eigenes, separates Wallet zu nutzen." },
-                { text: "Ein Anteil an einer Kryptowährung", correct: false, explain: "Nein, es ist das Aufbewahrungsinstrument." },
-                { text: "Ein anderes Wort für 'Blockchain'", correct: false, explain: "Nein, das Wallet ist dein persönlicher Zugang zur Blockchain." }
+                { text: "Eine Anwendung oder ein Gerät zur Verwaltung von kryptografischen Schlüsseln für den Zugriff auf Coins.", correct: true, explain: "Genau. Es gibt Software-Wallets (auf dem Handy/PC) und Hardware-Wallets (sicherere USB-Sticks)." },
+                { text: "Ein von einer Kryptobörse geführtes Sammelkonto, auf dem die Coins der Kunden liegen.", correct: false, explain: "Die Börse bietet oft ein 'Wallet' an (Hot Wallet), aber es ist sicherer, ein eigenes, separates Wallet zu nutzen." },
+                { text: "Ein einzelner Anteil an einer Kryptowährung, der als kleinste Einheit gehandelt wird.", correct: false, explain: "Nein, es ist das Aufbewahrungsinstrument." },
+                { text: "Ein Synonym für die individuelle Adresse eines Nutzers auf der Blockchain.", correct: false, explain: "Die Adresse wird vom Wallet generiert, ist aber nicht das Wallet selbst." }
             ], difficulty: 2 },
             { q: "Was bedeutet 'Not your keys, not your coins'?", a: [
-                { text: "Wenn du deine privaten Schlüssel nicht selbst kontrollierst (z.B. auf einer Börse), gehören dir die Coins nicht wirklich", correct: true, explain: "Exakt. Wird die Börse gehackt oder geht pleite, sind deine Coins weg. Nur mit einem eigenen Wallet (und den Schlüsseln dazu) hast du die volle Kontrolle." },
-                { text: "Man soll seine Passwörter nicht aufschreiben", correct: false, explain: "Den 'Private Key' bzw. die 'Seed Phrase' MUSS man sogar sicher aufschreiben und offline verwahren." },
-                { text: "Wenn du deinen Schlüssel verlierst, verlierst du deine Coins nicht", correct: false, explain: "Im Gegenteil: Schlüssel weg = Coins für immer weg!" },
-                { text: "Man braucht keinen Schlüssel, um Coins zu besitzen", correct: false, explain: "Der private Schlüssel IST der Besitznachweis." }
+                { text: "Ohne die alleinige Kontrolle über die privaten Schlüssel besitzt man die Coins nicht wirklich.", correct: true, explain: "Exakt. Wird die Börse gehackt oder geht pleite, sind deine Coins weg. Nur mit einem eigenen Wallet hast du die volle Kontrolle." },
+                { text: "Man sollte seine privaten Schlüssel niemals digital speichern, sondern nur auf Papier.", correct: false, explain: "Das ist eine Methode, aber der Spruch bezieht sich auf die Kontrolle, nicht auf das Speichermedium." },
+                { text: "Der Verlust des privaten Schlüssels führt nicht zwangsläufig zum Verlust der Coins.", correct: false, explain: "Im Gegenteil: Schlüssel weg = Coins für immer weg!" },
+                { text: "Der Handel mit Kryptowährungen ist nur mit einem physischen Sicherheitsschlüssel möglich.", correct: false, explain: "Der 'Schlüssel' ist eine digitale Information, nicht zwingend ein physisches Gerät." }
             ], difficulty: 3 },
-            { q: "Was ist der Hauptkritikpunkt am Bitcoin in Bezug auf die Umwelt?", a: [
-                { text: "Der hohe Energieverbrauch des 'Minings' (Proof-of-Work)", correct: true, explain: "Richtig. Das Erzeugen neuer Bitcoins und die Absicherung des Netzwerks verbrauchen riesige Mengen an Strom, was zu einer hohen CO2-Bilanz führt." },
-                { text: "Die Herstellung der Computerchips für das Mining", correct: false, explain: "Das trägt auch dazu bei, aber der Stromverbrauch im Betrieb ist der Hauptkritikpunkt." },
-                { text: "Dass er für illegale Geschäfte genutzt wird", correct: false, explain: "Das ist ein anderer Kritikpunkt, der sich nicht auf die Umwelt bezieht." },
-                { text: "Dass er nicht recyclebar ist", correct: false, explain: "Als digitales Gut ist 'Recycling' hier kein passender Begriff." }
+            { q: "Was ist der Hauptkritikpunkt am Bitcoin-Netzwerk?", a: [
+                { text: "Der extrem hohe Energieverbrauch durch den 'Proof-of-Work'-Konsensmechanismus.", correct: true, explain: "Richtig. Das Erzeugen neuer Bitcoins und die Absicherung des Netzwerks verbrauchen riesige Mengen an Strom." },
+                { text: "Die langsame Transaktionsgeschwindigkeit im Vergleich zu modernen Bezahlsystemen.", correct: false, explain: "Das ist auch ein Kritikpunkt (Skalierbarkeit), aber der Energieverbrauch ist der medienwirksamste." },
+                { text: "Die hohe Anfälligkeit der Blockchain-Technologie für Hackerangriffe und Manipulation.", correct: false, explain: "Die Blockchain selbst gilt als sehr sicher; die Schwachstellen sind meist die Nutzer oder Plattformen." },
+                { text: "Die unbegrenzte und inflationäre Erzeugung von neuen Bitcoins durch die Miner.", correct: false, explain: "Im Gegenteil, die Menge an Bitcoin ist auf 21 Millionen begrenzt und somit deflationär." }
             ], difficulty: 2 },
             { q: "Was sind 'NFTs' (Non-Fungible Tokens)?", a: [
-                { text: "Einzigartige, nicht austauschbare digitale Besitz-Zertifikate auf einer Blockchain", correct: true, explain: "Genau. Damit kann man das Eigentum an digitalen Gütern (z.B. Kunst, Sammelobjekte) nachweisen. Ein Bitcoin ist austauschbar (fungible), ein NFT ist ein Unikat." },
-                { text: "Eine neue Art von Kryptowährung", correct: false, explain: "Sie basieren auf der gleichen Technologie, sind aber keine Währung, sondern 'Besitzurkunden'." },
-                { text: "Bilder, die man an der Börse kaufen kann", correct: false, explain: "Man kauft nicht das Bild selbst, sondern den Token, der das Eigentum am Bild repräsentiert." },
-                { text: "Eine besonders sichere Form eines Wallets", correct: false, explain: "Nein, NFTs werden in Wallets aufbewahrt." }
+                { text: "Einzigartige digitale Zertifikate, die das Eigentum an einem Vermögenswert auf einer Blockchain repräsentieren.", correct: true, explain: "Genau. Damit kann man das Eigentum an digitalen Gütern (z.B. Kunst, Sammelobjekte) nachweisen. Ein Bitcoin ist austauschbar (fungible), ein NFT ist ein Unikat." },
+                { text: "Eine neue, verbesserte Art von Kryptowährung mit schnelleren Transaktionszeiten.", correct: false, explain: "Sie basieren auf der gleichen Technologie, sind aber keine Währung, sondern 'Besitzurkunden'." },
+                { text: "Die digitalen Bild- oder Musikdateien selbst, die auf der Blockchain gespeichert sind.", correct: false, explain: "Meist wird nur der Verweis auf die Datei gespeichert, nicht die Datei selbst. Man kauft den Token, nicht zwingend die Datei." },
+                { text: "Eine Technologie zur Verschlüsselung von digitalen Inhalten, um sie vor Kopien zu schützen.", correct: false, explain: "NFTs verhindern das Kopieren nicht, sie weisen nur das 'Original'-Eigentum nach." }
             ], difficulty: 2 },
             { q: "Was sind 'Stablecoins'?", a: [
-                { text: "Kryptowährungen, deren Wert an einen stabilen Vermögenswert wie den US-Dollar gekoppelt ist", correct: true, explain: "Richtig. Sie versuchen, die Vorteile von Krypto (schnelle Transaktionen) mit der Stabilität von traditionellem Geld zu verbinden (z.B. USDC, Tether)." },
-                { text: "Kryptowährungen, die nicht im Wert schwanken", correct: false, explain: "Sie versuchen es, aber die Stabilität ist nicht immer garantiert, wie einige Zusammenbrüche gezeigt haben." },
-                { text: "Alle Kryptowährungen außer Bitcoin", correct: false, explain: "Nein, es ist eine spezielle Art von Kryptowährung." },
-                { text: "Die Münzen, die in einem Pferdestall verwendet werden", correct: false, explain: "Haha, nein. 'Stable' bezieht sich auf die Wertstabilität." }
+                { text: "Kryptowährungen, die durch hinterlegte Sicherheiten eine feste Wertbindung an eine Fiat-Währung anstreben.", correct: true, explain: "Richtig. Sie versuchen, die Vorteile von Krypto (schnelle Transaktionen) mit der Stabilität von traditionellem Geld zu verbinden." },
+                { text: "Von Zentralbanken ausgegebene digitale Währungen, die den Euro oder Dollar ersetzen sollen.", correct: false, explain: "Das wären 'Central Bank Digital Currencies' (CBDCs). Stablecoins sind meist privat." },
+                { text: "Kryptowährungen mit einem besonders stabilen und über lange Zeit bewährten Quellcode.", correct: false, explain: "Nein, 'Stable' bezieht sich auf den Preis, nicht auf die Software." },
+                { text: "Anleihen, die nicht in Euro oder Dollar, sondern in einer Kryptowährung zurückgezahlt werden.", correct: false, explain: "Nein, es ist eine Art von Kryptowährung, keine Anleihe." }
             ], difficulty: 2 },
             { q: "Was ist 'Staking'?", a: [
-                { text: "Das Hinterlegen von Coins, um ein Krypto-Netzwerk (Proof-of-Stake) zu unterstützen und dafür Belohnungen zu erhalten", correct: true, explain: "Genau. Es ist vergleichbar mit dem Erhalten von Zinsen auf einem Sparkonto, aber im Krypto-Universum. Man hilft, das Netzwerk zu sichern." },
-                { text: "Das Setzen auf steigende oder fallende Kurse von Kryptowährungen", correct: false, explain: "Das wäre 'Traden' oder 'Spekulieren'." },
-                { text: "Das Aufbewahren von Coins in einem besonders sicheren Wallet", correct: false, explain: "Sichere Aufbewahrung ist wichtig, aber Staking ist ein aktiver Prozess, um Erträge zu erzielen." },
-                { text: "Das Kaufen eines Steaks mit Bitcoin", correct: false, explain: "Witzig, aber nein. 'To stake' bedeutet 'einsetzen' oder 'hinterlegen'." }
+                { text: "Das Hinterlegen von Coins zur Teilnahme am Konsensmechanismus eines 'Proof-of-Stake'-Netzwerks.", correct: true, explain: "Genau. Man hilft, das Netzwerk zu sichern und erhält dafür Belohnungen (Rewards), ähnlich wie Zinsen." },
+                { text: "Das spekulative Wetten auf die zukünftige Kursentwicklung einer Kryptowährung.", correct: false, explain: "Das wäre 'Traden' oder 'Spekulieren'." },
+                { text: "Das Aufteilen von Krypto-Vermögen auf verschiedene Wallets zur Risikominimierung.", correct: false, explain: "Das wäre Diversifikation von Wallets, nicht Staking." },
+                { text: "Der Prozess, bei dem neue Coins durch den Einsatz von Rechenleistung erzeugt werden.", correct: false, explain: "Das ist 'Mining' (Proof-of-Work)." }
             ], difficulty: 3 },
             { q: "Was ist ein 'ICO' (Initial Coin Offering)?", a: [
-                { text: "Eine Methode zur Kapitalbeschaffung, bei der ein neues Krypto-Projekt eigene Tokens ausgibt und verkauft", correct: true, explain: "Korrekt. Es ist quasi das Pendant zum IPO (Börsengang) in der Krypto-Welt, aber mit viel weniger Regulierung und daher extrem hohem Risiko." },
-                { text: "Ein Index, der die wichtigsten Kryptowährungen bündelt", correct: false, explain: "Nein, es ist ein Fundraising-Event." },
-                { text: "Eine Konferenz für Krypto-Entwickler", correct: false, explain: "Nein." },
-                { text: "Ein Zertifikat über den Besitz einer Kryptowährung", correct: false, explain: "Nein, es ist der erstmalige Verkauf." }
+                { text: "Eine unregulierte Methode des Fundraisings, bei der neue Krypto-Token an frühe Investoren verkauft werden.", correct: true, explain: "Korrekt. Es ist quasi das Pendant zum IPO (Börsengang) in der Krypto-Welt, aber mit viel weniger Regulierung und daher extrem hohem Risiko." },
+                { text: "Ein standardisierter Index, der die Wertentwicklung der zehn wichtigsten Kryptowährungen abbildet.", correct: false, explain: "Nein, es ist ein Fundraising-Event." },
+                { text: "Eine internationale Konferenz, auf der die neuesten Entwicklungen der Krypto-Branche vorgestellt werden.", correct: false, explain: "Nein." },
+                { text: "Ein offizielles Zertifikat, das die Echtheit und den Besitz einer Kryptowährung bestätigt.", correct: false, explain: "Nein, es ist der erstmalige Verkauf." }
             ], difficulty: 2 },
             { q: "Sollten Kryptowährungen den Hauptteil deines Portfolios ausmachen?", a: [
-                { text: "Nein, sie sind extrem riskant und sollten, wenn überhaupt, nur eine kleine Beimischung sein", correct: true, explain: "Absolut richtig. Die Basis eines soliden Portfolios sollten breit gestreute Aktien-ETFs sein. Krypto ist eine hochriskante Spekulation, kein solides Investment." },
-                { text: "Ja, weil man damit am schnellsten reich werden kann", correct: false, explain: "Man kann damit auch am schnellsten alles verlieren. Das Risiko ist enorm." },
-                { text: "Ja, weil sie die Zukunft des Geldes sind", correct: false, explain: "Ob sie die Zukunft sind, ist ungewiss. Auf eine ungewisse Zukunft sollte man nicht sein gesamtes Vermögen setzen." },
-                { text: "Ja, weil sie komplett unabhängig von der Wirtschaft sind", correct: false, explain: "Das stimmt nicht. In Wirtschaftskrisen sind Kryptowährungen oft stärker gefallen als der Aktienmarkt." }
+                { text: "Nein, aufgrund ihrer extremen Volatilität und Risiken sollten sie höchstens eine kleine Beimischung sein.", correct: true, explain: "Absolut richtig. Die Basis eines soliden Portfolios sollten breit gestreute Aktien-ETFs sein. Krypto ist eine hochriskante Spekulation." },
+                { text: "Ja, da sie im Gegensatz zu Aktien nicht von der Wirtschaftslage oder Zinsen beeinflusst werden.", correct: false, explain: "Das stimmt nicht. In Wirtschaftskrisen sind Kryptowährungen oft stärker gefallen als der Aktienmarkt." },
+                { text: "Ja, weil sie durch ihre dezentrale Natur einen besseren Schutz vor Inflation bieten als Aktien.", correct: false, explain: "Dieser Schutz ist theoretisch, aber in der Praxis hat er sich noch nicht langfristig bewährt. Aktien sind Anteile an inflationsgeschützten Sachwerten." },
+                { text: "Ja, weil die potenzielle Rendite das höhere Risiko mehr als rechtfertigt.", correct: false, explain: "Das ist eine persönliche Risikoeinschätzung, aber für einen soliden Vermögensaufbau ist diese Strategie extrem gefährlich und nicht zu empfehlen." }
             ], difficulty: 1 }
         ]
     };
@@ -969,7 +969,11 @@
             button.classList.add('incorrect');
             streak = 0;
             // Highlight the correct answer
-            const correctButton = Array.from(buttons).find((btn, index) => questionData.a[index].correct);
+            const correctButton = Array.from(buttons).find((btn) => {
+                // Find the original option object that corresponds to this button's text
+                const originalOption = questionData.a.find(opt => opt.text === btn.innerHTML);
+                return originalOption && originalOption.correct;
+            });
             if(correctButton) correctButton.classList.add('correct');
 
             feedbackTextEl.innerHTML = `<span class="feedback-emoji">🤔</span> <strong>Knapp daneben.</strong> ${explanation}`;
