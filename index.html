@@ -6,17 +6,18 @@
     <title>Trader-Lizenz | Die Challenge</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600;700&family=Roboto:wght@700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
     <style>
         :root {
-            --jo-dark-blue: #0A192F;
-            --jo-light-blue: #172A45;
-            --jo-text-light: #CCD6F6;
-            --jo-text-mid: #8892B0;
-            --jo-accent-orange: #FF8C00; /* DarkOrange */
-            --jo-accent-green: #2ecc71;
-            --jo-accent-red: #e74c3c;
-            --border-color: #233554;
+            /* Colors inspired by just-options.de and the screenshot */
+            --bg-dark: #0A192F;         /* Deep Navy Blue background */
+            --primary: #172A45;       /* Lighter Navy for containers */
+            --text-light: #CCD6F6;    /* Light text */
+            --text-mid: #8892B0;      /* Medium/subtle text */
+            --accent-orange: #FF8C00; /* Bright Orange for accents */
+            --accent-green: #2ecc71;  /* Success green */
+            --accent-red: #e74c3c;    /* Error red */
+            --border-color: #233554;  /* Border color */
         }
 
         * {
@@ -26,9 +27,9 @@
         }
 
         body {
-            font-family: 'Open Sans', sans-serif;
-            background-color: var(--jo-dark-blue);
-            color: var(--jo-text-light);
+            font-family: 'Roboto', sans-serif;
+            background-color: var(--bg-dark);
+            color: var(--text-light);
             display: flex;
             justify-content: center;
             align-items: center;
@@ -37,7 +38,7 @@
         }
 
         #quiz-container {
-            background-color: var(--jo-light-blue);
+            background-color: var(--primary);
             border-radius: 10px;
             box-shadow: 0 10px 30px -15px rgba(2,12,27,0.7);
             width: 100%;
@@ -62,7 +63,7 @@
         }
 
         h1 span {
-            color: var(--jo-accent-orange);
+            color: var(--accent-orange);
         }
 
         #question-area {
@@ -78,8 +79,8 @@
 
         #question-counter {
             font-size: 0.9em;
-            font-weight: 600;
-            color: var(--jo-text-mid);
+            font-weight: 500;
+            color: var(--text-mid);
             white-space: nowrap;
         }
         
@@ -88,22 +89,24 @@
             background-color: var(--border-color);
             border-radius: 10px;
             height: 10px;
+            overflow: hidden;
         }
 
         #progress-bar {
             width: 0%;
             height: 100%;
-            background-color: var(--jo-accent-orange);
+            background-color: var(--accent-orange);
             border-radius: 10px;
             transition: width 0.4s ease-in-out;
         }
 
         #question-text {
             font-size: 1.3em;
-            font-weight: 600;
+            font-weight: 500;
             margin-bottom: 30px;
             color: white;
             line-height: 1.5;
+            min-height: 5em; /* Reserve space to prevent layout shifts */
         }
 
         .options-grid {
@@ -116,9 +119,9 @@
             width: 100%;
             padding: 15px;
             font-size: 1em;
-            font-weight: 600;
+            font-weight: 500;
             background-color: transparent;
-            color: var(--jo-text-light);
+            color: var(--text-light);
             border: 2px solid var(--border-color);
             border-radius: 8px;
             cursor: pointer;
@@ -127,8 +130,9 @@
         }
 
         .option-btn:hover:not(:disabled) {
-            border-color: var(--jo-accent-orange);
-            color: var(--jo-accent-orange);
+            border-color: var(--accent-orange);
+            color: var(--accent-orange);
+            transform: translateY(-2px);
         }
 
         .option-btn:disabled {
@@ -137,36 +141,42 @@
         }
 
         .option-btn.correct {
-            border-color: var(--jo-accent-green);
+            border-color: var(--accent-green);
             background-color: rgba(46, 204, 113, 0.1);
-            color: var(--jo-accent-green);
+            color: var(--accent-green);
         }
 
         .option-btn.incorrect {
-            border-color: var(--jo-accent-red);
+            border-color: var(--accent-red);
             background-color: rgba(231, 76, 60, 0.1);
-            color: var(--jo-accent-red);
+            color: var(--text-light);
         }
 
         #feedback-text {
             margin-top: 25px;
-            font-size: 1em;
-            font-weight: 600;
+            font-size: 0.95em;
+            font-weight: 400;
             padding: 15px;
             border-radius: 8px;
             display: none;
-            line-height: 1.5;
+            line-height: 1.6;
+        }
+        
+        #feedback-text strong {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: 700;
         }
 
         #feedback-text.correct {
-            border: 1px solid var(--jo-accent-green);
-            color: var(--jo-accent-green);
+            border: 1px solid var(--accent-green);
+            color: var(--accent-green);
             display: block;
         }
 
         #feedback-text.incorrect {
-            border: 1px solid var(--jo-accent-red);
-            color: var(--jo-accent-red);
+            border: 1px solid var(--accent-red);
+            color: var(--text-light);
             display: block;
         }
 
@@ -174,14 +184,15 @@
             padding: 25px 30px;
             text-align: right;
             border-top: 1px solid var(--border-color);
+            min-height: 77px; /* Reserve space for button */
         }
 
         #next-btn {
             padding: 12px 35px;
             font-size: 1em;
             font-weight: 700;
-            background-color: var(--jo-accent-orange);
-            color: var(--jo-light-blue);
+            background-color: var(--accent-orange);
+            color: var(--bg-dark);
             border: none;
             border-radius: 8px;
             cursor: pointer;
@@ -190,24 +201,26 @@
         }
 
         #next-btn:hover {
-            filter: brightness(1.2);
+            filter: brightness(1.15);
+            transform: scale(1.03);
         }
 
         #results-screen {
-            padding: 40px;
+            padding: 30px;
             text-align: center;
         }
         
         #results-screen h2 {
-            font-size: 2.5em;
+            font-family: 'Roboto', sans-serif;
+            font-size: 2.2em;
             font-weight: 700;
             color: white;
-            margin-bottom: 15px;
+            margin-bottom: 10px;
         }
         
         #overall-score-text {
-            font-size: 1.2em;
-            color: var(--jo-text-mid);
+            font-size: 1.1em;
+            color: var(--text-mid);
             margin-bottom: 5px;
         }
 
@@ -215,19 +228,19 @@
             font-family: 'Roboto', sans-serif;
             font-size: 4em;
             font-weight: 700;
-            color: var(--jo-accent-orange);
+            color: var(--accent-orange);
             margin-bottom: 25px;
         }
 
         #topic-results-container {
             display: grid;
             grid-template-columns: 1fr;
-            gap: 20px;
+            gap: 15px;
             text-align: left;
-            margin-top: 30px;
+            margin-top: 20px;
         }
         .topic-result {
-            background-color: var(--jo-dark-blue);
+            background-color: var(--bg-dark);
             padding: 15px;
             border-radius: 8px;
             border: 1px solid var(--border-color);
@@ -243,36 +256,38 @@
             color: white;
         }
         .topic-score {
-            font-weight: 600;
-            color: var(--jo-text-mid);
+            font-weight: 500;
+            color: var(--text-mid);
         }
         .topic-progress-bar-container {
             width: 100%;
             background-color: var(--border-color);
             height: 8px;
             border-radius: 5px;
+            overflow: hidden;
         }
         .topic-progress-bar {
             height: 100%;
-            background-color: var(--jo-accent-orange);
+            background-color: var(--accent-orange);
             border-radius: 5px;
+            transition: width 0.5s ease;
         }
-
 
         #restart-btn {
             padding: 15px 40px;
             font-size: 1.1em;
             font-weight: 700;
-            background-color: var(--jo-accent-orange);
-            color: var(--jo-light-blue);
+            background-color: var(--accent-orange);
+            color: var(--bg-dark);
             border: none;
             border-radius: 8px;
             cursor: pointer;
             transition: all 0.2s ease;
-            margin-top: 40px;
+            margin-top: 30px;
         }
         #restart-btn:hover {
-            filter: brightness(1.2);
+            filter: brightness(1.15);
+            transform: scale(1.03);
         }
 
         @media (max-width: 700px) {
@@ -284,8 +299,10 @@
             }
             .options-grid { grid-template-columns: 1fr; }
             h1 { font-size: 1.8em; }
-            #question-text { font-size: 1.15em; }
-            #topic-results-container { grid-template-columns: 1fr; }
+            #question-text { font-size: 1.15em; min-height: 6em;}
+            #results-screen { padding: 20px; }
+            #question-area { padding: 20px; }
+            #navigation { padding: 20px; }
         }
     </style>
 </head>
@@ -303,7 +320,7 @@
                     <div id="progress-bar"></div>
                 </div>
             </div>
-            <div id="question-text">Lädt Frage...</div>
+            <div id="question-text">Quiz wird geladen...</div>
             <div class="options-grid" id="options-container"></div>
             <div id="feedback-text"></div>
         </div>
@@ -316,8 +333,7 @@
             <h2>Challenge abgeschlossen!</h2>
             <p id="overall-score-text">Dein Gesamtergebnis</p>
             <div id="score-percentage"></div>
-            <hr style="border-color: var(--border-color); margin: 30px 0;">
-            <h3>Leistung nach Themenfeld</h3>
+            <h3 style="color: var(--text-light); margin-top: 30px; border-top: 1px solid var(--border-color); padding-top: 30px;">Leistung nach Themenfeld</h3>
             <div id="topic-results-container"></div>
             <button id="restart-btn">Neue Runde starten</button>
         </div>
@@ -326,103 +342,64 @@
     <script>
         const quizTopics = {
             "Grundlagen & Begriffe": [
-                { question: "Was ist eine Aktie?", answers: [{ text: "Ein Anteil an einem Unternehmen", correct: true }, { text: "Ein Schuldschein von einer Bank", correct: false }, { text: "Ein fester Zins, den man jährlich bekommt", correct: false }, { text: "Ein Lottoschein für die Börse", correct: false }] },
-                { question: "Was ist die Börse?", answers: [{ text: "Ein organisierter Markt, an dem Wertpapiere gehandelt werden", correct: true }, { text: "Ein Supermarkt für Geld", correct: false }, { text: "Ein Ort, an dem nur reiche Leute handeln", correct: false }, { text: "Eine staatliche Behörde zur Kontrolle der Wirtschaft", correct: false }] },
-                { question: "Wer legt den Preis einer Aktie fest?", answers: [{ text: "Angebot und Nachfrage", correct: true }, { text: "Das Unternehmen selbst", correct: false }, { text: "Die Regierung", correct: false }, { text: "Die Bank des Käufers", correct: false }] },
-                { question: "Was ist ein 'Depot'?", answers: [{ text: "Ein Konto zur Aufbewahrung von Wertpapieren", correct: true }, { text: "Ein spezielles Sparkonto", correct: false }, { text: "Der Tresorraum einer Börse", correct: false }, { text: "Ein Synonym für das Girokonto", correct: false }] },
-                { question: "Was ist ein 'Broker'?", answers: [{ text: "Eine Bank oder ein Finanzdienstleister, über den du handelst", correct: true }, { text: "Ein Berater, der dir sagt, was du kaufen sollst", correct: false }, { text: "Eine Person, die die Aktienkurse festlegt", correct: false }, { text: "Die Börsenaufsicht", correct: false }] },
-                { question: "Was bedeutet die Abkürzung 'AG' im Namen eines Unternehmens?", answers: [{ text: "Aktiengesellschaft", correct: true }, { text: "Arbeitsgemeinschaft", correct: false }, { text: "Allgemeine Gesellschaft", correct: false }, { text: "Anlagegesellschaft", correct: false }] },
-                { question: "Was ist ein 'Portfolio'?", answers: [{ text: "Die Gesamtheit aller Wertpapiere, die ein Anleger besitzt", correct: true }, { text: "Ein Aktenordner zur Aufbewahrung von Dokumenten", correct: false }, { text: "Die Lieblingsaktie eines Anlegers", correct: false }, { text: "Der jährliche Bericht eines Unternehmens", correct: false }] },
-                { question: "Was ist der Unterschied zwischen dem Nominalwert und dem Kurswert einer Aktie?", answers: [{ text: "Der Nominalwert ist ein fester Anteil am Grundkapital, der Kurswert ist der Marktpreis", correct: true }, { text: "Der Nominalwert ist der Preis für Profis, der Kurswert für Private", correct: false }, { text: "Der Kurswert ist immer höher als der Nominalwert", correct: false }, { text: "Es gibt keinen Unterschied", correct: false }] },
-                 { question: "Was bedeutet es, wenn ein ETF 'thesaurierend' ist?", answers: [{ text: "Er schüttet Dividenden nicht aus, sondern reinvestiert sie direkt wieder", correct: true }, { text: "Er spendet die Dividenden für einen guten Zweck", correct: false }, { text: "Er zahlt die Dividenden monatlich auf dein Konto aus", correct: false }, { text: "Er investiert nur in Schatzbriefe", correct: false }] },
-                { question: "Was bedeutet 'Allzeithoch' (All-Time High)?", answers: [{ text: "Der höchste Kurs, den eine Aktie oder ein Index jemals erreicht hat", correct: true }, { text: "Wenn alle Aktien gleichzeitig steigen", correct: false }, { text: "Der höchste Kurs des aktuellen Jahres", correct: false }, { text: "Ein Signal, sofort zu verkaufen", correct: false }] },
+                { question: "Was ist eine Aktie?", answers: [{ text: "Ein Anteil an einem Unternehmen", correct: true, rationale: "Genau! Mit einer Aktie wirst du zum Miteigentümer eines Unternehmens." }, { text: "Ein Schuldschein von einer Bank", correct: false, rationale: "Falsch. Ein Schuldschein ist ein Kredit, den man vergibt. Eine Aktie ist hingegen ein Anteil an einem Unternehmen." }, { text: "Ein fester Zins, den man jährlich bekommt", correct: false, rationale: "Falsch. Feste Zinsen gibt es bei Anleihen oder auf dem Sparkonto. Der Wert einer Aktie kann schwanken." }, { text: "Ein Lottoschein für die Börse", correct: false, rationale: "Falsch. Auch wenn es manchmal so scheinen mag, basiert der Börsenhandel auf wirtschaftlichen Faktoren und nicht nur auf Glück." }] },
+                { question: "Was ist die Börse?", answers: [{ text: "Ein organisierter Markt, an dem Wertpapiere gehandelt werden", correct: true, rationale: "Richtig, die Börse bringt Käufer und Verkäufer von Wertpapieren zusammen und sorgt für faire Preise." }, { text: "Ein Supermarkt für Geld", correct: false, rationale: "Falsch. Man kann an der Börse zwar Geld anlegen, aber es ist kein Geschäft, in dem man Geld direkt kauft oder verkauft." }, { text: "Ein Ort, an dem nur reiche Leute handeln", correct: false, rationale: "Falsch. Heutzutage kann dank Online-Brokern und Sparplänen praktisch jeder an der Börse teilnehmen." }, { text: "Eine staatliche Behörde zur Kontrolle der Wirtschaft", correct: false, rationale: "Falsch. Die Börse ist ein Teil der Wirtschaft und wird staatlich reguliert, aber nicht direkt kontrolliert." }] },
+                { question: "Wer legt den Preis einer Aktie fest?", answers: [{ text: "Angebot und Nachfrage", correct: true, rationale: "Korrekt. Der Preis entsteht, wenn sich genügend Käufer und Verkäufer auf einen Wert einigen. Viele Aufträge bestimmen den Preis." }, { text: "Das Unternehmen selbst", correct: false, rationale: "Falsch. Das Unternehmen gibt die Aktien zwar aus (meistens nur einmal), aber der Markt bestimmt danach den Preis." }, { text: "Die Regierung", correct: false, rationale: "Falsch. Die Regierung reguliert den Markt, legt aber keine Aktienpreise fest." }, { text: "Die Bank des Käufers", correct: false, rationale: "Falsch. Die Bank führt nur den Auftrag des Käufers aus, bestimmt aber nicht den allgemeinen Marktpreis." }] },
+                { question: "Was ist ein 'Depot'?", answers: [{ text: "Ein Konto zur Aufbewahrung von Wertpapieren", correct: true, rationale: "Genau, in einem Depot werden deine gekauften Aktien und ETFs digital 'gelagert'." }, { text: "Ein spezielles Sparkonto", correct: false, rationale: "Falsch. Es ist kein Sparkonto, da der Wert der Inhalte schwanken kann und es nicht für den Zahlungsverkehr gedacht ist." }, { text: "Der Tresorraum einer Börse", correct: false, rationale: "Falsch. Wertpapiere werden heute fast ausschließlich digital in Depots bei Banken oder Brokern verwahrt." }, { text: "Ein Synonym für das Girokonto", correct: false, rationale: "Falsch. Ein Girokonto ist für den täglichen Zahlungsverkehr, ein Depot ist ausschließlich für Wertpapiere." }] },
+                { question: "Was ist ein 'Broker'?", answers: [{ text: "Eine Bank oder ein Finanzdienstleister, über den du handelst", correct: true, rationale: "Richtig, der Broker ist dein technischer Zugang zur Börse und führt deine Kauf- und Verkaufsaufträge aus." }, { text: "Ein Berater, der dir sagt, was du kaufen sollst", correct: false, rationale: "Falsch. Das wäre ein Anlageberater. Ein Broker führt in der Regel nur deine Befehle aus." }, { text: "Eine Person, die die Aktienkurse festlegt", correct: false, rationale: "Falsch. Die Kurse entstehen durch Angebot und Nachfrage aller Marktteilnehmer." }, { text: "Die Börsenaufsicht", correct: false, rationale: "Falsch. Die Aufsicht (in Deutschland die BaFin) überwacht den Handel, ist aber kein Broker." }] },
             ],
             "Produkte & Indizes": [
-                { question: "Was ist ein ETF (Exchange Traded Fund)?", answers: [{ text: "Ein Fonds, der einen Index wie den DAX abbildet und an der Börse gehandelt wird", correct: true }, { text: "Eine einzelne, sehr teure Aktie", correct: false }, { text: "Eine spezielle Art von Sparkonto", correct: false }, { text: "Eine Garantie, dass man kein Geld verliert", correct: false }] },
-                { question: "Was ist eine Dividende?", answers: [{ text: "Ein Teil des Unternehmensgewinns, der an Aktionäre ausgeschüttet wird", correct: true }, { text: "Die Gebühr für den Kauf einer Aktie", correct: false }, { text: "Der Verlust, den man macht, wenn der Kurs fällt", correct: false }, { text: "Ein Rabatt beim Kauf von vielen Aktien", correct: false }] },
-                { question: "Was ist der DAX?", answers: [{ text: "Der wichtigste deutsche Aktienindex mit den 40 größten Unternehmen", correct: true }, { text: "Ein Gesetz zum Aktienhandel", correct: false }, { text: "Die Börse in Frankfurt", correct: false }, { text: "Ein Computerprogramm, das vor Betrug warnt", correct: false }] },
-                { question: "Was ist der Unterschied zwischen einer Aktie und einer Anleihe?", answers: [{ text: "Aktie = Eigentum, Anleihe = Kredit", correct: true }, { text: "Aktien haben feste Zinsen, Anleihen nicht", correct: false }, { text: "Anleihen sind riskanter als Aktien", correct: false }, { text: "Man kann nur Aktien an der Börse handeln", correct: false }] },
-                { question: "Was ist der MSCI World?", answers: [{ text: "Ein weltweiter Aktienindex mit über 1.500 Unternehmen aus Industrieländern", correct: true }, { text: "Der Verband aller Börsen weltweit", correct: false }, { text: "Ein Fonds, der nur in Technologie-Aktien investiert", correct: false }, { text: "Eine Währung für den internationalen Handel", correct: false }] },
-                { question: "Was ist der S&P 500 Index?", answers: [{ text: "Ein Index, der die 500 größten börsennotierten US-Unternehmen umfasst", correct: true }, { text: "Ein Index für die 500 besten Unternehmen der Welt", correct: false }, { text: "Eine Liste von 500 empfohlenen Aktien", correct: false }, { text: "Ein Index, der von 500 Analysten bewertet wird", correct: false }] },
-                { question: "Was sind 'Rohstoffe' als Anlageklasse?", answers: [{ text: "Physische Güter wie Gold, Öl oder Weizen", correct: true }, { text: "Die Roh-Version einer Aktie", correct: false }, { text: "Unternehmen, die noch nicht an der Börse sind", correct: false }, { text: "Besonders riskante Aktien", correct: false }] },
-                { question: "Was ist ein 'Zertifikat' im Wertpapierhandel?", answers: [{ text: "Eine Schuldverschreibung, deren Wertentwicklung von einem Basiswert abhängt", correct: true }, { text: "Ein Eigentumsnachweis für eine Aktie", correct: false }, { text: "Eine Urkunde, die man nach einem Quiz bekommt", correct: false }, { text: "Eine garantierte Anleihe", correct: false }] },
-                { question: "Was ist ein 'REIT' (Real Estate Investment Trust)?", answers: [{ text: "Ein Unternehmen, das Immobilien besitzt, betreibt oder finanziert und an der Börse gehandelt wird", correct: true }, { text: "Ein Makler für sehr teure Immobilien", correct: false }, { text: "Eine Steuer auf Immobilienbesitz", correct: false }, { text: "Ein rechter Winkel im Immobilienbau", correct: false }] },
-                { question: "Was ist der Unterschied zwischen einer Stammaktie und einer Vorzugsaktie?", answers: [{ text: "Stammaktien haben ein Stimmrecht, Vorzugsaktien oft eine höhere Dividende", correct: true }, { text: "Stammaktien sind für Stammkunden, Vorzugsaktien für Neukunden", correct: false }, { text: "Vorzugsaktien sind sicherer als Stammaktien", correct: false }, { text: "Stammaktien kann jeder kaufen, Vorzugsaktien nur Profis", correct: false }] },
+                { question: "Was ist ein ETF (Exchange Traded Fund)?", answers: [{ text: "Ein Fonds, der einen Index wie den DAX abbildet und an der Börse gehandelt wird", correct: true, rationale: "Genau. Mit einem ETF kauft man einen ganzen Korb von Aktien auf einmal und streut so automatisch das Risiko." }, { text: "Eine einzelne, sehr teure Aktie", correct: false, rationale: "Falsch. Ein ETF ist keine einzelne Aktie, sondern eine Sammlung von vielen." }, { text: "Eine spezielle Art von Sparkonto", correct: false, rationale: "Falsch. Ein ETF ist ein Wertpapier, dessen Wert schwanken kann, kein verzinstes Sparkonto." }, { text: "Eine Garantie, dass man kein Geld verliert", correct: false, rationale: "Falsch. Keine Anlage an der Börse ist ohne Risiko, auch ETFs können an Wert verlieren." }] },
+                { question: "Was ist eine Dividende?", answers: [{ text: "Ein Teil des Unternehmensgewinns, der an Aktionäre ausgeschüttet wird", correct: true, rationale: "Richtig, es ist eine Art Gewinnbeteiligung für die Miteigentümer (Aktionäre). Nicht alle Unternehmen zahlen eine." }, { text: "Die Gebühr für den Kauf einer Aktie", correct: false, rationale: "Falsch. Die Gebühr nennt man Ordergebühr oder Courtage." }, { text: "Der Verlust, den man macht, wenn der Kurs fällt", correct: false, rationale: "Falsch. Ein Kursverlust ist keine Dividende, sondern ein Wertverlust des Anteils." }, { text: "Ein Rabatt beim Kauf von vielen Aktien", correct: false, rationale: "Falsch. Einen solchen Mengenrabatt gibt es an der Börse nicht." }] },
+                { question: "Was ist der DAX?", answers: [{ text: "Der wichtigste deutsche Aktienindex mit den 40 größten Unternehmen", correct: true, rationale: "Korrekt, der DAX zeigt die Wertentwicklung der größten deutschen börsennotierten Unternehmen." }, { text: "Ein Gesetz zum Aktienhandel", correct: false, rationale: "Falsch. Gesetze regeln den Handel, aber der DAX ist ein Index (eine Kennzahl)." }, { text: "Die Börse in Frankfurt", correct: false, rationale: "Falsch. Die Börse Frankfurt ist der Handelsplatz, der DAX ist der Index, der dort berechnet wird." }, { text: "Ein Computerprogramm, das vor Betrug warnt", correct: false, rationale: "Falsch. Dafür gibt es Aufsichtsbehörden, der DAX ist eine Kennzahl." }] },
+                { question: "Was ist der Unterschied zwischen einer Aktie und einer Anleihe?", answers: [{ text: "Aktie = Eigentum, Anleihe = Kredit", correct: true, rationale: "Mit einer Aktie bist du Eigentümer eines Unternehmens, mit einer Anleihe gibst du dem Unternehmen oder Staat einen Kredit." }, { text: "Aktien haben feste Zinsen, Anleihen nicht", correct: false, rationale: "Falsch, es ist genau umgekehrt. Anleihen haben oft einen festen Zins (Kupon)." }, { text: "Anleihen sind riskanter als Aktien", correct: false, rationale: "Falsch. Im Allgemeinen gelten Aktien als riskanter, da man bei einer Insolvenz erst nach den Anleihe-Gläubigern bedient wird." }, { text: "Man kann nur Aktien an der Börse handeln", correct: false, rationale: "Falsch. Auch Anleihen werden an der Börse gehandelt." }] },
+                { question: "Was ist der S&P 500 Index?", answers: [{ text: "Ein Index, der die 500 größten börsennotierten US-Unternehmen umfasst", correct: true, rationale: "Richtig. Er gilt als repräsentativer für den gesamten US-Markt als der Dow Jones." }, { text: "Ein Index für die 500 besten Unternehmen der Welt", correct: false, rationale: "Falsch. Er ist auf die USA beschränkt." }, { text: "Eine Liste von 500 empfohlenen Aktien", correct: false, rationale: "Falsch. Es ist ein Marktindex, keine Empfehlungsliste." }, { text: "Ein Index, der von 500 Analysten bewertet wird", correct: false, rationale: "Falsch. S&P (Standard & Poor's) ist der Herausgeber des Index." }] },
             ],
             "Markt & Wirtschaft": [
-                { question: "Was ist Inflation?", answers: [{ text: "Der Wert des Geldes sinkt und die Preise steigen", correct: true }, { text: "Dass Aktienkurse immer nur steigen", correct: false }, { text: "Eine spezielle Steuer auf Aktiengewinne", correct: false }, { text: "Ein Konjunkturabschwung", correct: false }] },
-                { question: "Was beschreibt einen 'Bullenmarkt' (Hausse)?", answers: [{ text: "Eine Phase mit allgemein steigenden Kursen", correct: true }, { text: "Eine Phase mit allgemein fallenden Kursen", correct: false }, { text: "Ein Markt mit sehr wenigen Händlern", correct: false }, { text: "Ein Markt für Agrarprodukte wie Rindfleisch", correct: false }] },
-                { question: "Was beschreibt einen 'Bärenmarkt' (Baisse)?", answers: [{ text: "Eine Phase mit allgemein fallenden Kursen", correct: true }, { text: "Eine Phase mit allgemein steigenden Kursen", correct: false }, { text: "Ein Markt, der nur nachts geöffnet ist", correct: false }, { text: "Ein Markt mit strengen Regeln", correct: false }] },
-                { question: "Wie können sich Zinserhöhungen durch die Zentralbank auf den Aktienmarkt auswirken?", answers: [{ text: "Sie können Aktienkurse belasten, weil Sparen attraktiver wird", correct: true }, { text: "Sie führen immer zu steigenden Aktienkursen", correct: false }, { text: "Sie haben keinen Einfluss auf den Aktienmarkt", correct: false }, { text: "Sie verbilligen den Aktienkauf", correct: false }] },
-                { question: "Was ist eine Rezession?", answers: [{ text: "Eine Phase, in der die Wirtschaftsleistung eines Landes schrumpft", correct: true }, { text: "Ein Börsencrash", correct: false }, { text: "Wenn die Inflation sehr hoch ist", correct: false }, { text: "Wenn die Regierung die Steuern erhöht", correct: false }] },
-                { question: "Was ist ein 'Börsencrash'?", answers: [{ text: "Ein plötzlicher, extremer Einbruch der Aktienkurse in kurzer Zeit", correct: true }, { text: "Wenn die Computer der Börse ausfallen", correct: false }, { text: "Ein Tag, an dem nur Verluste gemacht werden", correct: false }, { text: "Wenn eine einzelne Aktie stark fällt", correct: false }] },
-                { question: "Was ist ein 'IPO' (Initial Public Offering)?", answers: [{ text: "Der erstmalige Verkauf der Aktien eines Unternehmens an der Börse", correct: true }, { text: "Eine große Werbekampagne für ein neues Produkt", correct: false }, { text: "Wenn ein Unternehmen von der Börse genommen wird", correct: false }, { text: "Eine jährliche Versammlung der Aktionäre", correct: false }] },
-                { question: "Was sind 'zyklische' Aktien?", answers: [{ text: "Aktien von Unternehmen, deren Geschäft stark von der Konjunktur abhängt", correct: true }, { text: "Aktien, die sich im Kreis drehen", correct: false }, { text: "Aktien, die jeden Monat eine Dividende zahlen", correct: false }, { text: "Aktien von Fahrradherstellern", correct: false }] },
-                { question: "Was sind 'defensive' Aktien?", answers: [{ text: "Aktien von Unternehmen mit stabilen Geschäften, die weniger von der Konjunktur abhängen", correct: true }, { text: "Aktien von Rüstungsunternehmen", correct: false }, { text: "Aktien, die nie im Wert fallen", correct: false }, { text: "Aktien mit einer Verlust-Garantie", correct: false }] },
-                { question: "Was ist eine 'Blase' an der Börse?", answers: [{ text: "Eine Phase, in der die Preise weit über ihren fundamentalen Wert steigen", correct: true }, { text: "Eine Schutzhülle um das Depot", correct: false }, { text: "Ein sehr sicherer Hafen für Geld", correct: false }, { text: "Ein Unternehmen, das Seifenblasen herstellt", correct: false }] },
+                { question: "Was ist Inflation?", answers: [{ text: "Der Wert des Geldes sinkt und die Preise steigen", correct: true, rationale: "Richtig. Für einen Euro kann man sich in Zukunft weniger kaufen. Aktien können davor schützen." }, { text: "Dass Aktienkurse immer nur steigen", correct: false, rationale: "Falsch. Das wäre schön, ist aber nicht die Realität." }, { text: "Eine spezielle Steuer auf Aktiengewinne", correct: false, rationale: "Falsch. Steuern sind Abgaben, Inflation ist ein allgemeines wirtschaftliches Phänomen." }, { text: "Ein Konjunkturabschwung", correct: false, rationale: "Falsch. Das nennt man Rezession. Inflation kann auch bei guter Konjunktur auftreten." }] },
+                { question: "Was beschreibt einen 'Bullenmarkt' (Hausse)?", answers: [{ text: "Eine Phase mit allgemein steigenden Kursen", correct: true, rationale: "Korrekt. Der Bulle stößt mit seinen Hörnern von unten nach oben, was steigende Kurse symbolisiert." }, { text: "Eine Phase mit allgemein fallenden Kursen", correct: false, rationale: "Falsch. Das wäre ein 'Bärenmarkt' (Baisse)." }, { text: "Ein Markt mit sehr wenigen Händlern", correct: false, rationale: "Falsch. Die Marktaktivität kann variieren, aber der Begriff beschreibt die Kursrichtung." }, { text: "Ein Markt für Agrarprodukte wie Rindfleisch", correct: false, rationale: "Falsch. Das ist eine witzige Assoziation, aber der Begriff stammt von der Symbolik der Tierbewegungen." }] },
+                { question: "Was beschreibt einen 'Bärenmarkt' (Baisse)?", answers: [{ text: "Eine Phase mit allgemein fallenden Kursen", correct: true, rationale: "Korrekt. Der Bär schlägt mit seiner Tatze von oben nach unten, was fallende Kurse symbolisiert." }, { text: "Eine Phase mit allgemein steigenden Kursen", correct: false, rationale: "Falsch. Das wäre ein 'Bullenmarkt' (Hausse)." }, { text: "Ein Markt, der nur nachts geöffnet ist", correct: false, rationale: "Falsch. Die Handelszeiten sind festgelegt, haben aber nichts mit diesem Begriff zu tun." }, { text: "Ein Markt mit strengen Regeln", correct: false, rationale: "Falsch. Alle regulierten Märkte haben strenge Regeln, egal in welcher Phase sie sich befinden." }] },
+                { question: "Wie können sich Zinserhöhungen durch die Zentralbank auf den Aktienmarkt auswirken?", answers: [{ text: "Sie können Aktienkurse belasten, weil Sparen attraktiver wird", correct: true, rationale: "Richtig, höhere Zinsen machen Anleihen attraktiver und verteuern Kredite für Unternehmen, was oft Druck auf Aktien ausübt." }, { text: "Sie führen immer zu steigenden Aktienkursen", correct: false, rationale: "Falsch. Das Gegenteil ist oft der Fall, da Geld aus dem Aktienmarkt abgezogen werden kann." }, { text: "Sie haben keinen Einfluss auf den Aktienmarkt", correct: false, rationale: "Falsch. Zinsentscheidungen sind eines der wichtigsten Ereignisse für die Finanzmärkte." }, { text: "Sie verbilligen den Aktienkauf", correct: false, rationale: "Falsch. Zinserhöhungen beeinflussen den Wert der Anlagen, nicht die direkten Kaufkosten." }] },
+                { question: "Was ist eine Rezession?", answers: [{ text: "Eine Phase, in der die Wirtschaftsleistung eines Landes schrumpft", correct: true, rationale: "Genau. Technisch gesehen spricht man oft von einer Rezession, wenn das Bruttoinlandsprodukt (BIP) in zwei aufeinanderfolgenden Quartalen sinkt." }, { text: "Ein Börsencrash", correct: false, rationale: "Falsch. Ein Börsencrash kann eine Rezession begleiten oder auslösen, ist aber nicht dasselbe." }, { text: "Wenn die Inflation sehr hoch ist", correct: false, rationale: "Falsch. Hohe Inflation nennt man Inflation. Eine Kombination aus Rezession und Inflation nennt man Stagflation." }, { text: "Wenn die Regierung die Steuern erhöht", correct: false, rationale: "Falsch. Steuererhöhungen können die Wirtschaft beeinflussen, sind aber nicht die Definition einer Rezession." }] },
             ],
             "Strategie & Risiko": [
-                { question: "Was bedeutet 'Diversifikation'?", answers: [{ text: "Sein Geld auf viele verschiedene Anlagen verteilen", correct: true }, { text: "Sein ganzes Geld in eine einzige Aktie investieren", correct: false }, { text: "Nur in Aktien aus dem eigenen Land investieren", correct: false }, { text: "Jeden Tag Aktien kaufen und verkaufen", correct: false }] },
-                { question: "Welches ist das größte Risiko beim Aktienkauf?", answers: [{ text: "Der Totalverlust des eingesetzten Geldes", correct: true }, { text: "Dass man mehr Geld verliert, als man eingesetzt hat", correct: false }, { text: "Dass man Gebühren zahlen muss", correct: false }, { text: "Dass man nicht reich wird", correct: false }] },
-                { question: "Was ist der Vorteil einer langfristigen Anlagestrategie ('Buy and Hold')?", answers: [{ text: "Man kann kurzfristige Schwankungen aussitzen", correct: true }, { text: "Man muss keine Steuern zahlen", correct: false }, { text: "Man bekommt höhere Dividenden", correct: false }, { text: "Man hat garantiert keine Verluste", correct: false }] },
-                { question: "Was ist 'Volatilität'?", answers: [{ text: "Wie stark der Kurs einer Aktie schwankt", correct: true }, { text: "Wie schnell eine Aktie verkauft werden kann", correct: false }, { text: "Die Gesamtanzahl der Aktien eines Unternehmens", correct: false }, { text: "Die Beliebtheit einer Aktie bei Anlegern", correct: false }] },
-                { question: "Was ist der Cost-Average-Effekt (Durchschnittskosteneffekt)?", answers: [{ text: "Bei fallenden Kursen kauft man mit dem gleichen Betrag mehr Anteile, bei steigenden weniger", correct: true }, { text: "Dass die Kosten für einen Sparplan immer gleich bleiben", correct: false }, { text: "Dass man immer zum billigsten Kurs des Monats kauft", correct: false }, { text: "Ein Rabatt auf die Handelsgebühren", correct: false }] },
-                { question: "Was ist das 'Emittentenrisiko'?", answers: [{ text: "Das Risiko, dass der Herausgeber eines Wertpapiers (z.B. Zertifikat) pleitegeht", correct: true }, { text: "Das Risiko, dass ein Unternehmen schlechte Nachrichten veröffentlicht", correct: false }, { text: "Das Risiko, dass die Börse gehackt wird", correct: false }, { text: "Das Risiko, dass man die falschen Aktien kauft", correct: false }] },
-                { question: "Sollte man sich beim Investieren verschulden?", answers: [{ text: "Nein, auf keinen Fall. Nur Geld investieren, dessen Verlust man verkraften kann.", correct: true }, { text: "Ja, um den Gewinn zu maximieren", correct: false }, { text: "Nur, wenn die Bank es erlaubt", correct: false }, { text: "Nur für 'sichere' Anlagen wie Blue Chips", correct: false }] },
-                { question: "Was ist der Unterschied zwischen Investieren und Spekulieren?", answers: [{ text: "Investieren ist langfristig, Spekulieren ist kurzfristig", correct: true }, { text: "Investieren ist sicher, Spekulieren ist riskant", correct: false }, { text: "Investieren ist mit Aktien, Spekulieren mit ETFs", correct: false }, { text: "Es gibt keinen Unterschied", correct: false }] },
-                { question: "Was ist der Zinseszinseffekt?", answers: [{ text: "Dass man auf bereits erhaltene Zinsen/Gewinne erneut Zinsen/Gewinne bekommt", correct: true }, { text: "Eine zusätzliche Gebühr", correct: false }, { text: "Der Effekt, dass Zinsen immer weiter sinken", correct: false }, { text: "Dass man nur einmal im Leben Zinsen erhält", correct: false }] },
-                 { question: "Warum ist es sinnvoll, regelmäßig sein Portfolio zu überprüfen?", answers: [{ text: "Um die ursprüngliche Risikoverteilung wiederherzustellen ('Rebalancing')", correct: true }, { text: "Um jeden Tag Aktien zu kaufen und verkaufen", correct: false }, { text: "Weil der Broker das vorschreibt", correct: false }, { text: "Um die besten Aktien zu finden", correct: false }] },
+                { question: "Was bedeutet 'Diversifikation'?", answers: [{ text: "Sein Geld auf viele verschiedene Anlagen verteilen", correct: true, rationale: "Genau, das Streuen des Geldes reduziert das Risiko. 'Nicht alle Eier in einen Korb legen'." }, { text: "Sein ganzes Geld in eine einzige Aktie investieren", correct: false, rationale: "Falsch. Das ist das Gegenteil von Diversifikation und nennt sich Klumpenrisiko." }, { text: "Nur in Aktien aus dem eigenen Land investieren", correct: false, rationale: "Falsch. Das ist eine Form der Anlage, aber breite Diversifikation schließt auch andere Länder und Branchen ein." }, { text: "Jeden Tag Aktien kaufen und verkaufen", correct: false, rationale: "Falsch. Das ist 'Daytrading' und keine Diversifikationsstrategie." }] },
+                { question: "Welches ist das größte Risiko beim Aktienkauf?", answers: [{ text: "Der Totalverlust des eingesetzten Geldes", correct: true, rationale: "Wenn das Unternehmen insolvent wird, kann die Aktie wertlos werden. Das ist das maximale Risiko beim normalen Aktienkauf." }, { text: "Dass man mehr Geld verliert, als man eingesetzt hat", correct: false, rationale: "Falsch. Das passiert beim normalen Aktienkauf nicht, nur bei speziellen Hebelprodukten." }, { text: "Dass man Gebühren zahlen muss", correct: false, rationale: "Falsch. Gebühren sind Kosten, aber nicht das größte Risiko im Vergleich zum Kapitalverlust." }, { text: "Dass man nicht reich wird", correct: false, rationale: "Falsch. Kein Reichtum ist eine enttäuschte Erwartung, aber kein finanzieller Verlust." }] },
+                { question: "Was ist der Vorteil einer langfristigen Anlagestrategie ('Buy and Hold')?", answers: [{ text: "Man kann kurzfristige Schwankungen aussitzen", correct: true, rationale: "Langfristig wächst die Wirtschaft tendenziell, wodurch kurzfristige Krisen ausgeglichen werden können." }, { text: "Man muss keine Steuern zahlen", correct: false, rationale: "Falsch. Steuern werden fällig, wenn man mit Gewinn verkauft, egal nach welcher Zeit." }, { text: "Man bekommt höhere Dividenden", correct: false, rationale: "Falsch. Die Dividendenhöhe hängt vom Unternehmen ab, nicht von deiner Haltedauer." }, { text: "Man hat garantiert keine Verluste", correct: false, rationale: "Falsch. Garantien gibt es an der Börse nie, auch nicht bei langfristiger Anlage." }] },
+                { question: "Was ist 'Volatilität'?", answers: [{ text: "Wie stark der Kurs einer Aktie schwankt", correct: true, rationale: "Eine hohe Volatilität bedeutet starke Kursausschläge nach oben und unten." }, { text: "Wie schnell eine Aktie verkauft werden kann", correct: false, rationale: "Falsch. Das beschreibt die 'Liquidität' einer Aktie." }, { text: "Die Gesamtanzahl der Aktien eines Unternehmens", correct: false, rationale: "Falsch. Das ist die 'Anzahl der ausstehenden Aktien'." }, { text: "Die Beliebtheit einer Aktie bei Anlegern", correct: false, rationale: "Falsch. Beliebtheit kann die Volatilität beeinflussen, ist aber nicht die Definition." }] },
+                { question: "Sollte man sich beim Investieren verschulden?", answers: [{ text: "Nein, auf keinen Fall. Nur Geld investieren, dessen Verlust man verkraften kann.", correct: true, rationale: "Absolut richtig. Investieren auf Kredit ('Hebel') potenziert Verluste und kann zum Ruin führen." }, { text: "Ja, um den Gewinn zu maximieren", correct: false, rationale: "Falsch. Das ist extrem riskant und für Anfänger absolut ungeeignet." }, { text: "Nur, wenn die Bank es erlaubt", correct: false, rationale: "Falsch. Auch wenn eine Bank einen Wertpapierkredit anbietet, ist das Risiko für dich persönlich." }, { text: "Nur für 'sichere' Anlagen wie Blue Chips", correct: false, rationale: "Falsch. Es gibt keine 'sicheren' Aktien. Auch Blue Chips können stark fallen." }] },
             ],
             "Analyse & Kennzahlen": [
-                { question: "Was ist die Marktkapitalisierung eines Unternehmens?", answers: [{ text: "Der Gesamtwert aller Aktien des Unternehmens", correct: true }, { text: "Der jährliche Gewinn des Unternehmens", correct: false }, { text: "Die Schulden des Unternehmens", correct: false }, { text: "Der Wert der Gebäude und Maschinen", correct: false }] },
-                { question: "Unternehmen mit einer hohen Marktkapitalisierung nennt man auch...", answers: [{ text: "Large Caps oder Blue Chips", correct: true }, { text: "Small Caps", correct: false }, { text: "Penny Stocks", correct: false }, { text: "Start-ups", correct: false }] },
-                { question: "Was sagt das Kurs-Gewinn-Verhältnis (KGV) aus?", answers: [{ text: "Wie ein Unternehmen im Verhältnis zu seinem Gewinn bewertet ist", correct: true }, { text: "Wie viel Gewinn eine Aktie pro Jahr abwirft", correct: false }, { text: "Das Verhältnis von Aktienkurs zu Dividende", correct: false }, { text: "Wie oft eine Aktie den Besitzer wechselt", correct: false }] },
-                { question: "Was ist der Unterschied zwischen fundamentaler und technischer Analyse?", answers: [{ text: "Fundamentalanalyse betrachtet Unternehmensdaten, technische Analyse den Chart", correct: true }, { text: "Fundamentalanalyse ist für Profis, technische Analyse für Anfänger", correct: false }, { text: "Fundamentalanalyse ist kurzfristig, technische Analyse ist langfristig", correct: false }, { text: "Fundamentalanalyse ist sicherer als technische Analyse", correct: false }] },
-                { question: "Was ist die Dividendenrendite?", answers: [{ text: "Das Verhältnis der Dividende zum Aktienkurs in Prozent", correct: true }, { text: "Die absolute Höhe der Dividende in Euro", correct: false }, { text: "Der Kursgewinn plus die Dividende", correct: false }, { text: "Wie oft ein Unternehmen die Dividende erhöht hat", correct: false }] },
-                { question: "Was ist ein 'Wachstumsunternehmen' (Growth Stock)?", answers: [{ text: "Ein Unternehmen, von dem schnelles Wachstum erwartet wird", correct: true }, { text: "Ein Unternehmen, das schon sehr alt und groß ist", correct: false }, { text: "Ein Unternehmen, das nur Gemüse anbaut", correct: false }, { text: "Ein Unternehmen, das garantiert wächst", correct: false }] },
-                { question: "Was ist ein 'Value-Unternehmen' (Value Stock)?", answers: [{ text: "Ein Unternehmen, dessen Aktie günstig bewertet erscheint", correct: true }, { text: "Ein Unternehmen, das sehr teuer ist", correct: false }, { text: "Ein Unternehmen mit hohen ethischen Werten", correct: false }, { text: "Ein Unternehmen, das wertlose Produkte herstellt", correct: false }] },
-                { question: "Was bedeutet 'Liquidität' bei einer Aktie?", answers: [{ text: "Wie einfach und schnell man sie zum aktuellen Preis handeln kann", correct: true }, { text: "Wie viel Wasser das Unternehmen verbraucht", correct: false }, { text: "Ob das Unternehmen viel Bargeld besitzt", correct: false }, { text: "Ob die Aktie oft ihren Kurs ändert", correct: false }] },
-                { question: "Was ist 'Beta' einer Aktie?", answers: [{ text: "Ein Maß für die Schwankung einer Aktie im Vergleich zum Gesamtmarkt", correct: true }, { text: "Die zweite Version einer Aktie", correct: false }, { text: "Ein Gütesiegel für besonders gute Aktien", correct: false }, { text: "Der griechische Buchstabe für 'Bulle'", correct: false }] },
-                { question: "Was ist die 'Gesamtkostenquote' oder 'TER' bei einem ETF?", answers: [{ text: "Die jährlichen Kosten des Fonds in Prozent", correct: true }, { text: "Die einmaligen Kaufgebühren", correct: false }, { text: "Die Steuern, die auf den ETF anfallen", correct: false }, { text: "Der Gesamtverlust, den ein ETF machen kann", correct: false }] },
+                { question: "Was ist die Marktkapitalisierung eines Unternehmens?", answers: [{ text: "Der Gesamtwert aller Aktien des Unternehmens", correct: true, rationale: "Richtig. Sie berechnet sich aus dem Aktienkurs multipliziert mit der Anzahl der Aktien." }, { text: "Der jährliche Gewinn des Unternehmens", correct: false, rationale: "Falsch. Das ist der Gewinn. Die Marktkapitalisierung ist der Börsenwert." }, { text: "Die Schulden des Unternehmens", correct: false, rationale: "Falsch. Schulden sind ein Teil der Bilanz, aber nicht die Marktkapitalisierung." }, { text: "Der Wert der Gebäude und Maschinen", correct: false, rationale: "Falsch. Das ist das Anlagevermögen, ein Teil des Unternehmenswertes, aber nicht der Börsenwert." }] },
+                { question: "Unternehmen mit einer hohen Marktkapitalisierung nennt man auch...", answers: [{ text: "Large Caps oder Blue Chips", correct: true, rationale: "Genau. 'Caps' steht für Capitalization (Kapitalisierung). Blue Chips ist ein umgangssprachlicher Begriff für große, etablierte Unternehmen." }, { text: "Small Caps", correct: false, rationale: "Falsch. Small Caps sind Unternehmen mit einer geringen Marktkapitalisierung." }, { text: "Penny Stocks", correct: false, rationale: "Falsch. Penny Stocks sind Aktien, die zu sehr niedrigen Preisen (oft unter 1 Euro) gehandelt werden und extrem spekulativ sind." }, { text: "Start-ups", correct: false, rationale: "Falsch. Ein Start-up ist ein junges Unternehmen, das nicht zwingend börsennotiert sein muss." }] },
+                { question: "Was sagt das Kurs-Gewinn-Verhältnis (KGV) aus?", answers: [{ text: "Wie ein Unternehmen im Verhältnis zu seinem Gewinn bewertet ist", correct: true, rationale: "Korrekt. Ein niedriges KGV kann auf eine günstige Bewertung hindeuten, ist aber nicht das einzige Kriterium." }, { text: "Wie viel Gewinn eine Aktie pro Jahr abwirft", correct: false, rationale: "Falsch. Das wäre die Gewinnrendite (1/KGV)." }, { text: "Das Verhältnis von Aktienkurs zu Dividende", correct: false, rationale: "Falsch. Das wäre die Dividendenrendite." }, { text: "Wie oft eine Aktie den Besitzer wechselt", correct: false, rationale: "Falsch. Das hat nichts mit dem KGV zu tun." }] },
+                { question: "Was ist der Unterschied zwischen fundamentaler und technischer Analyse?", answers: [{ text: "Fundamentalanalyse betrachtet Unternehmensdaten, technische Analyse den Chart", correct: true, rationale: "Genau. Fundamentalisten suchen 'was' sie kaufen sollen, Techniker 'wann'." }, { text: "Fundamentalanalyse ist für Profis, technische Analyse für Anfänger", correct: false, rationale: "Falsch. Beide Ansätze werden von allen Arten von Anlegern genutzt und erfordern Wissen." }, { text: "Fundamentalanalyse ist kurzfristig, technische Analyse ist langfristig", correct: false, rationale: "Falsch. Oft ist es umgekehrt: Technische Analyse wird oft für kurzfristiges Timing genutzt." }, { text: "Fundamentalanalyse ist sicherer als technische Analyse", correct: false, rationale: "Falsch. Beide Methoden haben ihre Vor- und Nachteile und bieten keine Garantien." }] },
+                { question: "Was ist die Dividendenrendite?", answers: [{ text: "Das Verhältnis der Dividende zum Aktienkurs in Prozent", correct: true, rationale: "Richtig. Sie zeigt, wie hoch die 'Verzinsung' der Aktie allein durch die Dividende ist." }, { text: "Die absolute Höhe der Dividende in Euro", correct: false, rationale: "Falsch. Das ist die Dividende pro Aktie, aber nicht die Rendite." }, { text: "Der Kursgewinn plus die Dividende", correct: false, rationale: "Falsch. Das wäre die Gesamtrendite." }, { text: "Wie oft ein Unternehmen die Dividende erhöht hat", correct: false, rationale: "Falsch. Das ist die Dividendenhistorie, aber nicht die aktuelle Rendite." }] },
             ],
             "Praktischer Handel": [
-                { question: "Was ist ein Sparplan?", answers: [{ text: "Ein Dauerauftrag, mit dem man regelmäßig einen festen Betrag investiert", correct: true }, { text: "Ein spezielles, hochverzinstes Sparkonto", correct: false }, { text: "Ein Plan, um die Ausgaben zu senken", correct: false }, { text: "Eine garantierte Methode, um schnell reich zu werden", correct: false }] },
-                { question: "Was ist eine 'Market-Order'?", answers: [{ text: "Ein Auftrag, der zum nächstbesten verfügbaren Preis ausgeführt wird", correct: true }, { text: "Ein Auftrag, der nur zu einem bestimmten, festgelegten Preis ausgeführt wird", correct: false }, { text: "Ein Auftrag, der nur am Wochenende platziert werden kann", correct: false }, { text: "Ein Auftrag, der den ganzen Markt aufkauft", correct: false }] },
-                { question: "Was ist eine 'Limit-Order'?", answers: [{ text: "Ein Auftrag, der nur zu einem von dir festgelegten Preis (oder besser) ausgeführt wird", correct: true }, { text: "Ein Auftrag, der sofort zum besten Preis ausgeführt wird", correct: false }, { text: "Ein Auftrag, der die Anzahl der Aktien limitiert, die man kaufen kann", correct: false }, { text: "Ein Auftrag, der nur für eine begrenzte Zeit gültig ist", correct: false }] },
-                { question: "Was ist ein 'Stop-Loss-Order'?", answers: [{ text: "Ein Verkaufsauftrag, der bei Erreichen eines bestimmten Kurses automatisch ausgelöst wird, um Verluste zu begrenzen", correct: true }, { text: "Ein Auftrag, der den Handel stoppt, wenn man zu viel verliert", correct: false }, { text: "Ein Kaufauftrag für sehr günstige Aktien", correct: false }, { text: "Ein Auftrag, der Verluste verhindert", correct: false }] },
-                { question: "Was ist ein 'Börsenplatz' wie Xetra oder Tradegate?", answers: [{ text: "Ein elektronisches Handelssystem, über das Aufträge abgewickelt werden", correct: true }, { text: "Ein Gebäude, in dem sich Händler treffen", correct: false }, { text: "Eine App zum Aktienhandel", correct: false }, { text: "Ein Forum für Börsennachrichten", correct: false }] },
-                { question: "Was ist der 'Spread' (Geld-Brief-Spanne)?", answers: [{ text: "Der Unterschied zwischen dem Kauf- und Verkaufskurs", correct: true }, { text: "Die Streuung der Aktien in einem ETF", correct: false }, { text: "Eine spezielle Steuer für Trader", correct: false }, { text: "Der durchschnittliche Gewinn einer Aktie", correct: false }] },
-                 { question: "Was bedeutet es, wenn ein ETF 'physisch replizierend' ist?", answers: [{ text: "Der ETF kauft tatsächlich die Aktien, die im Index enthalten sind", correct: true }, { text: "Man bekommt die Aktien als Papier nach Hause geschickt", correct: false }, { text: "Der ETF bildet den Index durch Tauschgeschäfte (Swaps) nach", correct: false }, { text: "Der ETF investiert nur in physische Güter wie Gold", correct: false }] },
-                { question: "Kann man mit fallenden Kursen Geld verdienen?", answers: [{ text: "Ja, durch 'Short Selling' (Leerverkäufe) oder entsprechende Derivate", correct: true }, { text: "Nein, man kann nur bei steigenden Kursen gewinnen", correct: false }, { text: "Nur, wenn man Insider-Informationen hat", correct: false }, { text: "Nur bei Bärenmärkten", correct: false }] },
-                 { question: "Kann eine Aktie 'split'ten? Was bedeutet das?", answers: [{ text: "Ja, die Anzahl der Aktien wird erhöht und der Preis pro Aktie sinkt entsprechend", correct: true }, { text: "Nein, eine Aktie ist unteilbar", correct: false }, { text: "Ja, das Unternehmen wird in zwei Teile aufgeteilt", correct: false }, { text: "Ja, der Wert der Aktie halbiert sich", correct: false }] },
-                { question: "Wenn du 100 Euro in einen ETF-Sparplan investierst, was passiert dann?", answers: [{ text: "Dein Broker kauft für 100 Euro Anteile an dem ausgewählten ETF", correct: true }, { text: "Die 100 Euro liegen als Bargeld im Depot", correct: false }, { text: "Du bekommst eine Aktie im Wert von 100 Euro", correct: false }, { text: "Die 100 Euro werden für ein Jahr gesperrt", correct: false }] },
+                { question: "Was ist ein Sparplan?", answers: [{ text: "Ein Dauerauftrag, mit dem man regelmäßig einen festen Betrag investiert", correct: true, rationale: "Korrekt. Das automatisiert das Sparen und man profitiert vom Durchschnittskosteneffekt." }, { text: "Ein spezielles, hochverzinstes Sparkonto", correct: false, rationale: "Falsch. Es ist eine Investitionsmethode in Wertpapiere, kein Sparkonto." }, { text: "Ein Plan, um die Ausgaben zu senken", correct: false, rationale: "Falsch. Das ist ein Haushaltsplan. Ein Sparplan investiert das gesparte Geld." }, { text: "Eine garantierte Methode, um schnell reich zu werden", correct: false, rationale: "Falsch. Es ist eine solide, langfristige Strategie, aber keine Garantie und nicht schnell." }] },
+                { question: "Was ist eine 'Market-Order'?", answers: [{ text: "Ein Auftrag, der zum nächstbesten verfügbaren Preis ausgeführt wird", correct: true, rationale: "Richtig. Es wird sofort ausgeführt, aber man hat keine Kontrolle über den genauen Preis." }, { text: "Ein Auftrag, der nur zu einem bestimmten, festgelegten Preis ausgeführt wird", correct: false, rationale: "Falsch. Das wäre eine 'Limit-Order'." }, { text: "Ein Auftrag, der nur am Wochenende platziert werden kann", correct: false, rationale: "Falsch. Order können jederzeit platziert, aber nur zu Handelszeiten ausgeführt werden." }, { text: "Ein Auftrag, der den ganzen Markt aufkauft", correct: false, rationale: "Falsch. Das wäre wohl etwas zu teuer. Es ist eine Art der Auftragsausführung." }] },
+                { question: "Was ist eine 'Limit-Order'?", answers: [{ text: "Ein Auftrag, der nur zu einem von dir festgelegten Preis (oder besser) ausgeführt wird", correct: true, rationale: "Genau. Man hat die Kontrolle über den Preis, aber keine Garantie für die Ausführung." }, { text: "Ein Auftrag, der sofort zum besten Preis ausgeführt wird", correct: false, rationale: "Falsch. Das wäre eine 'Market-Order'." }, { text: "Ein Auftrag, der die Anzahl der Aktien limitiert, die man kaufen kann", correct: false, rationale: "Falsch. Man legt den Preis fest, nicht die maximale Anzahl." }, { text: "Ein Auftrag, der nur für eine begrenzte Zeit gültig ist", correct: false, rationale: "Falsch. Man kann eine Gültigkeit festlegen, aber die Definition ist der Preis." }] },
+                { question: "Was ist ein 'Stop-Loss-Order'?", answers: [{ text: "Ein Verkaufsauftrag, der bei Erreichen eines Kurses automatisch ausgelöst wird, um Verluste zu begrenzen", correct: true, rationale: "Genau. Er dient zur Begrenzung von Verlusten, kann sie aber nicht garantieren." }, { text: "Ein Auftrag, der den Handel stoppt, wenn man zu viel verliert", correct: false, rationale: "Falsch. Er stoppt nicht den Handel, sondern verkauft eine bestimmte Position." }, { text: "Ein Kaufauftrag für sehr günstige Aktien", correct: false, rationale: "Falsch. Es ist ein Verkaufsauftrag zur Risikobegrenzung." }, { text: "Ein Auftrag, der Verluste verhindert", correct: false, rationale: "Falsch. Er kann Verluste nicht verhindern, nur begrenzen. Bei schnellen Kursstürzen kann der Verkaufspreis auch unter dem Stop-Preis liegen." }] },
+                { question: "Was ist der 'Spread' (Geld-Brief-Spanne)?", answers: [{ text: "Der Unterschied zwischen dem Kauf- und Verkaufskurs", correct: true, rationale: "Korrekt. Ein kleiner Spread ist ein Zeichen für hohe Liquidität und geringere indirekte Handelskosten." }, { text: "Die Streuung der Aktien in einem ETF", correct: false, rationale: "Falsch. Das ist die Diversifikation." }, { text: "Eine spezielle Steuer für Trader", correct: false, rationale: "Falsch. Es sind implizite Kosten, keine Steuer." }, { text: "Der durchschnittliche Gewinn einer Aktie", correct: false, rationale: "Falsch. Der Gewinn ist die Rendite, nicht der Spread." }] },
             ],
             "Recht & Steuern": [
-                { question: "Was ist 'Insiderhandel' und warum ist es verboten?", answers: [{ text: "Der Handel auf Basis von vertraulichen, nicht-öffentlichen Informationen", correct: true }, { text: "Wenn man Aktien einer Firma kauft, deren Produkte man gut kennt", correct: false }, { text: "Wenn man Aktien kauft, weil ein Freund sie empfohlen hat", correct: false }, { text: "Wenn man Aktien außerhalb der Börsenöffnungszeiten handelt", correct: false }] },
-                { question: "Muss man auf Gewinne aus Aktienverkäufen Steuern zahlen?", answers: [{ text: "Ja, in Deutschland fällt auf Kapitalerträge die Abgeltungssteuer an", correct: true }, { text: "Nein, Aktiengewinne sind immer steuerfrei", correct: false }, { text: "Nur, wenn man mehr als 10.000 Euro Gewinn macht", correct: false }, { text: "Nur, wenn man die Aktien weniger als ein Jahr gehalten hat", correct: false }] },
-                { question: "Was ist der 'Sparer-Pauschbetrag' in Deutschland?", answers: [{ text: "Ein Freibetrag, bis zu dem Kapitalerträge steuerfrei sind", correct: true }, { text: "Eine Pauschale für die Kosten des Depots", correct: false }, { text: "Ein maximaler Betrag, den man pro Jahr sparen darf", correct: false }, { text: "Ein Rabatt auf die Abgeltungssteuer", correct: false }] },
-                { question: "Welche Behörde überwacht den Wertpapierhandel in Deutschland?", answers: [{ text: "Die BaFin (Bundesanstalt für Finanzdienstleistungsaufsicht)", correct: true }, { text: "Die Deutsche Bundesbank", correct: false }, { text: "Die Polizei", correct: false }, { text: "Die Schufa", correct: false }] },
-                { question: "Was bedeutet 'Geldwäsche' im Finanzkontext?", answers: [{ text: "Illegales Geld durch legale Transaktionen schleusen, um die Herkunft zu verschleiern", correct: true }, { text: "Geld physisch zu reinigen, bevor es eingezahlt wird", correct: false }, { text: "Sein Geld in besonders sicheren Anlagen 'parken'", correct: false }, { text: "Sein Geld in eine andere Währung umzutauschen", correct: false }] },
-                { question: "Als 14-Jähriger möchtest du ein Depot eröffnen. Was ist zwingend notwendig?", answers: [{ text: "Die Zustimmung und Mitwirkung deiner Eltern", correct: true }, { text: "Du musst es selbst online machen", correct: false }, { text: "Ein Startkapital von mindestens 5.000 Euro", correct: false }, { text: "Ein bestandener Test bei der Bank", correct: false }] },
-                { question: "Was ist ein 'Freistellungsauftrag'?", answers: [{ text: "Ein Auftrag an die Bank, um den Sparer-Pauschbetrag zu nutzen", correct: true }, { text: "Ein Auftrag, um von der Arbeit freigestellt zu werden", correct: false }, { text: "Ein Antrag auf Befreiung von den Depotgebühren", correct: false }, { text: "Ein Auftrag, um riskante Wertpapiere zu sperren", correct: false }] },
-                { question: "Was ist die 'Abgeltungssteuer' in Deutschland?", answers: [{ text: "Eine Steuer auf Kapitalerträge wie Zinsen, Dividenden und Kursgewinne", correct: true }, { text: "Eine Steuer, die alle anderen Steuern abgilt", correct: false }, { text: "Eine Gebühr, die der Broker für die Aufbewahrung von Geld verlangt", correct: false }, { text: "Eine freiwillige Abgabe", correct: false }] },
-                { question: "Was ist 'Sondervermögen' bei Fonds und ETFs?", answers: [{ text: "Das Geld der Anleger ist rechtlich vom Vermögen der Fondsgesellschaft getrennt und geschützt", correct: true }, { text: "Ein spezieller Fonds für besonders reiche Kunden", correct: false }, { text: "Geld, das für besondere Zwecke gespendet wird", correct: false }, { text: "Ein Fonds, der nur in sehr riskante 'Sonderfälle' investiert", correct: false }] },
-                { question: "Was ist ein 'Pump and Dump'-Schema?", answers: [{ text: "Illegaler Betrug, bei dem ein Kurs künstlich hochgetrieben und dann verkauft wird", correct: true }, { text: "Eine Methode, um Reifen aufzupumpen", correct: false }, { text: "Eine legitime Marketingstrategie", correct: false }, { text: "Ein Computerspiel", correct: false }] },
+                { question: "Was ist 'Insiderhandel' und warum ist es verboten?", answers: [{ text: "Der Handel auf Basis von vertraulichen, nicht-öffentlichen Informationen", correct: true, rationale: "Korrekt. Es ist verboten, weil es unfair gegenüber anderen Anlegern ist, die diese Informationen nicht haben." }, { text: "Wenn man Aktien einer Firma kauft, deren Produkte man gut kennt", correct: false, rationale: "Falsch. Das ist völlig legal und eine legitime Anlagestrategie ('Invest in what you know')." }, { text: "Wenn man Aktien kauft, weil ein Freund sie empfohlen hat", correct: false, rationale: "Falsch. Das ist erlaubt, solange der Freund kein Insider mit geheimen Informationen ist." }, { text: "Wenn man Aktien außerhalb der Börsenöffnungszeiten handelt", correct: false, rationale: "Falsch. Das ist als außerbörslicher Handel möglich und nicht illegal." }] },
+                { question: "Muss man auf Gewinne aus Aktienverkäufen Steuern zahlen?", answers: [{ text: "Ja, in Deutschland fällt auf Kapitalerträge die Abgeltungssteuer an", correct: true, rationale: "Richtig. Gewinne aus Zinsen, Dividenden und Kursgewinnen müssen versteuert werden (oberhalb eines Freibetrags)." }, { text: "Nein, Aktiengewinne sind immer steuerfrei", correct: false, rationale: "Falsch. Das war früher unter bestimmten Bedingungen so, gilt aber heute nicht mehr." }, { text: "Nur, wenn man mehr als 10.000 Euro Gewinn macht", correct: false, rationale: "Falsch. Die Steuerpflicht beginnt schon nach dem Sparer-Pauschbetrag (aktuell 1.000€ für Ledige)." }, { text: "Nur, wenn man die Aktien weniger als ein Jahr gehalten hat", correct: false, rationale: "Falsch. Die Haltedauer spielt für die Steuerpflicht bei nach 2009 gekauften Aktien keine Rolle mehr." }] },
+                { question: "Welche Behörde überwacht den Wertpapierhandel in Deutschland?", answers: [{ text: "Die BaFin (Bundesanstalt für Finanzdienstleistungsaufsicht)", correct: true, rationale: "Korrekt. Die BaFin achtet darauf, dass an den Finanzmärkten alles mit rechten Dingen zugeht." }, { text: "Die Deutsche Bundesbank", correct: false, rationale: "Falsch. Die Bundesbank ist die Zentralbank, die sich um die Geldpolitik kümmert." }, { text: "Die Polizei", correct: false, rationale: "Falsch. Die Polizei ermittelt bei Straftaten, aber die präventive Überwachung macht die BaFin." }, { text: "Die Schufa", correct: false, rationale: "Falsch. Die Schufa sammelt Daten zur Kreditwürdigkeit von Privatpersonen." }] },
+                { question: "Als 14-Jähriger möchtest du ein Depot eröffnen. Was ist zwingend notwendig?", answers: [{ text: "Die Zustimmung und Mitwirkung deiner Eltern", correct: true, rationale: "Korrekt. Da du noch nicht voll geschäftsfähig bist, müssen deine Eltern das Depot (als Junior-Depot) für dich eröffnen." }, { text: "Du musst es selbst online machen", correct: false, rationale: "Falsch. Das ist aus rechtlichen Gründen nicht möglich." }, { text: "Ein Startkapital von mindestens 5.000 Euro", correct: false, rationale: "Falsch. Die meisten Broker haben keine oder nur sehr geringe Mindestanlagesummen." }, { text: "Ein bestandener Test bei der Bank", correct: false, rationale: "Falsch. Ein Test ist nicht vorgeschrieben, die Zustimmung der Eltern ist der entscheidende Punkt." }] },
+                { question: "Was ist 'Sondervermögen' bei Fonds und ETFs?", answers: [{ text: "Das Geld der Anleger ist rechtlich vom Vermögen der Fondsgesellschaft getrennt und geschützt", correct: true, rationale: "Korrekt. Geht die Fondsgesellschaft pleite, ist das Geld der Anleger im Fonds geschützt. Das ist ein riesiger Vorteil." }, { text: "Ein spezieller Fonds für besonders reiche Kunden", correct: false, rationale: "Falsch. Es ist ein rechtlicher Schutzmechanismus für alle Anleger." }, { text: "Geld, das für besondere Zwecke gespendet wird", correct: false, rationale: "Falsch. Es bleibt das Eigentum der Anleger." }, { text: "Ein Fonds, der nur in sehr riskante 'Sonderfälle' investiert", correct: false, rationale: "Falsch. Es ist ein Sicherheitsmerkmal, kein Anlageschwerpunkt." }] },
             ],
             "Psychologie & Verhalten": [
-                { question: "Warum sind Emotionen wie Angst und Gier an der Börse gefährlich?", answers: [{ text: "Sie führen zu unüberlegten, irrationalen Entscheidungen", correct: true }, { text: "Sie sind gesetzlich verboten", correct: false }, { text: "Sie senken die Handelsgebühren", correct: false }, { text: "Sie garantieren hohe Gewinne", correct: false }] },
-                { question: "Was bedeutet 'FOMO' an der Börse?", answers: [{ text: "'Fear Of Missing Out' - die Angst, einen Gewinn zu verpassen", correct: true }, { text: "Eine Anlagestrategie für mutige Investoren", correct: false }, { text: "Ein technischer Indikator im Chart", correct: false }, { text: "Eine Abkürzung für eine Börsenaufsichtsbehörde", correct: false }] },
-                { question: "Was ist das 'Herdenverhalten' bei Anlegern?", answers: [{ text: "Die Tendenz, das zu tun, was die meisten anderen auch tun", correct: true }, { text: "Sich in Foren über Aktien auszutauschen", correct: false }, { text: "Nur in Agrar-Aktien zu investieren", correct: false }, { text: "Eine Strategie, bei der man immer auf den Marktführer setzt", correct: false }] },
-                { question: "Warum ist es wichtig, eine eigene Strategie zu haben und ihr treu zu bleiben?", answers: [{ text: "Um in turbulenten Zeiten nicht von Emotionen und der Meinung anderer geleitet zu werden", correct: true }, { text: "Weil man nur mit einer eigenen Strategie reich wird", correct: false }, { text: "Weil der Broker das verlangt", correct: false }, { text: "Damit man anderen davon erzählen kann", correct: false }] },
-                { question: "Ein Freund erzählt dir von einer 'todsicheren' Aktie. Wie reagierst du?", answers: [{ text: "Skeptisch bleiben, eigene Recherchen anstellen und die Risiken prüfen", correct: true }, { text: "Sofort mein ganzes Taschengeld investieren", correct: false }, { text: "Den Freund bitten, für mich zu investieren", correct: false }, { text: "Die Information ignorieren, weil Freunde immer lügen", correct: false }] },
-                { question: "Was bedeutet der Spruch 'Hin und Her macht Taschen leer'?", answers: [{ text: "Häufiges Handeln verursacht hohe Gebühren, die die Rendite auffressen", correct: true }, { text: "Man sollte sein Depot nicht zwischen Brokern wechseln", correct: false }, { text: "Man sollte nicht zwischen verschiedenen Währungen wechseln", correct:falsch }, { text: "Man sollte nicht zu oft auf sein Depot schauen", correct: false }] },
-                { question: "Ist die vergangene Performance einer Aktie eine Garantie für die Zukunft?", answers: [{ text: "Nein, auf keinen Fall. Vergangene Ergebnisse sind kein Indikator für zukünftige Renditen.", correct: true }, { text: "Ja, was gut lief, wird immer gut laufen", correct: false }, { text: "Meistens schon, aber nicht immer", correct: false }, { text: "Nur wenn die Aktie in einem Index ist", correct: false }] },
-                { question: "Warum kann die Aktie eines profitablen Unternehmens fallen?", answers: [{ text: "Weil die Erwartungen der Anleger noch höher waren und enttäuscht wurden", correct: true }, { text: "Das ist unmöglich. Profitable Unternehmen steigen immer.", correct: false }, { text: "Weil der CEO Urlaub gemacht hat", correct: false }, { text: "Weil zu viele Dividenden gezahlt wurden", correct: false }] },
-                { question: "Was ist der 'Homo Oeconomicus'?", answers: [{ text: "Ein theoretisches Modell eines rein rational entscheidenden Menschen", correct: true }, { text: "Ein besonders erfolgreicher Investor", correct: false }, { text: "Ein Anleger, der nur in die heimische Wirtschaft investiert", correct: false }, { text: "Ein ausgestorbener Vorfahre des modernen Menschen", correct: false }] },
-                { question: "Warum ist es riskant, auf 'heiße Tipps' aus dem Internet zu hören?", answers: [{ text: "Weil die Quelle oft anonym ist und eigene Interessen verfolgt", correct: true }, { text: "Weil gute Informationen im Internet immer falsch sind", correct: false }, { text: "Weil es illegal ist, Informationen aus dem Internet zu nutzen", correct: false }, { text: "Weil nur Bankberater gute Tipps geben", correct: false }] },
+                { question: "Warum sind Emotionen wie Angst und Gier an der Börse gefährlich?", answers: [{ text: "Sie führen zu unüberlegten, irrationalen Entscheidungen", correct: true, rationale: "Korrekt. Angst führt zum Verkauf bei Tiefstkursen, Gier zum Kauf bei Höchstkursen." }, { text: "Sie sind gesetzlich verboten", correct: false, rationale: "Falsch. Emotionen sind menschlich und nicht verboten, aber man sollte sie kontrollieren." }, { text: "Sie senken die Handelsgebühren", correct: false, rationale: "Falsch. Emotionen haben keinen Einfluss auf die Gebührenstruktur eines Brokers." }, { text: "Sie garantieren hohe Gewinne", correct: false, rationale: "Falsch. Das Gegenteil ist der Fall, sie führen oft zu Verlusten." }] },
+                { question: "Was bedeutet 'FOMO' an der Börse?", answers: [{ text: "'Fear Of Missing Out' - die Angst, einen Gewinn zu verpassen", correct: true, rationale: "Richtig. Diese Angst führt oft dazu, dass Anleger in bereits stark gestiegene, überhitzte Aktien einsteigen." }, { text: "Eine Anlagestrategie für mutige Investoren", correct: false, rationale: "Falsch. Es ist ein psychologischer Fallstrick, keine Strategie." }, { text: "Ein technischer Indikator im Chart", correct: false, rationale: "Falsch. Es ist eine Emotion, kein Indikator." }, { text: "Eine Abkürzung für eine Börsenaufsichtsbehörde", correct: false, rationale: "Falsch. Es ist ein umgangssprachlicher Begriff aus dem Englischen." }] },
+                { question: "Was ist das 'Herdenverhalten' bei Anlegern?", answers: [{ text: "Die Tendenz, das zu tun, was die meisten anderen auch tun", correct: true, rationale: "Korrekt. Das kann Blasen oder Panikverkäufe verstärken und ist selten eine gute Idee." }, { text: "Sich in Foren über Aktien auszutauschen", correct: false, rationale: "Falsch. Austausch ist gut, aber blind der Masse zu folgen, ist gefährlich." }, { text: "Nur in Agrar-Aktien zu investieren", correct: false, rationale: "Falsch. Das hat nichts mit dem Begriff zu tun." }, { text: "Eine Strategie, bei der man immer auf den Marktführer setzt", correct: false, rationale: "Falsch. Das kann eine Strategie sein, aber Herdenverhalten ist die unreflektierte Nachahmung." }] },
+                { question: "Ein Freund erzählt dir von einer 'todsicheren' Aktie. Wie reagierst du?", answers: [{ text: "Skeptisch bleiben, eigene Recherchen anstellen und die Risiken prüfen", correct: true, rationale: "Sehr gut. 'Todsichere' Tipps gibt es nicht. Mache immer deine eigenen Hausaufgaben." }, { text: "Sofort mein ganzes Taschengeld investieren", correct: false, rationale: "Falsch. Das wäre extrem riskant und von Gier getrieben." }, { text: "Den Freund bitten, für mich zu investieren", correct: false, rationale: "Falsch. Du solltest immer selbst die Kontrolle und Verantwortung für dein Geld behalten." }, { text: "Die Information ignorieren, weil Freunde immer lügen", correct: false, rationale: "Falsch. Ignorieren ist eine Option, aber die Quelle kritisch zu prüfen ist noch besser." }] },
+                { question: "Ist die vergangene Performance einer Aktie eine Garantie für die Zukunft?", answers: [{ text: "Nein, auf keinen Fall. Vergangene Ergebnisse sind kein Indikator für zukünftige Renditen.", correct: true, rationale: "Das ist einer der wichtigsten Grundsätze. Die Zukunft ist immer ungewiss." }, { text: "Ja, was gut lief, wird immer gut laufen", correct: false, rationale: "Falsch. Das ist ein gefährlicher Trugschluss. Unternehmen und Märkte verändern sich." }, { text: "Meistens schon, aber nicht immer", correct: false, rationale: "Falsch. Man kann sich nicht darauf verlassen, es ist keine verlässliche Prognose." }, { text: "Nur wenn die Aktie in einem Index ist", correct: false, rationale: "Falsch. Auch Index-Aktien können fallen." }] },
             ]
         };
 
+        // DOM Elements
         const questionArea = document.getElementById('question-area');
         const questionText = document.getElementById('question-text');
         const questionCounter = document.getElementById('question-counter');
@@ -437,35 +414,26 @@
         const restartBtn = document.getElementById('restart-btn');
         const navigationDiv = document.getElementById('navigation');
 
+        // State
         let flatQuizData = [];
         let topicScores = {};
         let currentQuestionIndex = 0;
         
         function setupQuiz() {
-            // Flatten the questions and add topic information to each
             flatQuizData = [];
             Object.keys(quizTopics).forEach(topic => {
                 quizTopics[topic].forEach(question => {
-                    // Add rationale to each answer for the feedback text
-                    const enrichedAnswers = question.answers.map(ans => ({...ans, rationale: getRationale(question.question, ans.text)}));
-                    flatQuizData.push({ ...question, answers: enrichedAnswers, topic: topic });
+                    flatQuizData.push({ ...question, topic: topic });
                 });
             });
             shuffleArray(flatQuizData);
 
-            // Initialize topic scores
             topicScores = {};
             Object.keys(quizTopics).forEach(topic => {
                 topicScores[topic] = { correct: 0, total: quizTopics[topic].length };
             });
         }
         
-        // This is a simplified helper to generate rationales. In a real app, this data would be structured.
-        function getRationale(question, answerText) {
-             // For brevity, we'll keep this simple. The real value is in the structured code.
-            return `Die richtige Antwort hebt den Kerngedanken des Konzepts hervor.`;
-        }
-
         function shuffleArray(array) {
             for (let i = array.length - 1; i > 0; i--) {
                 const j = Math.floor(Math.random() * (i + 1));
@@ -485,31 +453,32 @@
 
         function showQuestion() {
             resetState();
-            const question = flatQuizData[currentQuestionIndex];
-            questionText.innerText = question.question;
-            questionCounter.innerText = `Frage ${currentQuestionIndex + 1} / ${flatQuizData.length}`;
-            progressBar.style.width = `${((currentQuestionIndex + 1) / flatQuizData.length) * 100}%`;
+            if (currentQuestionIndex < flatQuizData.length) {
+                const question = flatQuizData[currentQuestionIndex];
+                questionText.innerText = question.question;
+                questionCounter.innerText = `Frage ${currentQuestionIndex + 1} / ${flatQuizData.length}`;
+                progressBar.style.width = `${((currentQuestionIndex + 1) / flatQuizData.length) * 100}%`;
 
-            const shuffledAnswers = [...question.answers];
-            shuffleArray(shuffledAnswers);
+                const shuffledAnswers = [...question.answers];
+                shuffleArray(shuffledAnswers);
 
-            shuffledAnswers.forEach(answer => {
-                const button = document.createElement('button');
-                button.innerHTML = answer.text;
-                button.classList.add('option-btn');
-                button.dataset.correct = answer.correct;
-                button.addEventListener('click', selectAnswer, { once: true });
-                optionsContainer.appendChild(button);
-            });
+                shuffledAnswers.forEach(answer => {
+                    const button = document.createElement('button');
+                    button.innerHTML = answer.text;
+                    button.classList.add('option-btn');
+                    button.dataset.correct = answer.correct;
+                    button.dataset.rationale = answer.rationale;
+                    button.addEventListener('click', selectAnswer, { once: true });
+                    optionsContainer.appendChild(button);
+                });
+            }
         }
 
         function resetState() {
             nextBtn.style.display = 'none';
             feedbackText.style.display = 'none';
             feedbackText.className = 'feedback-text';
-            while (optionsContainer.firstChild) {
-                optionsContainer.removeChild(optionsContainer.firstChild);
-            }
+            optionsContainer.innerHTML = ''; // Clear previous options
         }
 
         function selectAnswer(e) {
@@ -517,31 +486,32 @@
             const correct = selectedBtn.dataset.correct === 'true';
             const currentTopic = flatQuizData[currentQuestionIndex].topic;
 
-            if (correct) {
-                topicScores[currentTopic].correct++;
-                selectedBtn.classList.add('correct');
-                feedbackText.innerText = `✅ Korrekt!`;
-                feedbackText.classList.add('correct');
-            } else {
-                selectedBtn.classList.add('incorrect');
-                feedbackText.innerText = `❌ Leider falsch.`;
-                feedbackText.classList.add('incorrect');
-            }
-            feedbackText.style.display = 'block';
-            
             Array.from(optionsContainer.children).forEach(button => {
-                if (button.dataset.correct === 'true') {
+                const isCorrect = button.dataset.correct === 'true';
+                if (isCorrect) {
                     button.classList.add('correct');
                 }
                 button.disabled = true;
             });
+            
+            if (correct) {
+                topicScores[currentTopic].correct++;
+                feedbackText.innerHTML = `<strong>✅ Richtig!</strong> ${selectedBtn.dataset.rationale}`;
+                feedbackText.classList.add('correct');
+            } else {
+                selectedBtn.classList.add('incorrect');
+                const correctButton = optionsContainer.querySelector('[data-correct="true"]');
+                feedbackText.innerHTML = `<strong>❌ Falsch.</strong> ${correctButton.dataset.rationale}`;
+                feedbackText.classList.add('incorrect');
+            }
+            feedbackText.style.display = 'block';
 
             if (flatQuizData.length > currentQuestionIndex + 1) {
-                nextBtn.style.display = 'inline-block';
+                nextBtn.innerText = 'Weiter';
             } else {
                 nextBtn.innerText = 'Ergebnis anzeigen';
-                nextBtn.style.display = 'inline-block';
             }
+            nextBtn.style.display = 'inline-block';
         }
         
         function showResults() {
@@ -556,7 +526,7 @@
             const overallPercentage = Math.round((totalCorrect / flatQuizData.length) * 100);
             scorePercentage.innerText = `${overallPercentage}%`;
             
-            topicResultsContainer.innerHTML = ''; // Clear previous results
+            topicResultsContainer.innerHTML = '';
             
             Object.keys(topicScores).forEach(topic => {
                 const topicData = topicScores[topic];
@@ -588,7 +558,10 @@
         
         restartBtn.addEventListener('click', startQuiz);
 
-        startQuiz();
+        // Initial call to start the quiz
+        document.addEventListener('DOMContentLoaded', (event) => {
+            startQuiz();
+        });
     </script>
 </body>
 </html>
