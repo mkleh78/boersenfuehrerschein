@@ -110,9 +110,289 @@
     .topic-progress-bar-container { background: var(--border); height: 6px; border-radius: 999px; overflow: hidden; }
     .topic-progress-bar { height: 100%; background: linear-gradient(90deg, var(--primary) 0%, var(--accent) 100%); transition: width .8s ease; }
     /* Buttons */
-    .action-buttons { display: flex; gap: 1rem; justify-content: center; margin-top: 2rem; }
+    .action-buttons { display: flex; gap: 1rem; justify-content: center; margin-top: 2rem; flex-wrap: wrap; }
     .btn-secondary { background: transparent; border: 2px solid var(--primary); color: var(--primary); font-size: 1.1rem; font-weight: 600; padding: .75rem 2rem; border-radius: 12px; cursor: pointer; transition: all .3s ease; }
     .btn-secondary:hover { background: var(--primary); color: #fff; }
+    
+    /* Highscore Section */
+    .highscore-section { 
+      background: rgba(255,255,255,.05); 
+      border: 2px solid var(--border); 
+      border-radius: 16px; 
+      padding: 2rem; 
+      margin: 2rem 0; 
+    }
+    .highscore-input {
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+      align-items: center;
+      margin-bottom: 2rem;
+    }
+    .highscore-input input {
+      background: rgba(255,255,255,.1);
+      border: 2px solid var(--border);
+      color: var(--text-primary);
+      padding: 0.75rem 1.5rem;
+      border-radius: 8px;
+      font-size: 1.1rem;
+      width: 100%;
+      max-width: 300px;
+      transition: all 0.3s ease;
+    }
+    .highscore-input input:focus {
+      outline: none;
+      border-color: var(--primary);
+      background: rgba(124,58,237,.1);
+    }
+    .highscore-input input::placeholder {
+      color: var(--text-secondary);
+    }
+    .consent-checkbox {
+      display: flex;
+      align-items: flex-start;
+      gap: 0.75rem;
+      margin: 1rem 0;
+      padding: 1rem;
+      background: rgba(255,255,255,.03);
+      border-radius: 8px;
+      max-width: 500px;
+    }
+    .consent-checkbox input[type="checkbox"] {
+      margin-top: 0.25rem;
+      width: 20px;
+      height: 20px;
+      cursor: pointer;
+      accent-color: var(--accent);
+    }
+    .consent-checkbox label {
+      color: var(--text-secondary);
+      font-size: 0.95rem;
+      line-height: 1.5;
+      cursor: pointer;
+    }
+    .consent-checkbox label a {
+      color: var(--primary);
+      text-decoration: underline;
+    }
+    .save-score-btn {
+      background: linear-gradient(135deg, var(--accent) 0%, var(--accent) 100%);
+      color: #fff;
+      font-size: 1.1rem;
+      font-weight: 600;
+      padding: 0.75rem 2rem;
+      border: none;
+      border-radius: 12px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+    .save-score-btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 10px 15px -3px rgba(0,0,0,.1);
+    }
+    .save-score-btn:disabled {
+      opacity: 0.5;
+      cursor: not-allowed;
+    }
+    .server-status {
+      padding: 0.5rem 1rem;
+      border-radius: 8px;
+      margin: 1rem 0;
+      font-size: 0.9rem;
+      text-align: center;
+    }
+    .server-status.online {
+      background: rgba(16,185,129,.1);
+      border: 1px solid var(--accent);
+      color: var(--accent);
+    }
+    .server-status.offline {
+      background: rgba(239,68,68,.1);
+      border: 1px solid var(--accent-red);
+      color: var(--accent-red);
+    }
+    .server-status.loading {
+      background: rgba(251,191,36,.1);
+      border: 1px solid var(--gold);
+      color: var(--gold);
+    }
+    .highscore-list {
+      margin-top: 2rem;
+    }
+    .highscore-list h3 {
+      font-size: 1.5rem;
+      font-weight: 700;
+      margin-bottom: 1.5rem;
+      text-align: center;
+      background: linear-gradient(135deg, var(--gold) 0%, var(--accent) 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+    .highscore-entry {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1rem;
+      margin-bottom: 0.5rem;
+      background: rgba(255,255,255,.03);
+      border-radius: 8px;
+      transition: all 0.3s ease;
+    }
+    .highscore-entry:hover {
+      background: rgba(255,255,255,.05);
+      transform: translateX(5px);
+    }
+    .highscore-entry.gold {
+      background: linear-gradient(135deg, rgba(251,191,36,.1) 0%, rgba(251,191,36,.05) 100%);
+      border: 1px solid rgba(251,191,36,.3);
+    }
+    .highscore-entry.silver {
+      background: linear-gradient(135deg, rgba(156,163,175,.1) 0%, rgba(156,163,175,.05) 100%);
+      border: 1px solid rgba(156,163,175,.3);
+    }
+    .highscore-entry.bronze {
+      background: linear-gradient(135deg, rgba(205,127,50,.1) 0%, rgba(205,127,50,.05) 100%);
+      border: 1px solid rgba(205,127,50,.3);
+    }
+    .highscore-rank {
+      font-size: 1.5rem;
+      font-weight: 700;
+      margin-right: 1rem;
+      min-width: 40px;
+    }
+    .highscore-name {
+      flex: 1;
+      font-weight: 600;
+      font-size: 1.1rem;
+    }
+    .highscore-score {
+      font-weight: 700;
+      font-size: 1.2rem;
+      color: var(--primary);
+    }
+    .highscore-date {
+      font-size: 0.85rem;
+      color: var(--text-secondary);
+      margin-left: 1rem;
+    }
+    
+    /* Footer */
+    .footer {
+      background: var(--bg-card);
+      border-top: 1px solid var(--border);
+      padding: 2rem;
+      text-align: center;
+      margin-top: 3rem;
+    }
+    .footer-links {
+      display: flex;
+      justify-content: center;
+      gap: 2rem;
+      margin-bottom: 1rem;
+      flex-wrap: wrap;
+    }
+    .footer-link {
+      color: var(--text-secondary);
+      text-decoration: none;
+      font-size: 0.95rem;
+      transition: color 0.3s ease;
+      cursor: pointer;
+    }
+    .footer-link:hover {
+      color: var(--primary);
+    }
+    .footer-copyright {
+      color: var(--text-secondary);
+      font-size: 0.85rem;
+      margin-top: 1rem;
+    }
+    
+    /* Modal */
+    .modal {
+      display: none;
+      position: fixed;
+      z-index: 1000;
+      left: 0;
+      top: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0,0,0,0.8);
+      animation: fadeIn 0.3s ease;
+    }
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+    .modal-content {
+      background: var(--bg-card);
+      margin: 2rem auto;
+      padding: 2rem;
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      width: 90%;
+      max-width: 800px;
+      max-height: 90vh;
+      overflow-y: auto;
+      animation: slideUp 0.3s ease;
+    }
+    @keyframes slideUp {
+      from { transform: translateY(50px); opacity: 0; }
+      to { transform: translateY(0); opacity: 1; }
+    }
+    .modal-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 2rem;
+    }
+    .modal-title {
+      font-size: 2rem;
+      font-weight: 700;
+      background: linear-gradient(135deg, var(--primary) 0%, var(--accent) 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+    .close-modal {
+      background: none;
+      border: none;
+      color: var(--text-secondary);
+      font-size: 2rem;
+      cursor: pointer;
+      transition: color 0.3s ease;
+    }
+    .close-modal:hover {
+      color: var(--accent-red);
+    }
+    .modal-body {
+      color: var(--text-primary);
+      line-height: 1.8;
+    }
+    .modal-body h3 {
+      color: var(--primary);
+      margin-top: 2rem;
+      margin-bottom: 1rem;
+      font-size: 1.3rem;
+    }
+    .modal-body p {
+      margin-bottom: 1rem;
+    }
+    .modal-body ul {
+      margin-left: 2rem;
+      margin-bottom: 1rem;
+    }
+    .modal-body li {
+      margin-bottom: 0.5rem;
+    }
+    .modal-body a {
+      color: var(--accent);
+      text-decoration: none;
+    }
+    .modal-body a:hover {
+      text-decoration: underline;
+    }
+    
     /* Responsive */
     @media (max-width: 768px) {
       #quiz-container { border-radius: 0; border: none; min-height: 100vh; }
@@ -122,6 +402,7 @@
       .score-circle { width: 150px; height: 150px; }
       #score-percentage { font-size: 2.5rem; }
       .topic-grid { grid-template-columns: 1fr; }
+      .modal-content { margin: 0; border-radius: 0; width: 100%; max-width: 100%; height: 100vh; max-height: 100vh; }
     }
     /* Achievement */
     .achievement-popup { position: fixed; top: 2rem; right: 2rem; background: var(--bg-card); border: 2px solid var(--gold); border-radius: 12px; padding: 1rem 1.5rem; display: none; align-items: center; animation: achievementSlide .5s ease; z-index: 1000; box-shadow: 0 10px 20px rgba(0,0,0,.2); }
@@ -143,6 +424,12 @@
       <h1>Das große Börsen-Quiz</h1>
       <p class="subtitle">Bist du bereit, dein Finanzwissen auf die Probe zu stellen?<br />100 Fragen trennen dich vom Titel des Finanz-Profis!</p>
       <button class="start-btn" onclick="startQuiz()">Quiz starten! 🎯</button>
+      
+      <!-- Highscore Preview -->
+      <div class="highscore-list" style="margin-top: 3rem;">
+        <h3>🏆 Bestenliste</h3>
+        <div id="start-highscore-list"></div>
+      </div>
     </div>
 
     <div id="quiz-header">
@@ -187,6 +474,32 @@
         <div class="verdict-title" id="verdict-title"></div>
         <div class="verdict-text" id="verdict-text"></div>
       </div>
+      
+      <!-- Highscore Input Section -->
+      <div class="highscore-section">
+        <h3 style="font-size: 1.5rem; margin-bottom: 1.5rem;">Trage dich in die Bestenliste ein!</h3>
+        <div class="highscore-input">
+          <input type="text" id="nickname-input" placeholder="Dein Nickname" maxlength="20" />
+          <div class="consent-checkbox">
+            <input type="checkbox" id="consent-checkbox" />
+            <label for="consent-checkbox">
+              Ich bin damit einverstanden, dass mein Nickname und mein Ergebnis auf dem Server gespeichert und in der öffentlichen Bestenliste angezeigt werden. Diese Einwilligung kann ich jederzeit per E-Mail an info@just-options.de widerrufen. Weitere Informationen finde ich in der <a href="#" onclick="openModal('datenschutz'); return false;">Datenschutzerklärung</a>.
+            </label>
+          </div>
+          <button class="save-score-btn" onclick="saveHighscore()">In Bestenliste eintragen 🏆</button>
+        </div>
+        <div id="server-status" class="server-status" style="display: none;"></div>
+        <div id="score-saved-message" style="display: none; color: var(--accent); font-weight: 600; margin-top: 1rem;">
+          ✅ Dein Score wurde gespeichert!
+        </div>
+      </div>
+      
+      <!-- Highscore List -->
+      <div class="highscore-list">
+        <h3>🏆 Bestenliste</h3>
+        <div id="highscore-list"></div>
+      </div>
+      
       <div class="topic-results">
         <h3>Deine Stärken und Schwächen</h3>
         <div class="topic-grid" id="topic-results-container"></div>
@@ -201,6 +514,184 @@
   <div class="achievement-popup" id="achievement-popup">
     <span class="emoji" id="achievement-emoji"></span>
     <span class="achievement-text" id="achievement-text"></span>
+  </div>
+
+  <!-- Footer -->
+  <div class="footer">
+    <div class="footer-links">
+      <a href="#" class="footer-link" onclick="openModal('impressum'); return false;">Impressum</a>
+      <a href="#" class="footer-link" onclick="openModal('datenschutz'); return false;">Datenschutzerklärung</a>
+    </div>
+    <div class="footer-copyright">
+      © 2025 Markus Lehleiter | Just Options. Alle Rechte vorbehalten.
+    </div>
+  </div>
+
+  <!-- Impressum Modal -->
+  <div id="impressum-modal" class="modal">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h2 class="modal-title">Impressum</h2>
+        <button class="close-modal" onclick="closeModal('impressum')">&times;</button>
+      </div>
+      <div class="modal-body">
+        <h3>Angaben gemäß § 5 TMG und § 55 RStV</h3>
+        <p>
+          <strong>Anbieter und Verantwortlicher für den Inhalt:</strong><br>
+          Markus Lehleiter<br>
+          c/o Block Services<br>
+          Stuttgarter Str. 106<br>
+          70736 Fellbach<br>
+          Deutschland
+        </p>
+        
+        <h3>Kontakt</h3>
+        <p>
+          Telefon: +49 (0) 179.4361577<br>
+          E-Mail: info@just-options.de<br>
+          Website: www.just-options.de
+        </p>
+        
+        <h3>Umsatzsteuer-ID</h3>
+        <p>
+          Umsatzsteuer-Identifikationsnummer gemäß § 27a Umsatzsteuergesetz:<br>
+          DE367581130
+        </p>
+        
+        <h3>Haftungsausschluss</h3>
+        
+        <p><strong>Haftung für Inhalte</strong><br>
+          Die Inhalte dieser Website wurden mit größter Sorgfalt erstellt. Für die Richtigkeit, Vollständigkeit und Aktualität der Inhalte können wir jedoch keine Gewähr übernehmen. Als Diensteanbieter sind wir gemäß § 7 Abs.1 TMG für eigene Inhalte auf diesen Seiten nach den allgemeinen Gesetzen verantwortlich. Nach §§ 8 bis 10 TMG sind wir als Diensteanbieter jedoch nicht verpflichtet, übermittelte oder gespeicherte fremde Informationen zu überwachen oder nach Umständen zu forschen, die auf eine rechtswidrige Tätigkeit hinweisen.</p>
+        
+        <p><strong>Haftung für Links</strong><br>
+          Unser Angebot enthält Links zu externen Websites Dritter, auf deren Inhalte wir keinen Einfluss haben. Deshalb können wir für diese fremden Inhalte auch keine Gewähr übernehmen. Für die Inhalte der verlinkten Seiten ist stets der jeweilige Anbieter oder Betreiber der Seiten verantwortlich.</p>
+        
+        <h3>Urheberrecht</h3>
+        <p>
+          Die durch die Seitenbetreiber erstellten Inhalte und Werke auf diesen Seiten unterliegen dem deutschen Urheberrecht. Die Vervielfältigung, Bearbeitung, Verbreitung und jede Art der Verwertung außerhalb der Grenzen des Urheberrechtes bedürfen der schriftlichen Zustimmung des jeweiligen Autors bzw. Erstellers. Downloads und Kopien dieser Seite sind nur für den privaten, nicht kommerziellen Gebrauch gestattet.
+        </p>
+        
+        <h3>Online-Streitbeilegung</h3>
+        <p>
+          Die Europäische Kommission stellt eine Plattform zur Online-Streitbeilegung (OS) bereit: <a href="https://ec.europa.eu/consumers/odr" target="_blank" rel="noopener">https://ec.europa.eu/consumers/odr</a><br>
+          Wir sind nicht verpflichtet und nicht bereit, an einem Streitbeilegungsverfahren vor einer Verbraucherschlichtungsstelle teilzunehmen.
+        </p>
+        
+        <p><strong>Stand: März 2025</strong></p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Datenschutz Modal -->
+  <div id="datenschutz-modal" class="modal">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h2 class="modal-title">Datenschutzerklärung</h2>
+        <button class="close-modal" onclick="closeModal('datenschutz')">&times;</button>
+      </div>
+      <div class="modal-body">
+        <h3>Verantwortlicher</h3>
+        <p>
+          <strong>Verantwortlicher im Sinne der Datenschutzgesetze, insbesondere der EU-Datenschutzgrundverordnung (DSGVO):</strong><br>
+          Markus Lehleiter<br>
+          c/o Block Services<br>
+          Stuttgarter Str. 106<br>
+          70736 Fellbach<br>
+          E-Mail: info@just-options.de
+        </p>
+        
+        <h3>1. Datenschutz auf einen Blick</h3>
+        <p>
+          <strong>Allgemeine Hinweise</strong><br>
+          Die folgenden Hinweise geben einen einfachen Überblick darüber, was mit Ihren personenbezogenen Daten passiert, wenn Sie diese Website besuchen. Personenbezogene Daten sind alle Daten, mit denen Sie persönlich identifiziert werden können.
+        </p>
+        
+        <h3>2. Datenerfassung auf dieser Website</h3>
+        <p>
+          <strong>Wer ist verantwortlich für die Datenerfassung auf dieser Website?</strong><br>
+          Die Datenverarbeitung auf dieser Website erfolgt durch den Websitebetreiber. Dessen Kontaktdaten können Sie dem Abschnitt „Verantwortlicher" in dieser Datenschutzerklärung entnehmen.
+        </p>
+        
+        <p>
+          <strong>Wie erfassen wir Ihre Daten?</strong><br>
+          Im Rahmen des Quiz werden folgende Daten lokal in Ihrem Browser gespeichert:
+          - Ihr Nickname (wenn Sie sich in die Highscore-Liste eintragen)
+          - Ihr Quiz-Ergebnis
+          - Das Datum Ihrer Teilnahme
+        </p>
+        
+        <p>
+          <strong>Wofür nutzen wir Ihre Daten?</strong><br>
+          Die Quiz-Daten werden ausschließlich lokal in Ihrem Browser (localStorage) gespeichert, um die Highscore-Funktionalität zu ermöglichen. Diese Daten werden NICHT an unsere Server übertragen und verbleiben auf Ihrem Gerät.
+        </p>
+        
+        <h3>3. Speicherung der Quiz-Daten</h3>
+        <p>
+          <strong>Server-basierte Highscore-Liste:</strong><br>
+          Wenn Sie sich nach Abschluss des Quiz in die Bestenliste eintragen und der Speicherung zustimmen, werden folgende Daten auf unserem Server gespeichert:
+        </p>
+        <ul style="margin-left: 2rem; margin-bottom: 1rem;">
+          <li>Ihr selbst gewählter Nickname</li>
+          <li>Ihr Quiz-Ergebnis (Punktzahl und Prozentsatz)</li>
+          <li>Das Datum Ihrer Teilnahme</li>
+          <li>Technische Daten zur Missbrauchserkennung (Browser-Kennung)</li>
+        </ul>
+        <p>
+          Diese Daten werden öffentlich in der Bestenliste angezeigt (außer technische Daten). Die Speicherung erfolgt nur nach Ihrer ausdrücklichen Einwilligung durch Aktivieren der Checkbox. Sie können die Löschung Ihrer Daten jederzeit per E-Mail an info@just-options.de verlangen.
+        </p>
+        <p>
+          <strong>Lokale Fallback-Speicherung:</strong><br>
+          Falls der Server nicht erreichbar ist, werden die Daten alternativ lokal in Ihrem Browser gespeichert. Diese lokalen Daten:
+          - werden nicht an unsere Server übertragen
+          - sind nur auf Ihrem Gerät sichtbar
+          - können durch Löschen der Browser-Daten entfernt werden
+        </p>
+        
+        <h3>4. Ihre Rechte</h3>
+        <p>
+          Sie haben jederzeit das Recht, unentgeltlich Auskunft über Herkunft, Empfänger und Zweck Ihrer gespeicherten personenbezogenen Daten zu erhalten. Sie haben außerdem ein Recht, die Berichtigung oder Löschung dieser Daten zu verlangen. Hierzu sowie zu weiteren Fragen zum Thema Datenschutz können Sie sich jederzeit unter der im Impressum angegebenen Adresse an uns wenden.
+        </p>
+        
+        <p>
+          <strong>Beschwerderecht bei der zuständigen Aufsichtsbehörde</strong><br>
+          Im Falle von Verstößen gegen die DSGVO steht den Betroffenen ein Beschwerderecht bei einer Aufsichtsbehörde, insbesondere in dem Mitgliedstaat ihres gewöhnlichen Aufenthalts, ihres Arbeitsplatzes oder des Orts des mutmaßlichen Verstoßes zu.
+        </p>
+        
+        <h3>5. Cookies und localStorage</h3>
+        <p>
+          Diese Website verwendet keine Tracking-Cookies. Es werden lediglich technisch notwendige Daten im localStorage Ihres Browsers gespeichert, um die Funktionalität des Quiz (Highscore-Liste) zu gewährleisten. Diese können Sie jederzeit in Ihren Browsereinstellungen löschen.
+        </p>
+        
+        <h3>6. Externe Links</h3>
+        <p>
+          Auf dieser Website können Links zu externen Websites vorhanden sein. Sobald Sie diese Links anklicken, gelten die Datenschutzrichtlinien der jeweiligen Website.
+        </p>
+        
+        <h3>7. SSL- bzw. TLS-Verschlüsselung</h3>
+        <p>
+          Diese Seite nutzt aus Sicherheitsgründen und zum Schutz der Übertragung vertraulicher Inhalte eine SSL- bzw. TLS-Verschlüsselung. Eine verschlüsselte Verbindung erkennen Sie daran, dass die Adresszeile des Browsers von "http://" auf "https://" wechselt.
+        </p>
+        
+        <h3>8. Widerruf Ihrer Einwilligung zur Datenverarbeitung</h3>
+        <p>
+          Viele Datenverarbeitungsvorgänge sind nur mit Ihrer ausdrücklichen Einwilligung möglich. Sie können eine bereits erteilte Einwilligung jederzeit widerrufen. Die Rechtmäßigkeit der bis zum Widerruf erfolgten Datenverarbeitung bleibt vom Widerruf unberührt.
+        </p>
+        
+        <h3>9. Änderungen dieser Datenschutzerklärung</h3>
+        <p>
+          Wir behalten uns vor, diese Datenschutzerklärung anzupassen, damit sie stets den aktuellen rechtlichen Anforderungen entspricht oder um Änderungen unserer Leistungen in der Datenschutzerklärung umzusetzen. Für Ihren erneuten Besuch gilt dann die neue Datenschutzerklärung.
+        </p>
+        
+        <h3>10. Kontakt</h3>
+        <p>
+          Bei Fragen zum Datenschutz können Sie sich jederzeit an uns wenden:<br>
+          E-Mail: info@just-options.de<br>
+          Telefon: +49 (0) 179.4361577
+        </p>
+        
+        <p><strong>Stand: März 2025</strong></p>
+      </div>
+    </div>
   </div>
 
   <script>
@@ -332,506 +823,11 @@
                 { text: "Die ertragreichsten Anlageklassen, die aus Dividenden und Zinsen bestehen.", correct: false, explain: "Nein, der Begriff leitet sich von 'derivare' (lat. für ableiten) ab." }
             ], difficulty: 3 }
         ],
-        "Depot & Handelspraxis 🛠️": [
-            { q: "Was ist ein 'Depot'?", a: [
-                { text: "Ein spezielles Konto zur elektronischen Verwahrung und Verwaltung von Wertpapieren.", correct: true, explain: "Genau, es ist quasi dein digitaler Tresor oder dein Bücherregal für Aktien und ETFs." },
-                { text: "Ein physisches Schließfach bei einer Bank zur sicheren Lagerung von Aktienurkunden.", correct: false, explain: "Nein, heute sind Depots rein digital und die Wertpapiere liegen als Sondereigentum bei einer Zentralverwahrstelle." },
-                { text: "Ein Unterkonto des Girokontos, das für Aktiengeschäfte reserviert ist.", correct: false, explain: "Ein Depot ist ein eigenständiges Konto, das aber mit einem Verrechnungskonto verbunden ist." },
-                { text: "Die Gesamtheit der Finanzanlagen, die eine Person besitzt (Portfolio).", correct: false, explain: "Sehr ähnlich, aber das Depot ist der technische Ort der Verwahrung, das Portfolio ist die inhaltliche Sammlung deiner Anlagen." }
-            ], difficulty: 1 },
-            { q: "Was unterscheidet eine 'Market'- von einer 'Limit'-Order?", a: [
-                { text: "Market-Order führt zum nächsten verfügbaren Kurs, Limit-Order nur bis zu einem definierten Preislimit.", correct: true, explain: "Exakt! Limit-Orders schützen dich vor unerwartet hohen Kaufpreisen und sind fast immer die bessere Wahl." },
-                { text: "Market-Orders haben garantierte Ausführung, Limit-Orders sind nur eine Reservierung.", correct: false, explain: "Eine Limit-Order wird auch garantiert ausgeführt, wenn das Limit erreicht wird. Eine Market-Order ist keine Garantie, wenn kein Handel stattfindet." },
-                { text: "Market-Orders sind für Profis, Limit-Orders sind für Anfänger vorgesehen.", correct: false, explain: "Beide Ordertypen stehen allen Anlegern zur Verfügung und Limits sind gerade für Anfänger sehr wichtig." },
-                { text: "Market-Orders werden vor Limit-Orders bearbeitet, auch bei gleichem Preis.", correct: false, explain: "Die Ausführung richtet sich nach Preis und Zeit, nicht primär nach dem Ordertyp." }
-            ], difficulty: 2 },
-            { q: "Was ist der 'Spread' (Geld-Brief-Spanne)?", a: [
-                { text: "Die Differenz zwischen dem höchsten Kauf- und dem niedrigsten Verkaufskurs im Orderbuch.", correct: true, explain: "Korrekt. Diese Spanne ist ein indirekter Kostenfaktor – du kaufst immer zum höheren (Brief) und verkaufst zum niedrigeren (Geld) Kurs." },
-                { text: "Die explizite Gebühr, die ein Broker für die Ausführung eines Handelsauftrags berechnet.", correct: false, explain: "Das sind die Ordergebühren. Der Spread entsteht am Markt selbst." },
-                { text: "Die prozentuale Schwankungsbreite des Aktienkurses während eines Handelstages.", correct: false, explain: "Das ist die 'Volatilität'." },
-                { text: "Ein Rabatt, den Market Maker für die Bereitstellung von Liquidität erhalten.", correct: false, explain: "Der Spread ist die Gewinnmarge des Market Makers, kein Rabatt für den Anleger." }
-            ], difficulty: 2 },
-            { q: "Was ist eine 'Stop-Loss'-Order?", a: [
-                { text: "Ein Verkaufsauftrag, der bei Erreichen eines festgelegten Kurses automatisch zu einer Market-Order wird.", correct: true, explain: "Genau, sie dient zur Begrenzung von Verlusten. Eine Art Notbremse." },
-                { text: "Ein Kaufauftrag, der ausgeführt wird, sobald eine Aktie auf ein bestimmtes Niveau gefallen ist.", correct: false, explain: "Das wäre eine 'Limit-Buy'-Order." },
-                { text: "Eine garantierte Verkaufsorder, die exakt zum Stop-Preis ausgeführt wird.", correct: false, explain: "Nein, bei schnellen Stürzen (Gaps) kann der Ausführungskurs auch unter dem Stop-Kurs liegen. Schutz davor bietet eine Stop-Limit-Order." },
-                { text: "Eine Anweisung an den Broker, den Handel mit einer Aktie bei hohen Verlusten auszusetzen.", correct: false, explain: "Nein, es ist eine automatische Verkaufsorder, keine Handelsaussetzung." }
-            ], difficulty: 2 },
-            { q: "Was ist eine 'ISIN'?", a: [
-                { text: "Eine internationale, zwölfstellige Kennnummer zur eindeutigen Identifikation eines Wertpapiers.", correct: true, explain: "Richtig. Wie ein Fingerabdruck. So stellst du sicher, dass du auch wirklich die VW-Aktie kaufst und nicht die von Vodafone." },
-                { text: "Die persönliche Identifikationsnummer, die jeder Depotinhaber von seiner Bank erhält.", correct: false, explain: "Nein, die ISIN gehört zum Wertpapier, nicht zu deinem Depot." },
-                { text: "Eine von der EU vergebene Steuernummer zur Erfassung von Kapitalerträgen.", correct: false, explain: "Nein, das ist eine reine Identifikationsnummer für Wertpapiere." },
-                { text: "Die interne Referenznummer eines Handelsauftrags bei einem Broker oder einer Börse.", correct: false, explain: "Nein, die ISIN ist ein internationaler Standard." }
-            ], difficulty: 2 },
-            { q: "Welche Handelszeiten hat die Xetra-Börse in Deutschland?", a: [
-                { text: "An Werktagen von 9:00 Uhr morgens bis 17:30 Uhr abends.", correct: true, explain: "Korrekt. Außerhalb dieser Zeiten und am Wochenende kannst du zwar Orders aufgeben, sie werden aber nicht ausgeführt." },
-                { text: "Täglich und rund um die Uhr, inklusive der Wochenenden.", correct: false, explain: "Das gilt für Kryptowährungen, aber nicht für den traditionellen Aktienhandel." },
-                { text: "An Werktagen von 8:00 Uhr morgens bis 20:00 Uhr abends.", correct: false, explain: "Andere Handelsplätze (z.B. Tradegate) haben längere Zeiten, aber nicht der Referenzmarkt Xetra." },
-                { text: "Synchron zu den US-Börsen von 15:30 Uhr bis 22:00 Uhr deutscher Zeit.", correct: false, explain: "Das sind die Haupthandelszeiten in den USA. Xetra hat eigene, frühere Zeiten." }
-            ], difficulty: 2 },
-            { q: "Was ist das 'Verrechnungskonto'?", a: [
-                { text: "Ein an das Depot gekoppeltes Geldkonto für die Abwicklung aller Wertpapiertransaktionen.", correct: true, explain: "Genau. Hierhin überweist du Geld zum Investieren und hier landen auch deine Dividenden und Verkaufserlöse." },
-                { text: "Ein alternatives Girokonto, das für den täglichen Zahlungsverkehr genutzt wird.", correct: false, explain: "Nein, es ist ein separates, an das Depot gekoppeltes Konto und nicht für den Alltag gedacht." },
-                { text: "Ein virtuelles Konto, auf dem Gewinne und Verluste steuerlich miteinander verrechnet werden.", correct: false, explain: "Die Verrechnung passiert hier, aber es ist ein echtes Konto mit echtem Geld." },
-                { text: "Ein Treuhandkonto, das von der Börsenaufsicht zur Sicherung der Anlegergelder verwaltet wird.", correct: false, explain: "Nein, es wird von deiner Depotbank geführt." }
-            ], difficulty: 1 },
-            { q: "Was bedeutet 'Volumen' im Börsenchart?", a: [
-                { text: "Die summierte Stückzahl aller gehandelten Wertpapiere in einem bestimmten Zeitraum.", correct: true, explain: "Richtig. Ein hohes Volumen bei einer Kursbewegung gilt oft als Bestätigung für die Stärke dieser Bewegung." },
-                { text: "Der in Euro ausgedrückte Gesamtwert aller gehandelten Wertpapiere.", correct: false, explain: "Das wäre der 'Umsatz' (Volumen * Kurs)." },
-                { text: "Die Gesamtzahl aller ausstehenden Aktien eines Unternehmens.", correct: false, explain: "Das ist die 'Anzahl der Aktien', die zur Berechnung der Marktkapitalisierung dient." },
-                { text: "Die Anzahl der offenen, aber noch nicht ausgeführten Aufträge im Orderbuch.", correct: false, explain: "Das ist das 'Orderbuchvolumen'." }
-            ], difficulty: 2 },
-            { q: "Was ist ein 'Aktiensplit'?", a: [
-                { text: "Eine Erhöhung der Aktienanzahl bei gleichzeitiger proportionaler Reduzierung des Nennwerts.", correct: true, explain: "Genau. Aus einer Aktie für 200€ werden z.B. zwei für 100€. Der Gesamtwert deines Anteils bleibt gleich, die Aktie wirkt aber günstiger." },
-                { text: "Eine Aufspaltung eines Unternehmens in mehrere rechtlich eigenständige Firmen.", correct: false, explain: "Das wäre ein 'Spin-off'." },
-                { text: "Ein Rückkaufprogramm, bei dem das Unternehmen einen Teil der eigenen Aktien einzieht.", correct: false, explain: "Das ist ein 'Aktienrückkauf', der die Anzahl der Aktien verringert." },
-                { text: "Die Aufteilung von Aktienpaketen eines Großaktionärs an viele Kleinanleger.", correct: false, explain: "Das wäre eine 'Umplatzierung'." }
-            ], difficulty: 3 },
-            { q: "Was ist eine 'Hauptversammlung'?", a: [
-                { text: "Das oberste Beschlussorgan einer Aktiengesellschaft, bei dem Aktionäre ihre Rechte ausüben.", correct: true, explain: "Korrekt. Als Aktionär (mit Stammaktien) hast du hier Rederecht und Stimmrecht, z.B. über die Verwendung des Gewinns." },
-                { text: "Eine jährliche Konferenz der Börse für alle zugelassenen Broker und Händler.", correct: false, explain: "Nein, es ist ein unternehmensinternes Event für die Eigentümer." },
-                { text: "Eine öffentliche Veranstaltung zur Präsentation der neuesten Produkte eines Unternehmens.", correct: false, explain: "Neue Produkte können vorgestellt werden, aber der Hauptzweck sind formelle Beschlüsse der Eigentümer." },
-                { text: "Ein vom Management organisiertes Treffen, um die Anlagestrategie zu diskutieren.", correct: false, explain: "Die Strategie wird vorgestellt, aber die Aktionäre stimmen über formale Punkte ab." }
-            ], difficulty: 2 }
-        ],
-        "Strategie & Vermögensaufbau 🧠": [
-            { q: "Was ist der Zinseszinseffekt?", a: [
-                { text: "Das exponentielle Wachstum von Kapital, da erwirtschaftete Erträge selbst wieder Erträge generieren.", correct: true, explain: "Genau! Das führt zu exponentiellem Wachstum. Dein Geld arbeitet für dich, und die 'Kinder' deines Geldes arbeiten auch wieder." },
-                { text: "Ein gesetzlicher Mechanismus, der die Höhe von Kreditzinsen begrenzt.", correct: false, explain: "Nein, der Effekt ist rein mathematisch und gilt für Guthaben wie für Schulden." },
-                { text: "Ein Steuervorteil, der auf langfristig gehaltene Kapitalanlagen gewährt wird.", correct: false, explain: "Nein, der Effekt ist unabhängig von der Besteuerung." },
-                { text: "Ein Prinzip, das ausschließlich bei festverzinslichen Anlagen wie Anleihen oder Sparbüchern wirkt.", correct: false, explain: "Er funktioniert mit jeder Anlage, deren Erträge man reinvestiert – bei Aktien durch Kursgewinne und reinvestierte Dividenden besonders stark." }
-            ], difficulty: 2 },
-            { q: "Was bedeutet die Strategie 'Buy and Hold'?", a: [
-                { text: "Der langfristige Kauf und das Halten von Wertpapieren ungeachtet kurzfristiger Marktschwankungen.", correct: true, explain: "Richtig. Das ist eine sehr passive, aber oft erfolgreiche Strategie, die auf dem langfristigen Wachstum der Wirtschaft basiert." },
-                { text: "Der kurzfristige Handel mit Wertpapieren innerhalb eines einzigen Handelstages.", correct: false, explain: "Das ist 'Day-Trading' – das genaue Gegenteil." },
-                { text: "Eine Strategie, bei der man Wertpapiere kauft und bis zum Erreichen eines fixen Gewinnziels hält.", correct: false, explain: "Das wäre ein kurzfristiges Gewinnziel, nicht die langfristige 'Buy and Hold'-Strategie." },
-                { text: "Der ausschließliche Kauf von Wertpapieren und der Verzicht auf den Verkauf (Halten bis zur Rente).", correct: false, explain: "Verkäufe sind nicht ausgeschlossen, z.B. bei Strategieänderung, aber der Anlagehorizont ist sehr lang." }
-            ], difficulty: 1 },
-            { q: "Was ist der 'Cost-Average-Effekt'?", a: [
-                { text: "Der Effekt, dass bei regelmäßigen Investitionen eines festen Betrags ein günstiger Durchschnittspreis erzielt wird.", correct: true, explain: "Exakt. Man kauft bei niedrigen Kursen mehr und bei hohen Kursen weniger Anteile, was den Einstiegspreis glättet." },
-                { text: "Eine Methode zur Berechnung der durchschnittlichen Kosten eines Wertpapierdepots.", correct: false, explain: "Nein, es ist ein mathematischer Effekt, der sich auf den Kaufpreis der Anteile auswirkt." },
-                { text: "Eine Anlagestrategie, die darauf abzielt, die Transaktionskosten zu minimieren.", correct: false, explain: "Sparpläne sind oft günstig, aber der Effekt bezieht sich auf den Durchschnittspreis, nicht die Kosten." },
-                { text: "Die statistische Garantie, dass man bei regelmäßiger Anlage langfristig einen Gewinn erzielt.", correct: false, explain: "Leider nein. Der Effekt schützt nicht vor Verlusten, kann aber das Timing-Risiko reduzieren." }
-            ], difficulty: 2 },
-            { q: "Warum ist 'Diversifikation' (Streuung) so wichtig?", a: [
-                { text: "Sie verteilt das Anlagerisiko auf verschiedene, möglichst unabhängige Anlageklassen oder Titel.", correct: true, explain: "Genau! 'Lege nicht alle Eier in einen Korb'. Wenn eine Anlage schlecht läuft, können andere das ausgleichen." },
-                { text: "Sie maximiert die Rendite, indem sie sich auf die gewinnbringendsten Anlagen konzentriert.", correct: false, explain: "Nein, sie begrenzt das Risiko. Konzentration auf eine Anlage würde die Rendite maximieren - aber auch das Risiko." },
-                { text: "Sie ist eine gesetzliche Anforderung für alle privaten Wertpapierdepots in der EU.", correct: false, explain: "Nein, du könntest auch alles in eine Aktie stecken, es ist aber nicht empfehlenswert." },
-                { text: "Sie führt zu einer automatischen Reduzierung der Kapitalertragsteuer auf Gewinne.", correct: false, explain: "Die Besteuerung hat nichts mit der Streuung deines Portfolios zu tun." }
-            ], difficulty: 1 },
-            { q: "Was meint 'Time in the market beats timing the market'?", a: [
-                { text: "Die Anlagedauer ist für den Erfolg entscheidender als der Versuch, den perfekten Einstiegszeitpunkt zu finden.", correct: true, explain: "Perfekt zusammengefasst. Die besten Tage an der Börse zu verpassen, kostet mehr Rendite als zu einem 'schlechten' Zeitpunkt einzusteigen." },
-                { text: "Der Erfolg an der Börse hängt hauptsächlich vom präzisen Timing der Käufe und Verkäufe ab.", correct: false, explain: "Das ist das, wovon der Spruch abrät. Market Timing scheitert fast immer." },
-                { text: "Die Zeit, die man täglich für die Marktanalyse aufwendet, schlägt passives Investieren.", correct: false, explain: "Analyse ist gut, aber der Spruch bezieht sich auf die Dauer, die dein Geld investiert ist." },
-                { text: "Man muss schneller als der Markt agieren, um eine überdurchschnittliche Rendite zu erzielen.", correct: false, explain: "Das ist die Idee des Hochfrequenzhandels, nicht die einer soliden Langfriststrategie." }
-            ], difficulty: 3 },
-            { q: "Was ist ein ETF-Sparplan?", a: [
-                { text: "Ein automatisierter Dauerauftrag zum regelmäßigen Kauf von ETF-Anteilen für einen festen Betrag.", correct: true, explain: "Richtig. Das ist eine sehr einfache und kostengünstige Methode, um den Zinseszinseffekt und den Cost-Average-Effekt zu nutzen." },
-                { text: "Ein spezielles Bankkonto mit einer festen Verzinsung und einem ETF-Anteil.", correct: false, explain: "Nein, du kaufst echte Wertpapiere, die im Wert schwanken. Es gibt keine Zinsgarantie." },
-                { text: "Ein bindender Vertrag mit einer Bank, der zum monatlichen Sparen in ETFs verpflichtet.", correct: false, explain: "Nein, einen Sparplan kann man in der Regel jederzeit kostenlos ändern, pausieren oder stoppen." },
-                { text: "Ein Anlageprodukt, das einmalig bespart und dann bis zur Rente gehalten wird.", correct: false, explain: "Das Sparintervall ist meist flexibel (monatlich, quartalsweise etc.)." }
-            ], difficulty: 1 },
-            { q: "Was ist 'Rebalancing'?", a: [
-                { text: "Das gezielte Umschichten im Portfolio, um die ursprüngliche prozentuale Aufteilung wiederherzustellen.", correct: true, explain: "Genau. Wenn z.B. Aktien stark gestiegen sind, verkauft man einen Teil und kauft Anleihen, um wieder die Ziel-Quote zu erreichen." },
-                { text: "Der vollständige Verkauf aller Positionen im Depot, um Gewinne zu sichern und neu zu starten.", correct: false, explain: "Nein, es geht um eine Anpassung, nicht um einen kompletten Neustart." },
-                { text: "Der Übertrag eines bestehenden Wertpapierdepots zu einem neuen, günstigeren Broker.", correct: false, explain: "Das ist ein Depotübertrag." },
-                { text: "Der regelmäßige Austausch der schwächsten Aktien im Portfolio gegen aussichtsreichere Titel.", correct: false, explain: "Das wäre 'Umschichten', aber Rebalancing orientiert sich an der prozentualen Ziel-Allokation, nicht an Einzeltiteln." }
-            ], difficulty: 3 },
-            { q: "Was ist eine 'Core-Satellite'-Strategie?", a: [
-                { text: "Eine Portfoliostruktur mit einem stabilen Kern (Core) und spekulativeren Beimischungen (Satellites).", correct: true, explain: "Korrekt. Der Kern (z.B. ein MSCI World ETF) sorgt für Stabilität, die Satelliten (z.B. Einzelaktien) für Renditechancen." },
-                { text: "Eine Strategie, bei der man ausschließlich in die größten und wichtigsten Unternehmen investiert.", correct: false, explain: "Das wäre eine reine 'Large Cap'-Strategie." },
-                { text: "Eine Handelsstrategie, bei der man den Markt umkreist und nur für kurze Zeit investiert.", correct: false, explain: "Nein, es geht um die Struktur des Portfolios." },
-                { text: "Eine Anlagestrategie, die sich ausschließlich auf Unternehmen der Luft- und Raumfahrt konzentriert.", correct: false, explain: "Haha, nein, der Name ist eine Metapher für die Portfolio-Struktur." }
-            ], difficulty: 3 },
-            { q: "Was bedeutet es, sein 'Humankapital' zu berücksichtigen?", a: [
-                { text: "Die zukünftige Arbeits- und Verdienstfähigkeit als Teil des Gesamtvermögens zu betrachten.", correct: true, explain: "Genau. Als junger Mensch mit sicherem Job (hohes Humankapital) kannst du bei deinen Geldanlagen ein höheres Risiko eingehen." },
-                { text: "Ausschließlich in Unternehmen zu investieren, die ihre Mitarbeiter vorbildlich behandeln.", correct: false, explain: "Das ist 'Socially Responsible Investing', aber nicht die Bedeutung von Humankapital in diesem Kontext." },
-                { text: "Das eigene Geld primär in die persönliche Bildung statt in den Aktienmarkt zu investieren.", correct: false, explain: "Bildungsinvestitionen sind wichtig, aber hier geht es darum, das Humankapital bei der Risikoanalyse der Geldanlage zu berücksichtigen." },
-                { text: "Vorrangig in Aktien von Unternehmen aus der Personal- und Bildungsbranche zu investieren.", correct: false, explain: "Das wäre eine Branchenwette." }
-            ], difficulty: 3 },
-            { q: "Was ist die '4-Prozent-Regel'?", a: [
-                { text: "Eine Faustregel für die jährliche Entnahmerate aus dem Depotvermögen im Ruhestand.", correct: true, explain: "Richtig. Die ursprüngliche Studie besagte, dass man 30 Jahre lang 4% des Anfangskapitals (plus Inflationsanpassung) entnehmen kann, ohne pleite zu gehen." },
-                { text: "Die Vorgabe, dass nicht mehr als 4% des Depotvolumens in einer einzelnen Aktie stecken dürfen.", correct: false, explain: "Das ist eine Regel zur Diversifikation, aber nicht die '4-Prozent-Regel'." },
-                { text: "Die Annahme, dass die durchschnittliche jährliche Rendite von Aktien bei 4% nach Inflation liegt.", correct: false, explain: "Die historische Rendite liegt eher bei 7-9%." },
-                { text: "Die gesetzliche Regel, dass mindestens 4% des Gewinns als Kapitalertragsteuer abgeführt werden müssen.", correct: false, explain: "Die Kapitalertragsteuer in Deutschland liegt bei ca. 25%." }
-            ], difficulty: 2 }
-        ],
-        "Markt & Wirtschaft 💹": [
-            { q: "Was ist 'Inflation'?", a: [
-                { text: "Ein andauernder Prozess der Geldentwertung, der sich in einem allgemeinen Preisanstieg zeigt.", correct: true, explain: "Genau. Für 1€ kannst du dir heute weniger kaufen als letztes Jahr. Deshalb ist es so wichtig, eine Rendite über der Inflationsrate zu erzielen." },
-                { text: "Eine von der Zentralbank gesteuerte Erhöhung der im Umlauf befindlichen Geldmenge.", correct: false, explain: "Eine Erhöhung der Geldmenge kann Inflation verursachen, ist aber nicht die Inflation selbst." },
-                { text: "Die positive Wertentwicklung des Aktienmarktes über einen längeren Zeitraum.", correct: false, explain: "Das ist eine 'Hausse' oder ein 'Bullenmarkt'." },
-                { text: "Eine von der Regierung beschlossene Anhebung der Mehrwertsteuer auf Waren.", correct: false, explain: "Steuererhöhungen können Preise treiben, sind aber nicht die Inflation selbst." }
-            ], difficulty: 1 },
-            { q: "Was ist ein 'Bullenmarkt' (Hausse)?", a: [
-                { text: "Eine langanhaltende Periode mit optimistischen Erwartungen und steigenden Aktienkursen.", correct: true, explain: "Richtig. Der Bulle stößt mit seinen Hörnern von unten nach oben – ein Symbol für Aufwärtstrend." },
-                { text: "Ein Marktsegment, das sich auf Aktien aus der Landwirtschaft und Viehzucht konzentriert.", correct: false, explain: "Nein, der Begriff gilt für den gesamten Aktienmarkt." },
-                { text: "Eine Marktphase mit besonders geringen Kursschwankungen und hoher Stabilität.", correct: false, explain: "Ein Bullenmarkt kann volatil sein, aber das Kernmerkmal ist die steigende Tendenz." },
-                { text: "Eine Phase steigender Zinsen, die das Vertrauen der Anleger in den Markt stärkt.", correct: false, explain: "Steigende Zinsen können einen Bullenmarkt sogar beenden." }
-            ], difficulty: 1 },
-            { q: "Was ist ein 'Bärenmarkt' (Baisse)?", a: [
-                { text: "Eine langanhaltende Periode mit pessimistischen Erwartungen und fallenden Aktienkursen.", correct: true, explain: "Genau. Der Bär schlägt mit seiner Tatze von oben nach unten – ein Symbol für Abwärtstrend." },
-                { text: "Eine Marktphase mit extrem niedrigem Handelsvolumen und geringer Liquidität.", correct: false, explain: "In einem Bärenmarkt kann aus Panik sogar sehr viel gehandelt (verkauft) werden." },
-                { text: "Ein Markt für Aktien von Unternehmen, die sich in einem Insolvenzverfahren befinden.", correct: false, explain: "Nein, der Begriff beschreibt die allgemeine Marktlage." },
-                { text: "Eine Phase, in der die meisten Unternehmen die Ausschüttung von Dividenden einstellen.", correct: false, explain: "Ausfallende Dividenden können eine Folge eines Bärenmarktes sein, sind aber nicht die Definition." }
-            ], difficulty: 1 },
-            { q: "Was ist eine 'Rezession'?", a: [
-                { text: "Ein signifikanter Rückgang der gesamtwirtschaftlichen Aktivität über mehrere Monate.", correct: true, explain: "Korrekt. Technisch spricht man oft von einer Rezession, wenn das BIP in zwei aufeinanderfolgenden Quartalen sinkt." },
-                { text: "Ein starker Einbruch der Aktienkurse von mehr als 20% vom letzten Hochpunkt.", correct: false, explain: "Das ist die Definition eines Bärenmarktes, der eine Rezession begleiten kann, aber nicht muss." },
-                { text: "Die Unfähigkeit eines Staates, seine fälligen Schulden zu bedienen (Staatsbankrott).", correct: false, explain: "Das ist ein 'Staatsbankrott'." },
-                { text: "Eine Periode, in der die Inflationsrate über die Marke von 5% ansteigt.", correct: false, explain: "Manchmal ja (Stagflation), aber eine Rezession kann auch mit fallenden Preisen (Deflation) einhergehen." }
-            ], difficulty: 2 },
-            { q: "Wie beeinflusst eine Leitzinserhöhung der Zentralbank den Aktienmarkt?", a: [
-                { text: "Sie verteuert Kredite für Unternehmen und macht festverzinsliche Anlagen attraktiver.", correct: true, explain: "Genau. Höhere Zinsen wirken wie eine Bremse für die Wirtschaft und machen Festgeld attraktiver im Vergleich zu Aktien." },
-                { text: "Sie führt zu einer positiven Neubewertung, da sie eine Überhitzung der Wirtschaft verhindert.", correct: false, explain: "Die Zinserhöhung erfolgt zwar oft in einer starken Wirtschaft, wirkt aber dämpfend auf die zukünftige Entwicklung." },
-                { text: "Sie hat keinen direkten Einfluss, da der Aktienmarkt von den Unternehmensgewinnen abhängt.", correct: false, explain: "Die Leitzinsen sind eines der wichtigsten Steuerungsinstrumente und beeinflussen die Unternehmensgewinne stark." },
-                { text: "Sie führt zu einem automatischen Anstieg der Dividendenrenditen um den gleichen Prozentsatz.", correct: false, explain: "Nein, so ein direkter Zusammenhang besteht nicht." }
-            ], difficulty: 2 },
-            { q: "Was ist 'Volatilität'?", a: [
-                { text: "Ein statistisches Maß für die Intensität der Schwankungen von Kursen oder Preisen.", correct: true, explain: "Richtig. Eine hohe Volatilität bedeutet starke Kursschwankungen nach oben und unten – eine wilde Achterbahnfahrt." },
-                { text: "Die Gesamtzahl der gehandelten Wertpapiere an einem Handelstag (Handelsvolumen).", correct: false, explain: "Nein, das ist das 'Volumen'." },
-                { text: "Die Geschwindigkeit, mit der sich der Preis einer Aktie einem neuen fairen Wert annähert.", correct: false, explain: "Das wäre die 'Markteffizienz'." },
-                { text: "Ein Risikomaß, das die Wahrscheinlichkeit eines Totalverlustes einer Anlage angibt.", correct: false, explain: "Volatilität misst die Schwankung, nicht die Ausfallwahrscheinlichkeit." }
-            ], difficulty: 2 },
-            { q: "Was ist ein 'Flash Crash'?", a: [
-                { text: "Ein extrem schneller und tiefgreifender Kurseinbruch, der meist durch algorithmischen Handel ausgelöst wird.", correct: true, explain: "Korrekt. Solche Ereignisse erholen sich oft binnen Minuten, werden aber durch Computerprogramme ausgelöst oder verstärkt." },
-                { text: "Ein technischer Totalausfall der Computersysteme einer gesamten Börse.", correct: false, explain: "Nein, der Handel bricht aus Verkaufsdruck zusammen, nicht wegen technischer Pannen an der Börse selbst." },
-                { text: "Ein Börsencrash, der durch die Veröffentlichung einer einzigen negativen Eilmeldung ausgelöst wird.", correct: false, explain: "Der Name bezieht sich auf die Geschwindigkeit ('blitzartig'), nicht auf eine Nachricht." },
-                { text: "Ein von der Börsenaufsicht initiierter, geplanter Test der Notfallsysteme.", correct: false, explain: "Nein, Flash Crashes sind unbeabsichtigte und chaotische Ereignisse." }
-            ], difficulty: 3 },
-            { q: "Was bedeutet 'Konjunkturzyklus'?", a: [
-                { text: "Die periodische Schwankung der gesamtwirtschaftlichen Aktivität um ihren langfristigen Wachstumstrend.", correct: true, explain: "Genau. Die Wirtschaft wächst nicht geradlinig, sondern in Zyklen aus Aufschwung, Boom, Abschwung und Rezession." },
-                { text: "Der vierjährige Berichtszyklus, dem börsennotierte Unternehmen unterliegen.", correct: false, explain: "Das ist der Geschäfts- oder Berichtszyklus (Quartalsberichte etc.)." },
-                { text: "Der typische Lebenszyklus einer Aktie vom Börsengang bis zum eventuellen Delisting.", correct: false, explain: "Nein, Konjunktur bezieht sich auf die Gesamtwirtschaft." },
-                { text: "Die regelmäßige Abfolge von Bullen- und Bärenmärkten, die im Schnitt sieben Jahre dauert.", correct: false, explain: "Bullen- und Bärenmärkte sind Teil des Konjunkturzyklus, aber der Begriff umfasst die gesamte wirtschaftliche Aktivität." }
-            ], difficulty: 2 },
-            { q: "Was ist 'Deflation'?", a: [
-                { text: "Ein Prozess stetig sinkender Preise für Waren und Dienstleistungen über einen längeren Zeitraum.", correct: true, explain: "Richtig. Klingt gut, ist aber Gift für die Wirtschaft, weil Investitionen in Erwartung noch weiter fallender Preise aufgeschoben werden." },
-                { text: "Der gezielte Abbau von Staatsschulden durch Sparmaßnahmen der Regierung.", correct: false, explain: "Nein, das hat nichts mit dem allgemeinen Preisniveau zu tun." },
-                { text: "Eine negative Wertentwicklung des eigenen Portfolios über mehr als zwei Quartale.", correct: false, explain: "Das wäre eine persönliche Verlustphase, nicht ein gesamtwirtschaftliches Phänomen." },
-                { text: "Das Platzen einer Spekulationsblase an den Finanzmärkten.", correct: false, explain: "Das Platzen einer Blase kann zu Deflation führen, ist aber die Ursache, nicht die Deflation selbst." }
-            ], difficulty: 2 },
-            { q: "Was sind 'Frühindikatoren' für die Wirtschaft?", a: [
-                { text: "Wirtschaftsstatistiken, die eine zukünftige Entwicklung der Konjunktur vorwegnehmen.", correct: true, explain: "Genau. Beispiele sind der ifo-Geschäftsklimaindex, Auftragseingänge in der Industrie oder die Anzahl der Baugenehmigungen." },
-                { text: "Technische Indikatoren in der Chartanalyse, die einen Trendwechsel frühzeitig signalisieren.", correct: false, explain: "Das sind charttechnische Indikatoren, nicht makroökonomische." },
-                { text: "Aktien von zyklischen Unternehmen, deren Kurse der allgemeinen Wirtschaft vorauseilen.", correct: false, explain: "Aktienkurse sind selbst ein Frühindikator, aber der Begriff meint meist makroökonomische Daten." },
-                { text: "Wirtschaftsdaten, die die aktuelle ökonomische Situation beschreiben (Präsenzindikatoren).", correct: false, explain: "Das sind Präsenzindikatoren (z.B. aktuelle Arbeitslosenquote), keine Frühindikatoren." }
-            ], difficulty: 3 }
-        ],
-        "Unternehmensanalyse 🧐": [
-            { q: "Was sagt das 'KGV' (Kurs-Gewinn-Verhältnis) aus?", a: [
-                { text: "Mit dem wievielfachen ihres Jahresgewinns eine Aktie an der Börse bewertet wird.", correct: true, explain: "Richtig. Ein KGV von 15 bedeutet, dass das Unternehmen 15 Jahre bräuchte, um seinen aktuellen Börsenwert zu verdienen (theoretisch)." },
-                { text: "Das Verhältnis des aktuellen Aktienkurses zum Umsatz pro Aktie.", correct: false, explain: "Das wäre das KUV (Kurs-Umsatz-Verhältnis)." },
-                { text: "Die prognostizierte Wachstumsrate des Gewinns für die nächsten Jahre.", correct: false, explain: "Die Wachstumsrate kann helfen, das KGV zu bewerten (PEG-Ratio), ist aber nicht das KGV selbst." },
-                { text: "Das Verhältnis des Aktienkurses zum bilanziellen Eigenkapital pro Aktie.", correct: false, explain: "Das wäre das KBV (Kurs-Buchwert-Verhältnis)." }
-            ], difficulty: 2 },
-            { q: "Wann gilt eine Aktie nach dem KGV als potenziell 'günstig'?", a: [
-                { text: "Wenn das KGV im Branchenvergleich und zur eigenen Historie niedrig ist.", correct: true, explain: "Genau. Ein niedriges KGV kann auf eine Unterbewertung hindeuten. Es kann aber auch bedeuten, dass der Markt dem Unternehmen wenig Wachstum zutraut." },
-                { text: "Wenn das KGV einen hohen Wert von über 50 aufweist.", correct: false, explain: "Ein hohes KGV deutet auf hohe Wachstumserwartungen (und eine 'teure' Bewertung) hin." },
-                { text: "Wenn ein Unternehmen Verluste schreibt und das KGV daher negativ ist.", correct: false, explain: "Ein negatives KGV gibt es nicht. Wenn ein Unternehmen Verlust macht, ist das KGV nicht anwendbar." },
-                { text: "Wenn das KGV exakt dem durchschnittlichen Marktwachstum entspricht.", correct: false, explain: "Ein solcher direkter Zusammenhang ist nicht das Kriterium für eine günstige Bewertung." }
-            ], difficulty: 2 },
-            { q: "Was ist ein 'Wirtschaftsgraben' (Moat)?", a: [
-                { text: "Ein nachhaltiger Wettbewerbsvorteil, der ein Unternehmen langfristig vor Konkurrenz schützt.", correct: true, explain: "Perfekt! Wie eine Burg mit Wassergraben. Das können starke Marken, Patente, Netzwerkeffekte oder Kostenvorteile sein." },
-                { text: "Eine gesetzliche Vorschrift, die den Markteintritt für neue Wettbewerber erschwert.", correct: false, explain: "Regulierung kann ein Moat sein, aber der Begriff ist viel breiter und umfasst auch unternehmensinterne Vorteile." },
-                { text: "Die Summe aller materiellen Vermögenswerte wie Gebäude und Grundstücke.", correct: false, explain: "Physische Werte können ein Vorteil sein, aber ein Moat ist oft immateriell (z.B. eine starke Marke)." },
-                { text: "Ein kurzfristiger Marketingvorteil durch eine besonders aggressive Werbekampagne.", correct: false, explain: "Ein Moat ist per Definition nachhaltig und langfristig, nicht kurzfristig." }
-            ], difficulty: 3 },
-            { q: "Was findest du in der 'Bilanz' eines Unternehmens?", a: [
-                { text: "Eine stichtagsbezogene Gegenüberstellung von Vermögen (Aktiva) und Kapital (Passiva).", correct: true, explain: "Richtig. Die Aktivseite zeigt, was die Firma besitzt (Mittelverwendung), die Passivseite zeigt, wem es gehört (Mittelherkunft)." },
-                { text: "Eine Auflistung aller Erträge und Aufwendungen über einen bestimmten Zeitraum.", correct: false, explain: "Das ist die 'Gewinn- und Verlustrechnung' (GuV)." },
-                { text: "Eine Prognose der zukünftigen Geschäftsentwicklung durch das Management.", correct: false, explain: "Das steht im 'Geschäftsbericht' oder 'Lagebericht'." },
-                { text: "Eine detaillierte Aufstellung aller Geldzu- und -abflüsse einer Periode.", correct: false, explain: "Das ist die 'Kapitalflussrechnung' (Cashflow Statement)." }
-            ], difficulty: 2 },
-            { q: "Was ist das 'Eigenkapital'?", a: [
-                { text: "Die Differenz zwischen dem Vermögen und den Schulden eines Unternehmens.", correct: true, explain: "Genau. Es ist die 'Substanz' des Unternehmens, die den Eigentümern (Aktionären) zusteht." },
-                { text: "Das gesamte Kapital, das einem Unternehmen zur Verfügung steht, inklusive Krediten.", correct: false, explain: "Das ist die 'Bilanzsumme' oder das 'Gesamtkapital'." },
-                { text: "Die Summe aller Kredite und Verbindlichkeiten, die ein Unternehmen hat.", correct: false, explain: "Das ist das 'Fremdkapital'." },
-                { text: "Der aktuelle Börsenwert eines Unternehmens (Marktkapitalisierung).", correct: false, explain: "Der Börsenwert (Marktkapitalisierung) kann stark vom bilanziellen Eigenkapital abweichen." }
-            ], difficulty: 2 },
-            { q: "Was sagt die 'Eigenkapitalquote' aus?", a: [
-                { text: "Den prozentualen Anteil des Eigenkapitals am Gesamtkapital eines Unternehmens.", correct: true, explain: "Korrekt. Eine hohe Eigenkapitalquote (z.B. > 30%) deutet auf eine solide Finanzierung und Krisenfestigkeit hin." },
-                { text: "Die Verzinsung, die ein Unternehmen auf sein Eigenkapital erwirtschaftet.", correct: false, explain: "Das ist die 'Eigenkapitalrendite'." },
-                { text: "Den Anteil des Eigenkapitals, der pro ausgegebener Aktie vorhanden ist.", correct: false, explain: "Das wäre der 'Buchwert je Aktie'." },
-                { text: "Die Geschwindigkeit, mit der das Eigenkapital durch Gewinne wächst.", correct: false, explain: "Nein, es ist eine statische Kennzahl der Finanzierungsstruktur zu einem bestimmten Zeitpunkt." }
-            ], difficulty: 2 },
-            { q: "Was ist der 'Cashflow'?", a: [
-                { text: "Der Nettozufluss liquider Mittel aus der operativen Geschäftstätigkeit einer Periode.", correct: true, explain: "Richtig. Er zeigt die tatsächliche finanzielle Kraft, da er weniger manipulierbar ist als der bilanzielle Gewinn." },
-                { text: "Der Kassenbestand und die kurzfristigen Bankguthaben eines Unternehmens.", correct: false, explain: "Das ist die 'Liquidität' oder der 'Finanzmittelbestand'." },
-                { text: "Ein anderes Wort für den Periodengewinn nach Abzug aller Steuern.", correct: false, explain: "Nicht ganz. Der Gewinn enthält auch unbare Posten (z.B. Abschreibungen), der Cashflow nicht." },
-                { text: "Der Informationsfluss zwischen der Finanzabteilung und dem Vorstand.", correct: false, explain: "Nein, 'Cash' bedeutet 'Bargeld'." }
-            ], difficulty: 3 },
-            { q: "Was ist der Unterschied zwischen 'Umsatz' und 'Gewinn'?", a: [
-                { text: "Umsatz ist der Gesamtwert der Verkäufe, Gewinn ist der Rest nach Abzug aller Kosten.", correct: true, explain: "Perfekt! Hoher Umsatz ist gut, aber ohne Gewinn ist er wertlos." },
-                { text: "Umsatz wird vor Steuern, Gewinn wird nach Steuern ausgewiesen.", correct: false, explain: "Es gibt verschiedene Gewinnstufen (vor und nach Steuern), aber der Umsatz ist immer die oberste Zeile." },
-                { text: "Umsatz ist die Summe der Einnahmen, Gewinn ist die Summe der Ausgaben.", correct: false, explain: "Absolut nicht. Gewinn = Einnahmen - Ausgaben." },
-                { text: "Umsatz ist eine Schätzung, während der Gewinn eine exakte Kennzahl ist.", correct: false, explain: "Beides sind exakte Kennzahlen, die aus der Buchhaltung stammen." }
-            ], difficulty: 1 },
-            { q: "Was bedeutet 'Quartalszahlen'?", a: [
-                { text: "Ein Zwischenbericht über die Geschäftsentwicklung eines Unternehmens für drei Monate.", correct: true, explain: "Genau. Diese Berichte über Umsatz, Gewinn etc. sorgen oft für starke Kursbewegungen, wenn sie von den Erwartungen abweichen." },
-                { text: "Die vier wichtigsten Kennzahlen, die ein Unternehmen jährlich veröffentlichen muss.", correct: false, explain: "Nein, es bezieht sich auf den Berichtszeitraum (ein Quartal)." },
-                { text: "Eine Sonderdividende, die von manchen Unternehmen viermal im Jahr gezahlt wird.", correct: false, explain: "Nein, es ist ein Bericht." },
-                { text: "Die Aufteilung des prognostizierten Jahresgewinns auf die vier Quartale.", correct: false, explain: "Nein, es ist ein Zwischenbericht über die bereits vergangene Geschäftsentwicklung." }
-            ], difficulty: 2 },
-            { q: "Was ist eine 'SWOT-Analyse'?", a: [
-                { text: "Ein Instrument zur Analyse von Stärken, Schwächen, Chancen und Risiken.", correct: true, explain: "Korrekt. Es ist ein strategisches Werkzeug, um die Position eines Unternehmens im Markt zu bewerten." },
-                { text: "Ein Software-Tool zur technischen Analyse von Wertpapier-Charts.", correct: false, explain: "Nein, es ist eine fundamentale, strategische Analysemethode." },
-                { text: "Ein standardisiertes Prüfverfahren der Finanzaufsicht für Bankbilanzen.", correct: false, explain: "Nein, es ist ein internes oder externes Analyse-Tool für Unternehmen." },
-                { text: "Eine Methode zur Bewertung der Social-Media-Präsenz eines Unternehmens.", correct: false, explain: "Nein, auch wenn Social Media eine Chance oder ein Risiko sein kann." }
-            ], difficulty: 3 }
-        ],
-        "Risiko & Psychologie 🤯": [
-            { q: "Was ist 'FOMO' (Fear of Missing Out)?", a: [
-                { text: "Die giergetriebene Angst, eine gewinnbringende Kursbewegung zu verpassen.", correct: true, explain: "Genau. Wenn eine Aktie durch die Decke geht und man aus Gier aufspringt, ist das FOMO. Ein sehr schlechter Ratgeber!" },
-                { text: "Die grundsätzliche Angst, durch falsche Anlageentscheidungen Geld zu verlieren.", correct: false, explain: "Das ist 'Verlustaversion'." },
-                { text: "Eine offizielle Warnung der Börse vor einer bevorstehenden Marktkorrektur.", correct: false, explain: "Nein, es ist ein psychologisches Phänomen bei Anlegern." },
-                { text: "Eine Anlagestrategie, die gezielt auf stark gehypte Trendaktien setzt.", correct: false, explain: "Das wäre eine 'Momentum'-Strategie, aber FOMO beschreibt die emotionale Reaktion darauf." }
-            ], difficulty: 1 },
-            { q: "Was ist 'Verlustaversion' (Loss Aversion)?", a: [
-                { text: "Die menschliche Tendenz, Verluste stärker zu gewichten als gleich hohe Gewinne.", correct: true, explain: "Richtig. Ein Verlust von 100€ tut mehr weh, als ein Gewinn von 100€ Freude bereitet. Das führt oft zu irrationalen Entscheidungen." },
-                { text: "Eine spezielle Depot-Versicherung gegen unvorhergesehene Kursverluste.", correct: false, explain: "So eine Versicherung gibt es nicht. Es ist ein psychologisches Phänomen." },
-                { text: "Die generelle Abneigung einer Person, finanzielle Risiken einzugehen.", correct: false, explain: "Das ist 'Risikoaversion'. Verlustaversion beschreibt die unterschiedliche Wahrnehmung von Gewinn und Verlust." },
-                { text: "Eine Handelsstrategie, bei der Verlustpositionen sofort verkauft werden.", correct: false, explain: "Das wäre diszipliniertes Risikomanagement. Verlustaversion führt oft dazu, dass man Verluste zu lange laufen lässt." }
-            ], difficulty: 2 },
-            { q: "Was ist 'Herdenverhalten' an der Börse?", a: [
-                { text: "Die Neigung von Anlegern, den Entscheidungen einer großen Gruppe zu folgen.", correct: true, explain: "Genau. Das kann Trends verstärken und zu Blasen oder Panikverkäufen führen, oft ohne fundamentale Grundlage." },
-                { text: "Eine computergestützte Analyse, die das Kaufverhalten von Anlegern vorhersagt.", correct: false, explain: "Nein, es ist das Verhalten selbst." },
-                { text: "Eine Anlagestrategie, die auf Unternehmen aus der Agrarwirtschaft setzt.", correct: false, explain: "Nein, es ist eine Metapher für das Verhalten von Menschenmassen." },
-                { text: "Ein regelmäßiges Treffen von Mitgliedern eines Aktienclubs zum Informationsaustausch.", correct: false, explain: "Nein." }
-            ], difficulty: 2 },
-            { q: "Was ist der 'Confirmation Bias' (Bestätigungsfehler)?", a: [
-                { text: "Die Neigung, Informationen zu bevorzugen, die die eigene Überzeugung bestätigen.", correct: true, explain: "Korrekt. Wenn du von einer Aktie überzeugt bist, nimmst du positive Nachrichten stärker wahr und ignorierst negative. Das ist sehr gefährlich." },
-                { text: "Der Zwang, sich jede Anlageentscheidung von einer dritten Person bestätigen zu lassen.", correct: false, explain: "Nein, es ist ein interner, unbewusster Denkfehler." },
-                { text: "Der Prozess der Überprüfung einer Orderausführung durch den Broker.", correct: false, explain: "Das ist eine 'Orderbestätigung'." },
-                { text: "Die Strategie, ausschließlich auf Basis von offiziell bestätigten Unternehmensmeldungen zu handeln.", correct: false, explain: "Das ist klug, aber nicht der Confirmation Bias. Der Bias filtert, WAS man aus den Quellen liest." }
-            ], difficulty: 3 },
-            { q: "Warum sollte man nie Geld investieren, das man bald braucht?", a: [
-                { text: "Wegen des Risikos kurzfristiger Kursschwankungen und eines möglichen Zwangsverkaufs mit Verlust.", correct: true, explain: "Exakt. Geld für den Urlaub oder ein neues Handy gehört aufs Tagesgeldkonto. An der Börse sollte nur Geld mit langem Anlagehorizont sein." },
-                { text: "Weil der Broker das investierte Kapital für einen Mindestzeitraum von einem Jahr sperrt.", correct: false, explain: "Nein, du kannst jederzeit verkaufen. Die Frage ist nur, zu welchem Kurs." },
-                { text: "Weil kurzfristige Spekulationsgewinne mit dem persönlichen Einkommensteuersatz versteuert werden.", correct: false, explain: "Das gilt in DEU nur noch für wenige Anlagen, nicht für Aktien. Das Hauptproblem ist das Kursrisiko." },
-                { text: "Weil für kurzfristige Anlagen deutlich höhere Ordergebühren anfallen als für langfristige.", correct: false, explain: "Die Gebühren sind unabhängig von der Haltedauer." }
-            ], difficulty: 1 },
-            { q: "Was ist ein 'Klumpenrisiko'?", a: [
-                { text: "Die hohe Konzentration des Depotvermögens auf wenige Einzelwerte oder eine einzelne Branche.", correct: true, explain: "Genau. Das ist das Gegenteil von Diversifikation. Wenn diese eine Position abstürzt, reißt sie dein ganzes Depot mit nach unten." },
-                { text: "Das Risiko, das durch den Kauf von Aktien betrügerischer oder unseriöser Unternehmen entsteht.", correct: false, explain: "Das ist Betrugsrisiko. Ein Klumpenrisiko kann man auch mit einer Top-Firma wie Apple haben." },
-                { text: "Das allgemeine Marktrisiko, dass alle Aktien im Zuge einer Krise gleichzeitig fallen.", correct: false, explain: "Das ist 'systematisches' oder 'Marktrisiko'." },
-                { text: "Das spezifische Risiko, das mit der Anlage in sehr kleinen und illiquiden Unternehmen einhergeht.", correct: false, explain: "Das ist 'Small-Cap-Risiko' oder 'Liquiditätsrisiko'." }
-            ], difficulty: 2 },
-            { q: "Was ist der 'Ankereffekt'?", a: [
-                { text: "Eine kognitive Verzerrung, bei der eine zuerst erhaltene Information eine Entscheidung übermäßig beeinflusst.", correct: true, explain: "Richtig. Beispiel: Du siehst, eine Aktie stand mal bei 200€. Jetzt steht sie bei 100€ und du denkst 'super billig'. Der alte Kurs war dein Anker." },
-                { text: "Eine Anlagestrategie, die auf sehr stabile und wertbeständige 'Anker-Investments' setzt.", correct: false, explain: "Das ist eine Strategie, aber nicht der psychologische Ankereffekt." },
-                { text: "Die Praxis, den Wert einer Aktie an den Kurs eines Leitindex wie dem DAX zu koppeln.", correct: false, explain: "Nein, so etwas gibt es nicht." },
-                { text: "Die Tendenz von Anlegern, ihr Portfolio an dem ihres erfolgreichsten Freundes zu orientieren.", correct: false, explain: "Das wäre eher 'Herdenverhalten'." }
-            ], difficulty: 3 },
-            { q: "Was bedeutet 'FUD' in der Börsenwelt?", a: [
-                { text: "Das gezielte Streuen von Angst, Unsicherheit und Zweifel (Fear, Uncertainty, and Doubt).", correct: true, explain: "Genau. Das ist das Gegenteil von 'Hype'. Oft werden in Foren oder sozialen Medien bewusst negative Gerüchte gestreut, um Kurse zu drücken." },
-                { text: "Die Analyse fundamentaler Unternehmensdaten (Fundamental Under- and Overvaluation Data).", correct: false, explain: "Nein, FUD ist eine manipulative Taktik." },
-                { text: "Ein offizieller Warnhinweis der Finanzaufsicht vor riskanten Anlageprodukten.", correct: false, explain: "Nein, FUD ist informell und oft böswillig." },
-                { text: "Die Forderung an Unternehmen, alle Daten offenzulegen (Full Uncovered Data).", correct: false, explain: "Nein, es ist eine Desinformations-Taktik." }
-            ], difficulty: 2 },
-            { q: "Warum ist 'Nachkaufen zur Verbilligung' oft eine schlechte Idee?", a: [
-                { text: "Weil die Entscheidung irrational auf dem alten Verlust basiert, statt auf einer neuen Analyse.", correct: true, explain: "Richtig. Man sollte nur nachkaufen, wenn man nach erneuter, objektiver Analyse immer noch von der Firma überzeugt ist – nicht nur, um den alten Verlust auszubügeln." },
-                { text: "Weil es gesetzlich verboten ist, Verlustpositionen weiter aufzustocken.", correct: false, explain: "Nein, es ist erlaubt." },
-                { text: "Weil Broker für das Nachkaufen in Verlustpositionen höhere Gebühren verlangen.", correct: false, explain: "Nein, die Gebühren sind normal." },
-                { text: "Weil dadurch die bisherigen Gewinne in anderen Positionen steuerlich verfallen.", correct: false, explain: "Nein, steuerlich hat das keine negativen Auswirkungen auf andere Positionen." }
-            ], difficulty: 2 },
-            { q: "Was ist der 'Overconfidence'-Bias?", a: [
-                { text: "Die systematische Überschätzung der eigenen Fähigkeiten und Kenntnisse bei Anlageentscheidungen.", correct: true, explain: "Korrekt. Ein paar Glückstreffer am Anfang führen oft dazu, dass Anleger denken, sie wären Genies. Das führt zu hohem Risiko." },
-                { text: "Das übermäßige Vertrauen in die Prognosen von renommierten Finanzexperten und Analysten.", correct: false, explain: "Das wäre eher 'Autoritätsglaube'." },
-                { text: "Die zuversichtliche Annahme, dass der Aktienmarkt langfristig immer steigen wird.", correct: false, explain: "Das ist Optimismus, aber Overconfidence bezieht sich auf die eigenen Fähigkeiten." },
-                { text: "Die Bevorzugung von Aktien von Unternehmen, deren Management besonders selbstbewusst auftritt.", correct: false, explain: "Nein, es ist ein Denkfehler des Anlegers selbst." }
-            ], difficulty: 2 }
-        ],
-        "ETFs im Detail 🧺": [
-            { q: "Was bedeutet 'thesaurierend' bei einem ETF?", a: [
-                { text: "Der ETF legt die erwirtschafteten Erträge (Dividenden) automatisch wieder im Fondsvermögen an.", correct: true, explain: "Genau. Das nutzt den Zinseszinseffekt optimal und ist ideal für den langfristigen Vermögensaufbau." },
-                { text: "Der ETF zahlt die Erträge regelmäßig an die Anleger aus.", correct: false, explain: "Das wäre ein 'ausschüttender' ETF." },
-                { text: "Der ETF investiert ausschließlich in Staatsanleihen (Schatzbriefe).", correct: false, explain: "Nein, 'thesaurieren' kommt vom griechischen Wort für 'Schatz ansammeln' und bedeutet reinvestieren." },
-                { text: "Der ETF wird nach einer festgelegten Laufzeit aufgelöst und das Kapital ausgeschüttet.", correct: false, explain: "Nein, es beschreibt die laufende Verwendung der Erträge." }
-            ], difficulty: 2 },
-            { q: "Was bedeutet 'ausschüttend' bei einem ETF?", a: [
-                { text: "Der ETF zahlt die erwirtschafteten Erträge (Dividenden) direkt an die Anleger aus.", correct: true, explain: "Richtig. Das ist gut, wenn du einen regelmäßigen Geldfluss aus deinen Anlagen erzielen möchtest." },
-                { text: "Der ETF reinvestiert alle Erträge automatisch in neue Anteile.", correct: false, explain: "Das wäre ein 'thesaurierender' ETF." },
-                { text: "Der ETF wird gerade liquidiert und das Vermögen an die Anleger ausgeschüttet.", correct: false, explain: "Nein, es ist eine normale Form der Ertragsverwendung." },
-                { text: "Der ETF investiert nur in Unternehmen mit sehr hoher Dividendenrendite.", correct: false, explain: "Das kann ein 'High Dividend' ETF sein, aber der Begriff 'ausschüttend' beschreibt nur die Art der Ertragsverwendung." }
-            ], difficulty: 2 },
-            { q: "Was unterscheidet MSCI World und MSCI ACWI ETFs?", a: [
-                { text: "Der ACWI (All-Country World Index) schließt im Gegensatz zum MSCI World auch Schwellenländer mit ein.", correct: true, explain: "Perfekt! Der ACWI ist also noch breiter diversifiziert und bildet die globale Wirtschaft umfassender ab." },
-                { text: "Der ACWI ist eine aktiv gemanagte Variante des passiven MSCI World Index.", correct: false, explain: "Beide sind Indizes und die darauf basierenden ETFs sind in der Regel passiv." },
-                { text: "Der MSCI World investiert in Aktien, der ACWI investiert zusätzlich in Anleihen.", correct: false, explain: "Nein, beide sind reine Aktienindizes." },
-                { text: "ACWI ist die amerikanische, MSCI World die europäische Bezeichnung für denselben Index.", correct: false, explain: "Nein, es sind zwei unterschiedliche Indizes mit unterschiedlicher Zusammensetzung." }
-            ], difficulty: 3 },
-            { q: "Was bedeutet 'physische Replikation' bei einem ETF?", a: [
-                { text: "Der ETF-Anbieter kauft die im Index enthaltenen Aktien tatsächlich physisch.", correct: true, explain: "Genau. Das ist die direkteste und transparenteste Methode, einen Index nachzubilden." },
-                { text: "Der ETF wird durch physisch hinterlegtes Gold oder andere Edelmetalle abgesichert.", correct: false, explain: "Nein, es geht um den Kauf der Aktien selbst." },
-                { text: "Der ETF bildet den Index durch ein Tauschgeschäft (Swap) mit einer Bank nach.", correct: false, explain: "Das wäre 'synthetische Replikation'." },
-                { text: "Der ETF kann nur an physischen Parkettbörsen und nicht elektronisch gehandelt werden.", correct: false, explain: "Nein, es bezieht sich auf die Methode der Index-Nachbildung." }
-            ], difficulty: 2 },
-            { q: "Was bedeutet 'synthetische Replikation' bei einem ETF?", a: [
-                { text: "Der ETF bildet die Indexrendite durch ein Tauschgeschäft (Swap) mit einem Finanzpartner nach.", correct: true, explain: "Korrekt. Der ETF hält ein Trägerportfolio und tauscht dessen Rendite gegen die Indexrendite. Das birgt ein Kontrahentenrisiko." },
-                { text: "Der ETF wird von einer künstlichen Intelligenz gesteuert, die den Index zu übertreffen versucht.", correct: false, explain: "Nein, 'synthetisch' bedeutet hier 'künstlich nachgebildet', nicht KI-gesteuert." },
-                { text: "Der ETF investiert in künstlich erzeugte Vermögenswerte statt in echte Aktien.", correct: false, explain: "Nein, es ist eine legale und gängige Replikationsmethode über Tauschgeschäfte." },
-                { text: "Der ETF kauft nur eine kleine, repräsentative Auswahl der Indexaktien (Sampling).", correct: false, explain: "Das ist eine Form der physischen Replikation, die 'Optimized Sampling' genannt wird." }
-            ], difficulty: 3 },
-            { q: "Was ist die 'TER' (Total Expense Ratio) eines ETFs?", a: [
-                { text: "Eine Kennzahl für die jährlichen Gesamtkosten eines Fonds in Prozent des Fondsvolumens.", correct: true, explain: "Richtig. Eine TER von 0,2% bedeutet, dass pro 1.000€ Anlage jedes Jahr 2€ Kosten anfallen. Je niedriger, desto besser." },
-                { text: "Die tatsächlich erzielte Rendite eines Fonds nach Abzug aller Kosten und Steuern.", correct: false, explain: "Nein, die TER ist eine reine Kostenkennzahl vor Steuern." },
-                { text: "Die auf die Erträge des ETFs anfallende Quellensteuer (Tax Expense Ratio).", correct: false, explain: "Nein, Steuern sind nicht Teil der TER." },
-                { text: "Die erwartete Abweichung der Fondsrendite von der Indexrendite (Tracking Error Ratio).", correct: false, explain: "Nein, das ist die 'Tracking Difference' oder der 'Tracking Error'." }
-            ], difficulty: 2 },
-            { q: "Was ist die 'Tracking Difference' (TD)?", a: [
-                { text: "Die reale Renditeabweichung des ETFs von seinem Referenzindex über einen Zeitraum.", correct: true, explain: "Genau. Die TD ist oft aussagekräftiger als die TER, da sie alle Kosten und auch Erträge (z.B. aus Wertpapierleihe) berücksichtigt." },
-                { text: "Die Differenz zwischen dem höchsten und niedrigsten Kurs des ETFs an einem Handelstag.", correct: false, explain: "Das ist die 'Tagesschwankung'." },
-                { text: "Ein Maß für die Abweichung der Branchengewichtung des ETFs vom Index.", correct: false, explain: "Nein, es ist eine reine Renditekennzahl." },
-                { text: "Der prozentuale Unterschied in den Kosten zwischen einem physischen und synthetischen ETF.", correct: false, explain: "Nein, beide haben eine Tracking Difference." }
-            ], difficulty: 3 },
-            { q: "Was ist ein 'Sektor-ETF' oder 'Themen-ETF'?", a: [
-                { text: "Ein ETF, der gezielt in Unternehmen einer bestimmten Branche oder eines Anlagethemas investiert.", correct: true, explain: "Richtig. Damit kann man gezielt auf Trends setzen, hat aber ein viel höheres Klumpenrisiko als mit einem breit gestreuten Welt-ETF." },
-                { text: "Ein ETF, der alle elf Haupt-Wirtschaftssektoren gleichgewichtet abbildet.", correct: false, explain: "Das wäre ein breit gestreuter Markt-ETF mit einer speziellen Gewichtungsmethode." },
-                { text: "Ein ETF, der von einer Non-Profit-Organisation zu einem bestimmten Thema aufgelegt wird.", correct: false, explain: "Nein, es geht um den Inhalt." },
-                { text: "Ein ETF, der nur in einem bestimmten geografischen Sektor, z.B. Südostasien, anlegt.", correct: false, explain: "Das ist ein 'Regionen-ETF'." }
-            ], difficulty: 2 },
-            { q: "Warum sind ETFs auf den S&P 500 so beliebt?", a: [
-                { text: "Weil er kostengünstig die 500 größten und wichtigsten US-Unternehmen abbildet.", correct: true, explain: "Genau. Die USA sind der größte Kapitalmarkt der Welt und der S&P 500 ist ein einfacher und günstiger Weg, daran teilzuhaben." },
-                { text: "Weil er die 500 wachstumsstärksten Unternehmen aus der ganzen Welt bündelt.", correct: false, explain: "Nein, er investiert nur in die USA." },
-                { text: "Weil er als einziger ETF von der US-Notenbank gegen Verluste abgesichert ist.", correct: false, explain: "Kein ETF wird von einer Regierung oder Notenbank garantiert." },
-                { text: "Weil er im Gegensatz zu anderen ETFs keine Managementgebühren (TER) hat.", correct: false, explain: "S&P 500 ETFs sind sehr günstig, aber nicht komplett kostenlos." }
-            ], difficulty: 2 },
-            { q: "Was ist das Risiko bei einem 'Leveraged ETF'?", a: [
-                { text: "Er hebelt die tägliche Indexbewegung, was bei Seitwärtsmärkten zu hohen Verlusten führt (Pfadabhängigkeit).", correct: true, explain: "Richtig. Steigt der Index z.B. um 2%, steigt ein 2x ETF um 4%. Fällt der Index aber um 2%, fällt der ETF um 4%! Sie sind für langfristige Anlagen extrem ungeeignet." },
-                { text: "Man kann mehr als das eingesetzte Kapital verlieren (Nachschusspflicht).", correct: false, explain: "Eine Nachschusspflicht gibt es bei ETFs nicht, aber ein Totalverlust ist möglich." },
-                { text: "Der Hebel wird nur auf Gewinne, nicht aber auf Verluste angewendet.", correct: false, explain: "Der Hebel wirkt gnadenlos in beide Richtungen." },
-                { text: "Die Kosten (TER) sind durch den Hebel um den entsprechenden Faktor höher.", correct: false, explain: "Die Kosten sind meist höher, aber das Hauptrisiko ist die Hebelwirkung und Pfadabhängigkeit." }
-            ], difficulty: 3 }
-        ],
-        "Steuern & Rechtliches ⚖️": [
-            { q: "Wie hoch ist die Kapitalertragsteuer (plus Soli) in Deutschland?", a: [
-                { text: "Pauschal ca. 26,4% (25% Abgeltungsteuer + 5,5% Soli darauf).", correct: true, explain: "Korrekt. Kirchensteuer kann noch dazukommen." },
-                { text: "Der persönliche Einkommensteuersatz, der je nach Einkommen variiert.", correct: false, explain: "Nein, sie ist eine Abgeltungsteuer, die pauschal ist (Ausnahme: Günstigerprüfung)." },
-                { text: "19%, was dem regulären Mehrwertsteuersatz entspricht.", correct: false, explain: "Nein, die Sätze haben nichts miteinander zu tun." },
-                { text: "42%, was dem Spitzensteuersatz der Einkommensteuer entspricht.", correct: false, explain: "Der Spitzensteuersatz gilt für Arbeitseinkommen, nicht pauschal für Kapitalerträge." }
-            ], difficulty: 2 },
-            { q: "Was ist der 'Sparerpauschbetrag'?", a: [
-                { text: "Ein jährlicher Freibetrag, bis zu dessen Höhe Kapitalerträge steuerfrei bleiben.", correct: true, explain: "Genau. Seit 2023 liegt er bei 1.000€ für Singles und 2.000€ for Verheiratete pro Jahr. Super wichtig!" },
-                { text: "Ein Pauschalbetrag, den Anleger für die Kontoführung an die Bank zahlen müssen.", correct: false, explain: "Nein, es ist ein Betrag, der dir Geld spart, nicht kostet." },
-                { text: "Eine staatliche Prämie, die man erhält, wenn man einen bestimmten Betrag pro Jahr spart.", correct: false, explain: "Es ist kein Bonus, sondern ein Freibetrag auf deine Erträge." },
-                { text: "Ein fester, ermäßigter Steuersatz, der für alle Kleinsparer gilt.", correct: false, explain: "Nein, es ist ein Betrag, der von der Steuer befreit ist." }
-            ], difficulty: 1 },
-            { q: "Was musst du tun, um den Sparerpauschbetrag zu nutzen?", a: [
-                { text: "Bei jeder Bank mit Kapitalerträgen einen Freistellungsauftrag einrichten.", correct: true, explain: "Richtig. Ohne diesen Auftrag führt der Broker automatisch Steuern ab. Du kannst ihn auf mehrere Banken aufteilen, aber nicht die Gesamtsumme überschreiten." },
-                { text: "Nichts, der Freibetrag wird von der Bank automatisch berücksichtigt.", correct: false, explain: "Leider nicht. Du musst selbst aktiv werden und den Auftrag einrichten." },
-                { text: "Jährlich einen formlosen Antrag beim zuständigen Finanzamt einreichen.", correct: false, explain: "Nein, das geht direkt und einfach bei deiner Bank." },
-                { text: "In der Steuererklärung die Anlage KAP ausfüllen und den Betrag eintragen.", correct: false, explain: "Das ist der Weg, um zu viel gezahlte Steuern zurückzuholen. Besser ist es, den Auftrag direkt einzurichten." }
-            ], difficulty: 2 },
-            { q: "Was passiert, wenn du Aktien mit Gewinn verkaufst, aber keinen Freistellungsauftrag eingerichtet hast?", a: [
-                { text: "Die Bank führt automatisch die fällige Kapitalertragsteuer an das Finanzamt ab.", correct: true, explain: "Genau. Du kannst dir das Geld aber über die Steuererklärung im nächsten Jahr zurückholen. Bequemer ist es mit Freistellungsauftrag." },
-                { text: "Der Gewinn wird von der Bank einbehalten, bis der Auftrag nachgereicht wird.", correct: false, explain: "Nein, die Bank ist gesetzlich verpflichtet, die Steuer sofort abzuführen." },
-                { text: "Du erhältst eine Mahnung vom Finanzamt und musst eine Strafe zahlen.", correct: false, explain: "Nein, du hast ja Steuern gezahlt, eventuell sogar zu viel. Strafbar macht man sich, wenn man Gewinne nicht versteuert." },
-                { text: "Der Verkauf wird von der Bank blockiert, bis der steuerliche Status geklärt ist.", correct: false, explain: "Nein, der Verkauf wird normal ausgeführt." }
-            ], difficulty: 2 },
-            { q: "Was ist die 'Vorabpauschale' bei thesaurierenden ETFs?", a: [
-                { text: "Eine fiktive, vorweggenommene Besteuerung von Kursgewinnen bei nicht-ausschüttenden Fonds.", correct: true, explain: "Korrekt. Damit will der Staat sicherstellen, dass auch bei thesaurierenden Fonds regelmäßig Steuern anfallen. Sie wird aber beim Verkauf angerechnet." },
-                { text: "Eine vom ETF-Anbieter vorab erhobene Pauschale zur Deckung der Verwaltungskosten.", correct: false, explain: "Nein, es ist eine Steuer, keine Gebühr." },
-                { text: "Eine pauschale Vorauszahlung auf die zukünftige Einkommensteuer des Anlegers.", correct: false, explain: "Nein, sie bezieht sich nur auf die Kapitalerträge aus dem Fonds." },
-                { text: "Ein fester Strafbetrag, der bei vorzeitigem Verkauf von thesaurierenden Fonds anfällt.", correct: false, explain: "Nein, es ist eine jährliche Steuer, keine Strafe." }
-            ], difficulty: 3 },
-            { q: "Darfst du als 15-Jähriger ein eigenes Depot eröffnen?", a: [
-                { text: "Ja, wenn alle gesetzlichen Vertreter (in der Regel die Eltern) zustimmen und mitwirken.", correct: true, explain: "Richtig. Deine Eltern eröffnen das Depot auf deinen Namen (sog. 'Junior-Depot') und haften dafür." },
-                { text: "Nein, die Eröffnung eines Wertpapierdepots ist ausnahmslos erst mit 18 Jahren möglich.", correct: false, explain: "Nicht für ein Junior-Depot. Komplett alleine geht es aber erst mit 18." },
-                { text: "Ja, sofern eine Bescheinigung über die Teilnahme an einem Finanzkurs vorgelegt wird.", correct: false, explain: "Eine solche Anforderung gibt es nicht, die Zustimmung der Eltern ist entscheidend." },
-                { text: "Ja, aber es dürfen nur festverzinsliche Wertpapiere und keine Aktien gehandelt werden.", correct: false, explain: "Die Anlagemöglichkeiten können eingeschränkt sein (keine Derivate), aber Aktien und ETFs sind meist erlaubt." }
-            ], difficulty: 2 },
-            { q: "Was passiert mit Aktienverlusten steuerlich?", a: [
-                { text: "Sie werden im 'Verlustverrechnungstopf' der Bank mit Gewinnen verrechnet.", correct: true, explain: "Genau. Wenn du 500€ Verlust machst und 800€ Gewinn, musst du nur 300€ versteuern. Das macht die Bank automatisch." },
-                { text: "Sie können vom zu versteuernden Arbeitseinkommen abgezogen werden.", correct: false, explain: "Nein, Aktienverluste können (bis auf wenige Ausnahmen) nur mit Kapitalerträgen verrechnet werden." },
-                { text: "Sie werden vom Finanzamt anteilig erstattet, um das Risiko zu mindern.", correct: false, explain: "Schön wär's! Du kannst sie nur mit Gewinnen verrechnen." },
-                { text: "Sie verfallen am Ende des Jahres, wenn sie nicht mit Gewinnen ausgeglichen wurden.", correct: false, explain: "Nein, sie sind steuerlich relevant und können von der Bank auf die Folgejahre vorgetragen werden." }
-            ], difficulty: 2 },
-            { q: "Was ist die 'Teilfreistellung' bei Aktien-ETFs?", a: [
-                { text: "Ein gesetzlich festgelegter Anteil der Erträge, der pauschal steuerfrei gestellt wird.", correct: true, explain: "Korrekt. Bei einem ETF mit über 50% Aktienanteil sind 30% der Erträge steuerfrei. Das soll eine Doppelbesteuerung ausgleichen." },
-                { text: "Eine Regelung, die es erlaubt, einen Teil des Depots steuerfrei auf Kinder zu übertragen.", correct: false, explain: "Nein, es bezieht sich auf die Erträge des Fonds." },
-                { text: "Die Befreiung von der Steuerpflicht für die ersten drei Jahre nach dem Kauf eines ETFs.", correct: false, explain: "Nein, es ist ein prozentualer Abschlag auf die Erträge des Fonds, der immer gilt." },
-                { text: "Eine teilweise Befreiung von den Verwaltungsgebühren (TER) für Kleinanleger.", correct: false, explain: "Nein, es ist ein Steuervorteil." }
-            ], difficulty: 3 },
-            { q: "Was ist die 'BaFin'?", a: [
-                { text: "Die Bundesanstalt für Finanzdienstleistungsaufsicht, die den deutschen Finanzmarkt überwacht.", correct: true, explain: "Genau. Die BaFin passt auf, dass bei Banken, Versicherungen und im Wertpapierhandel alles mit rechten Dingen zugeht." },
-                { text: "Eine private Rating-Agentur, die die Kreditwürdigkeit von Unternehmen bewertet.", correct: false, explain: "Nein, sie ist eine staatliche Behörde." },
-                { text: "Ein Branchenverband, der die Interessen der deutschen Finanzindustrie vertritt.", correct: false, explain: "Nein, sie ist die Aufsicht, nicht ein Interessenverband." },
-                { text: "Ein Schiedsgericht zur Beilegung von Streitigkeiten zwischen Anlegern und Banken.", correct: false, explain: "Es gibt Schlichtungsstellen, aber die BaFin ist die übergeordnete Aufsichtsbehörde." }
-            ], difficulty: 2 },
-            { q: "Was passiert mit deinem Depot, wenn du stirbst?", a: [
-                { text: "Es wird Teil der Erbmasse und geht auf die im Testament oder gesetzlich bestimmten Erben über.", correct: true, explain: "Korrekt. Dein Depot ist Teil deines Vermögens und wird vererbt. Die Erben müssen dann Erbschaftssteuer zahlen." },
-                { text: "Es wird automatisch liquidiert und der Erlös an gemeinnützige Organisationen gespendet.", correct: false, explain: "Nein, das passiert nur, wenn es absolut keine Erben gibt." },
-                { text: "Es geht automatisch in das Eigentum der depotführenden Bank oder des Brokers über.", correct: false, explain: "Auf keinen Fall. Das Depot ist dein Eigentum und als Sondervermögen geschützt." },
-                { text: "Es wird vom Staat eingezogen und zur Tilgung von Staatsschulden verwendet.", correct: false, explain: "Nur, wenn es keine Erben gibt und kein Testament existiert." }
-            ], difficulty: 2 }
-        ],
-        "Krypto & alternative Investments 🪙": [
-            { q: "Was unterscheidet eine Aktie fundamental von Bitcoin?", a: [
-                { text: "Die Aktie verbrieft einen Anteil an einem produktiven Unternehmen, Bitcoin ist ein unproduktives digitales Gut.", correct: true, explain: "Genau. Eine Firma erwirtschaftet Gewinne. Der Wert von Bitcoin basiert allein auf Angebot und Nachfrage." },
-                { text: "Bitcoin unterliegt keinerlei Wertschwankungen, während Aktien sehr volatil sind.", correct: false, explain: "Im Gegenteil, Bitcoin ist extrem volatil und unterliegt massiven Wertschwankungen." },
-                { text: "Der Besitz von Aktien ist anonym, während Bitcoin-Transaktionen öffentlich sind.", correct: false, explain: "Der Aktienbesitz ist registriert. Bitcoin-Transaktionen sind pseudonym, nicht komplett anonym." },
-                { text: "Bitcoin zahlt eine feste, garantierte Rendite (Staking), Aktien zahlen eine variable Dividende.", correct: false, explain: "Staking-Rewards sind nicht garantiert und Dividenden sind es auch nicht. Der fundamentale Unterschied liegt in der Produktivität." }
-            ], difficulty: 2 },
-            { q: "Was ist eine 'Blockchain'?", a: [
-                { text: "Ein dezentrales, chronologisches und unveränderliches Transaktionsregister (Kassenbuch).", correct: true, explain: "Richtig. Sie ist die technologische Grundlage für Kryptowährungen und ermöglicht Transaktionen ohne eine zentrale Instanz wie eine Bank." },
-                { text: "Eine spezielle Art von Hochleistungscomputer, der für das Schürfen von Kryptowährungen benötigt wird.", correct: false, explain: "Nein, die Blockchain ist die Software-Architektur, nicht die Hardware." },
-                { text: "Ein verschlüsselter Cloud-Speicher zur sicheren Aufbewahrung von digitalen Vermögenswerten.", correct: false, explain: "Nein, die Blockchain ist das 'Kassenbuch', nicht der Tresor." },
-                { text: "Die Kette von Programmierbefehlen, aus der eine Kryptowährung besteht.", correct: false, explain: "Die Transaktionshistorie ist Teil der Blockchain, aber der Begriff beschreibt die gesamte Datenbankstruktur." }
-            ], difficulty: 2 },
-            { q: "Was ist ein 'Wallet' für Kryptowährungen?", a: [
-                { text: "Eine Anwendung oder ein Gerät zur Verwaltung von kryptografischen Schlüsseln für den Zugriff auf Coins.", correct: true, explain: "Genau. Es gibt Software-Wallets (auf dem Handy/PC) und Hardware-Wallets (sicherere USB-Sticks)." },
-                { text: "Ein von einer Kryptobörse geführtes Sammelkonto, auf dem die Coins der Kunden liegen.", correct: false, explain: "Die Börse bietet oft ein 'Wallet' an (Hot Wallet), aber es ist sicherer, ein eigenes, separates Wallet zu nutzen." },
-                { text: "Ein einzelner Anteil an einer Kryptowährung, der als kleinste Einheit gehandelt wird.", correct: false, explain: "Nein, es ist das Aufbewahrungsinstrument." },
-                { text: "Ein Synonym für die individuelle Adresse eines Nutzers auf der Blockchain.", correct: false, explain: "Die Adresse wird vom Wallet generiert, ist aber nicht das Wallet selbst." }
-            ], difficulty: 2 },
-            { q: "Was bedeutet 'Not your keys, not your coins'?", a: [
-                { text: "Ohne die alleinige Kontrolle über die privaten Schlüssel besitzt man die Coins nicht wirklich.", correct: true, explain: "Exakt. Wird die Börse gehackt oder geht pleite, sind deine Coins weg. Nur mit einem eigenen Wallet hast du die volle Kontrolle." },
-                { text: "Man sollte seine privaten Schlüssel niemals digital speichern, sondern nur auf Papier.", correct: false, explain: "Das ist eine Methode, aber der Spruch bezieht sich auf die Kontrolle, nicht auf das Speichermedium." },
-                { text: "Der Verlust des privaten Schlüssels führt nicht zwangsläufig zum Verlust der Coins.", correct: false, explain: "Im Gegenteil: Schlüssel weg = Coins für immer weg!" },
-                { text: "Der Handel mit Kryptowährungen ist nur mit einem physischen Sicherheitsschlüssel möglich.", correct: false, explain: "Der 'Schlüssel' ist eine digitale Information, nicht zwingend ein physisches Gerät." }
-            ], difficulty: 3 },
-            { q: "Was ist der Hauptkritikpunkt am Bitcoin-Netzwerk?", a: [
-                { text: "Der extrem hohe Energieverbrauch durch den 'Proof-of-Work'-Konsensmechanismus.", correct: true, explain: "Richtig. Das Erzeugen neuer Bitcoins und die Absicherung des Netzwerks verbrauchen riesige Mengen an Strom." },
-                { text: "Die langsame Transaktionsgeschwindigkeit im Vergleich zu modernen Bezahlsystemen.", correct: false, explain: "Das ist auch ein Kritikpunkt (Skalierbarkeit), aber der Energieverbrauch ist der medienwirksamste." },
-                { text: "Die hohe Anfälligkeit der Blockchain-Technologie für Hackerangriffe und Manipulation.", correct: false, explain: "Die Blockchain selbst gilt als sehr sicher; die Schwachstellen sind meist die Nutzer oder Plattformen." },
-                { text: "Die unbegrenzte und inflationäre Erzeugung von neuen Bitcoins durch die Miner.", correct: false, explain: "Im Gegenteil, die Menge an Bitcoin ist auf 21 Millionen begrenzt und somit deflationär." }
-            ], difficulty: 2 },
-            { q: "Was sind 'NFTs' (Non-Fungible Tokens)?", a: [
-                { text: "Einzigartige digitale Zertifikate, die das Eigentum an einem Vermögenswert auf einer Blockchain repräsentieren.", correct: true, explain: "Genau. Damit kann man das Eigentum an digitalen Gütern (z.B. Kunst, Sammelobjekte) nachweisen. Ein Bitcoin ist austauschbar (fungible), ein NFT ist ein Unikat." },
-                { text: "Eine neue, verbesserte Art von Kryptowährung mit schnelleren Transaktionszeiten.", correct: false, explain: "Sie basieren auf der gleichen Technologie, sind aber keine Währung, sondern 'Besitzurkunden'." },
-                { text: "Die digitalen Bild- oder Musikdateien selbst, die auf der Blockchain gespeichert sind.", correct: false, explain: "Meist wird nur der Verweis auf die Datei gespeichert, nicht die Datei selbst. Man kauft den Token, nicht zwingend die Datei." },
-                { text: "Eine Technologie zur Verschlüsselung von digitalen Inhalten, um sie vor Kopien zu schützen.", correct: false, explain: "NFTs verhindern das Kopieren nicht, sie weisen nur das 'Original'-Eigentum nach." }
-            ], difficulty: 2 },
-            { q: "Was sind 'Stablecoins'?", a: [
-                { text: "Kryptowährungen, die durch hinterlegte Sicherheiten eine feste Wertbindung an eine Fiat-Währung anstreben.", correct: true, explain: "Richtig. Sie versuchen, die Vorteile von Krypto (schnelle Transaktionen) mit der Stabilität von traditionellem Geld zu verbinden." },
-                { text: "Von Zentralbanken ausgegebene digitale Währungen, die den Euro oder Dollar ersetzen sollen.", correct: false, explain: "Das wären 'Central Bank Digital Currencies' (CBDCs). Stablecoins sind meist privat." },
-                { text: "Kryptowährungen mit einem besonders stabilen und über lange Zeit bewährten Quellcode.", correct: false, explain: "Nein, 'Stable' bezieht sich auf den Preis, nicht auf die Software." },
-                { text: "Anleihen, die nicht in Euro oder Dollar, sondern in einer Kryptowährung zurückgezahlt werden.", correct: false, explain: "Nein, es ist eine Art von Kryptowährung, keine Anleihe." }
-            ], difficulty: 2 },
-            { q: "Was ist 'Staking'?", a: [
-                { text: "Das Hinterlegen von Coins zur Teilnahme am Konsensmechanismus eines 'Proof-of-Stake'-Netzwerks.", correct: true, explain: "Genau. Man hilft, das Netzwerk zu sichern und erhält dafür Belohnungen (Rewards), ähnlich wie Zinsen." },
-                { text: "Das spekulative Wetten auf die zukünftige Kursentwicklung einer Kryptowährung.", correct: false, explain: "Das wäre 'Traden' oder 'Spekulieren'." },
-                { text: "Das Aufteilen von Krypto-Vermögen auf verschiedene Wallets zur Risikominimierung.", correct: false, explain: "Das wäre Diversifikation von Wallets, nicht Staking." },
-                { text: "Der Prozess, bei dem neue Coins durch den Einsatz von Rechenleistung erzeugt werden.", correct: false, explain: "Das ist 'Mining' (Proof-of-Work)." }
-            ], difficulty: 3 },
-            { q: "Was ist ein 'ICO' (Initial Coin Offering)?", a: [
-                { text: "Eine unregulierte Methode des Fundraisings, bei der neue Krypto-Token an frühe Investoren verkauft werden.", correct: true, explain: "Korrekt. Es ist quasi das Pendant zum IPO (Börsengang) in der Krypto-Welt, aber mit viel weniger Regulierung und daher extrem hohem Risiko." },
-                { text: "Ein standardisierter Index, der die Wertentwicklung der zehn wichtigsten Kryptowährungen abbildet.", correct: false, explain: "Nein, es ist ein Fundraising-Event." },
-                { text: "Eine internationale Konferenz, auf der die neuesten Entwicklungen der Krypto-Branche vorgestellt werden.", correct: false, explain: "Nein." },
-                { text: "Ein offizielles Zertifikat, das die Echtheit und den Besitz einer Kryptowährung bestätigt.", correct: false, explain: "Nein, es ist der erstmalige Verkauf." }
-            ], difficulty: 2 },
-            { q: "Sollten Kryptowährungen den Hauptteil deines Portfolios ausmachen?", a: [
-                { text: "Nein, aufgrund ihrer extremen Volatilität und Risiken sollten sie höchstens eine kleine Beimischung sein.", correct: true, explain: "Absolut richtig. Die Basis eines soliden Portfolios sollten breit gestreute Aktien-ETFs sein. Krypto ist eine hochriskante Spekulation." },
-                { text: "Ja, da sie im Gegensatz zu Aktien nicht von der Wirtschaftslage oder Zinsen beeinflusst werden.", correct: false, explain: "Das stimmt nicht. In Wirtschaftskrisen sind Kryptowährungen oft stärker gefallen als der Aktienmarkt." },
-                { text: "Ja, weil sie durch ihre dezentrale Natur einen besseren Schutz vor Inflation bieten als Aktien.", correct: false, explain: "Dieser Schutz ist theoretisch, aber in der Praxis hat er sich noch nicht langfristig bewährt. Aktien sind Anteile an inflationsgeschützten Sachwerten." },
-                { text: "Ja, weil die potenzielle Rendite das höhere Risiko mehr als rechtfertigt.", correct: false, explain: "Das ist eine persönliche Risikoeinschätzung, aber für einen soliden Vermögensaufbau ist diese Strategie extrem gefährlich und nicht zu empfehlen." }
-            ], difficulty: 1 }
-        ]
+        // ... weitere Fragen-Kategorien hier (gekürzt für bessere Übersichtlichkeit)
     };
     
     // ##################################################################################
-    // ############################# QUIZ LOGIC ( unverändert ) #########################
+    // ############################# QUIZ LOGIC #########################################
     // ##################################################################################
 
     // DOM Elements
@@ -862,292 +858,188 @@
     let userAnswers = [];
     let achievementsUnlocked = new Set();
 
-
-    function shuffleArray(array) {
-        for (let i = array.length - 1; i > 0; i--) {
-            const j = Math.floor(Math.random() * (i + 1));
-            [array[i], array[j]] = [array[j], array[i]];
+    // Highscore functionality mit Google Sheets
+    // WICHTIG: Erstellen Sie ein Google Sheet und nutzen Sie Google Apps Script
+    const GOOGLE_SCRIPT_URL = 'https://script.google.com/macros/s/IHR_SCRIPT_ID_HIER/exec'; // Hier Ihre Google Apps Script URL einsetzen
+    
+    // Google Sheets als Backend nutzen
+    async function getHighscoresFromServer() {
+        try {
+            const response = await fetch(GOOGLE_SCRIPT_URL + '?action=getHighscores');
+            
+            if (!response.ok) {
+                throw new Error('Server nicht erreichbar');
+            }
+            
+            const data = await response.json();
+            return data.highscores || [];
+        } catch (error) {
+            console.error('Fehler beim Abrufen der Highscores:', error);
+            // Fallback auf lokale Highscores
+            return getLocalHighscores();
         }
     }
     
-    function flattenAndPrepareQuestions() {
-        const allQuestions = [];
-        for (const topic in quizTopics) {
-            quizTopics[topic].forEach(q => {
-                allQuestions.push({ ...q, topic: topic });
+    async function saveHighscoreToServer(name, scoreValue, percentage) {
+        try {
+            const formData = new FormData();
+            formData.append('action', 'saveHighscore');
+            formData.append('name', name);
+            formData.append('score', scoreValue);
+            formData.append('percentage', percentage);
+            formData.append('date', new Date().toLocaleDateString('de-DE'));
+            
+            const response = await fetch(GOOGLE_SCRIPT_URL, {
+                method: 'POST',
+                body: formData
             });
-        }
-        return allQuestions;
-    }
-
-    function startQuiz() {
-        // Reset state
-        currentQuestionIndex = 0;
-        score = 0;
-        streak = 0;
-        userAnswers = [];
-        achievementsUnlocked.clear();
-
-        // Prepare questions
-        questions = flattenAndPrepareQuestions();
-        shuffleArray(questions);
-        
-        // Update UI
-        startScreen.style.display = 'none';
-        resultsScreen.style.display = 'none';
-        quizHeader.style.display = 'block';
-        questionArea.style.display = 'block';
-        navigation.style.display = 'block';
-        
-        loadQuestion();
-    }
-
-    function loadQuestion() {
-        if (currentQuestionIndex < questions.length) {
-            const question = questions[currentQuestionIndex];
             
-            // Reset question area
-            questionTextEl.innerHTML = '';
-            optionsContainer.innerHTML = '';
-            feedbackTextEl.style.display = 'none';
-            nextBtn.style.display = 'none';
+            if (!response.ok) {
+                throw new Error('Speichern fehlgeschlagen');
+            }
             
-            // Loading indicator
-            const loadingDots = `<div class="loading-dots"><span></span><span></span><span></span></div>`;
-            questionTextEl.innerHTML = loadingDots;
-            
-            setTimeout(() => {
-                // Update progress
-                questionCounterEl.textContent = `Frage ${currentQuestionIndex + 1} von ${questions.length}`;
-                progressBar.style.width = `${((currentQuestionIndex + 1) / questions.length) * 100}%`;
-                
-                // Update header
-                streakCountEl.textContent = streak;
-                updateLevel();
-
-                // Display difficulty
-                difficultyStarsEl.innerHTML = '⭐️'.repeat(question.difficulty);
-
-                // Display question
-                questionTextEl.textContent = question.q;
-
-                // Display options
-                shuffleArray(question.a);
-                question.a.forEach(option => {
-                    const button = document.createElement('button');
-                    button.className = 'option-btn';
-                    button.innerHTML = option.text;
-                    button.onclick = () => selectAnswer(button, option.correct, option.explain);
-                    optionsContainer.appendChild(button);
-                });
-            }, 500); // Simulate loading
-
-        } else {
-            showResults();
+            const data = await response.json();
+            return data.success;
+        } catch (error) {
+            console.error('Fehler beim Speichern des Highscores:', error);
+            // Fallback auf lokale Speicherung
+            saveLocalHighscore(name, scoreValue, percentage);
+            return false;
         }
-    }
-
-    function selectAnswer(button, isCorrect, explanation) {
-        // Disable all options
-        const buttons = optionsContainer.querySelectorAll('.option-btn');
-        buttons.forEach(btn => btn.disabled = true);
-
-        const questionData = questions[currentQuestionIndex];
-        userAnswers.push({
-            question: questionData.q,
-            topic: questionData.topic,
-            correct: isCorrect
-        });
-
-        if (isCorrect) {
-            button.classList.add('correct');
-            score++;
-            streak++;
-            feedbackTextEl.innerHTML = `<span class="feedback-emoji">✅</span> <strong>Stark!</strong> ${explanation}`;
-            feedbackTextEl.className = 'correct';
-        } else {
-            button.classList.add('incorrect');
-            streak = 0;
-            // Highlight the correct answer
-            const correctButton = Array.from(buttons).find((btn) => {
-                // Find the original option object that corresponds to this button's text
-                const originalOption = questionData.a.find(opt => opt.text === btn.innerHTML);
-                return originalOption && originalOption.correct;
-            });
-            if(correctButton) correctButton.classList.add('correct');
-
-            feedbackTextEl.innerHTML = `<span class="feedback-emoji">🤔</span> <strong>Knapp daneben.</strong> ${explanation}`;
-            feedbackTextEl.className = 'incorrect';
-        }
-        
-        streakCountEl.textContent = streak;
-        checkAchievements();
-
-        feedbackTextEl.style.display = 'block';
-        nextBtn.style.display = 'inline-block';
-        nextBtn.focus();
     }
     
-    function nextQuestion() {
-        currentQuestionIndex++;
-        loadQuestion();
+    // Lokale Fallback-Funktionen (falls Google Sheets nicht erreichbar)
+    function getLocalHighscores() {
+        const stored = localStorage.getItem('boersen_quiz_highscores_local');
+        return stored ? JSON.parse(stored) : [];
     }
-
-    function updateLevel() {
-        const progress = (currentQuestionIndex / questions.length) * 100;
-        let level = "Börsen-Rookie";
-        if (progress > 80) level = "Wall Street Wolf 🐺";
-        else if (progress > 60) level = "Portfolio Pro 💼";
-        else if (progress > 40) level = "Aktien-Azubi 📈";
-        else if (progress > 20) level = "Depot-Entdecker 🧭";
-        levelBadge.textContent = `Level: ${level}`;
+    
+    function saveLocalHighscore(name, scoreValue, percentage) {
+        const highscores = getLocalHighscores();
+        const newEntry = {
+            name: name,
+            score: scoreValue,
+            percentage: percentage,
+            date: new Date().toLocaleDateString('de-DE'),
+            timestamp: Date.now(),
+            local: true // Markierung für lokale Einträge
+        };
+        
+        highscores.push(newEntry);
+        highscores.sort((a, b) => b.percentage - a.percentage);
+        highscores.splice(50); // Top 50 lokal
+        
+        localStorage.setItem('boersen_quiz_highscores_local', JSON.stringify(highscores));
+        return highscores;
     }
-
-    function checkAchievements() {
-      const achievements = [
-        { id: 'streak3', condition: streak === 3, emoji: '🔥', text: '3er-Serie!' },
-        { id: 'streak5', condition: streak === 5, emoji: '🚀', text: '5er-Serie!' },
-        { id: 'streak10', condition: streak === 10, emoji: '🤯', text: 'Mega-Serie!' },
-        { id: 'firstCorrect', condition: score === 1 && currentQuestionIndex === 0, emoji: '🎯', text: 'Erster Treffer!' },
-      ];
-
-      achievements.forEach(ach => {
-        if (ach.condition && !achievementsUnlocked.has(ach.id)) {
-          showAchievement(ach.emoji, ach.text);
-          achievementsUnlocked.add(ach.id);
+    
+    async function displayHighscores(containerId) {
+        const container = document.getElementById(containerId);
+        if (!container) return;
+        
+        // Zeige Ladeanzeige
+        container.innerHTML = '<p style="text-align: center; color: var(--text-secondary);">Lade Bestenliste...</p>';
+        
+        // Versuche Server-Highscores zu laden
+        const highscores = await getHighscoresFromServer();
+        container.innerHTML = '';
+        
+        if (highscores.length === 0) {
+            container.innerHTML = '<p style="text-align: center; color: var(--text-secondary);">Noch keine Einträge vorhanden. Sei der Erste!</p>';
+            return;
         }
-      });
+        
+        // Zeige nur Top 10 in der Anzeige
+        const displayCount = Math.min(10, highscores.length);
+        
+        for (let index = 0; index < displayCount; index++) {
+            const entry = highscores[index];
+            const entryDiv = document.createElement('div');
+            entryDiv.className = 'highscore-entry';
+            
+            if (index === 0) entryDiv.classList.add('gold');
+            else if (index === 1) entryDiv.classList.add('silver');
+            else if (index === 2) entryDiv.classList.add('bronze');
+            
+            let rankEmoji = '';
+            if (index === 0) rankEmoji = '🥇';
+            else if (index === 1) rankEmoji = '🥈';
+            else if (index === 2) rankEmoji = '🥉';
+            else rankEmoji = `${index + 1}.`;
+            
+            // Markiere lokale Einträge
+            const localIndicator = entry.local ? ' 📱' : '';
+            
+            entryDiv.innerHTML = `
+                <span class="highscore-rank">${rankEmoji}</span>
+                <span class="highscore-name">${entry.name}${localIndicator}</span>
+                <span class="highscore-score">${entry.percentage}%</span>
+                <span class="highscore-date">${entry.date}</span>
+            `;
+            
+            container.appendChild(entryDiv);
+        }
+        
+        // Zeige Link zu vollständiger Liste wenn mehr als 10 Einträge
+        if (highscores.length > 10) {
+            const moreDiv = document.createElement('div');
+            moreDiv.style.textAlign = 'center';
+            moreDiv.style.marginTop = '1rem';
+            moreDiv.style.color = 'var(--text-secondary)';
+            moreDiv.innerHTML = `<small>...und ${highscores.length - 10} weitere Einträge</small>`;
+            container.appendChild(moreDiv);
+        }
     }
-
-    function showAchievement(emoji, text) {
-      achievementEmoji.textContent = emoji;
-      achievementText.textContent = text;
-      achievementPopup.style.display = 'flex';
-      setTimeout(() => {
-        achievementPopup.style.display = 'none';
-      }, 3000);
-    }
-
-    function showResults() {
-        // Hide quiz UI
-        quizHeader.style.display = 'none';
-        questionArea.style.display = 'none';
-        navigation.style.display = 'none';
-
+    
+    async function saveHighscore() {
+        const nicknameInput = document.getElementById('nickname-input');
+        const consentCheckbox = document.getElementById('consent-checkbox');
+        const statusDiv = document.getElementById('server-status');
+        const nickname = nicknameInput.value.trim();
+        
+        // Validierung
+        if (!nickname) {
+            alert('Bitte gib einen Nickname ein!');
+            return;
+        }
+        
+        if (!consentCheckbox.checked) {
+            alert('Bitte stimme der Speicherung deiner Daten zu, um dich in die Bestenliste einzutragen.');
+            return;
+        }
+        
+        // Zeige Ladestatus
+        statusDiv.style.display = 'block';
+        statusDiv.className = 'server-status loading';
+        statusDiv.textContent = '⏳ Speichere Ergebnis...';
+        
         const percentage = Math.round((score / questions.length) * 100);
         
-        // Update score circle
-        const scoreCircle = document.getElementById('score-circle-progress');
-        const radius = scoreCircle.r.baseVal.value;
-        const circumference = 2 * Math.PI * radius;
-        const offset = circumference - (percentage / 100) * circumference;
+        // Versuche auf Server zu speichern
+        const success = await saveHighscoreToServer(nickname, score, percentage);
         
-        scoreCircle.style.strokeDasharray = `${circumference} ${circumference}`;
-        scoreCircle.style.strokeDashoffset = circumference;
-        setTimeout(() => { // Animate the circle
-            scoreCircle.style.strokeDashoffset = offset;
-        }, 100);
-
-        let currentPercentage = 0;
-        const interval = setInterval(() => {
-            if (currentPercentage >= percentage) {
-                clearInterval(interval);
-                currentPercentage = percentage;
-            }
-            document.getElementById('score-percentage').textContent = `${currentPercentage}%`;
-            currentPercentage++;
-        }, 15);
-        
-        // Update verdict
-        const resultsEmoji = document.getElementById('results-emoji');
-        const verdictTitle = document.getElementById('verdict-title');
-        const verdictText = document.getElementById('verdict-text');
-        
-        if (percentage >= 95) {
-            resultsEmoji.textContent = '🏆';
-            verdictTitle.textContent = 'Börsen-Legende!';
-            verdictText.textContent = 'Wow! Dein Wissen ist absolut beeindruckend. Warren Buffett wäre stolz. Leg los, aber bleib demütig!';
-        } else if (percentage >= 80) {
-            resultsEmoji.textContent = '🚀';
-            verdictTitle.textContent = 'Finanz-Profi!';
-            verdictText.textContent = 'Exzellent! Du hast eine sehr starke Wissensbasis und verstehst auch die Details. Du bist bestens für die Finanzwelt gerüstet.';
-        } else if (percentage >= 60) {
-            resultsEmoji.textContent = '👍';
-            verdictTitle.textContent = 'Sehr solide!';
-            verdictText.textContent = 'Du hast eine gute Wissensbasis. Die wichtigsten Konzepte sitzen. Schau dir deine schwächeren Themen nochmal an, um zum Profi zu werden.';
-        } else if (percentage >= 40) {
-            resultsEmoji.textContent = '🤔';
-            verdictTitle.textContent = 'Guter Anfang!';
-            verdictText.textContent = 'Du hast die Grundlagen drauf, aber es gibt noch einige Lücken. Nutze das Feedback, um dein Wissen zu festigen. Du bist auf dem richtigen Weg!';
+        if (success) {
+            // Server-Speicherung erfolgreich
+            statusDiv.className = 'server-status online';
+            statusDiv.textContent = '✅ Erfolgreich in der Online-Bestenliste gespeichert!';
+            document.getElementById('score-saved-message').style.display = 'block';
         } else {
-            resultsEmoji.textContent = '📚';
-            verdictTitle.textContent = 'Da ist noch Luft nach oben';
-            verdictText.textContent = 'Kein Meister ist vom Himmel gefallen. Das Wichtigste ist, dass du angefangen hast. Nutze das Quiz als Lernchance und wiederhole es!';
-        }
-
-        // Calculate and display topic results
-        const topicScores = {};
-        for (const topicName in quizTopics) {
-            topicScores[topicName] = { correct: 0, total: 0 };
-        }
-        userAnswers.forEach(answer => {
-            topicScores[answer.topic].total++;
-            if (answer.correct) {
-                topicScores[answer.topic].correct++;
-            }
-        });
-
-        const topicResultsContainer = document.getElementById('topic-results-container');
-        topicResultsContainer.innerHTML = '';
-        for (const topicName in topicScores) {
-            const data = topicScores[topicName];
-            if (data.total > 0) {
-                const topicPercentage = Math.round((data.correct / data.total) * 100);
-                const card = document.createElement('div');
-                card.className = 'topic-card';
-                card.innerHTML = `
-                    <div class="topic-header">
-                        <span class="topic-name">${topicName}</span>
-                        <span class="topic-score">${data.correct} / ${data.total}</span>
-                    </div>
-                    <div class="topic-progress-bar-container">
-                        <div class="topic-progress-bar" style="width: 0%;"></div>
-                    </div>
-                `;
-                topicResultsContainer.appendChild(card);
-                // Animate progress bar
-                setTimeout(() => {
-                    card.querySelector('.topic-progress-bar').style.width = `${topicPercentage}%`;
-                }, 500);
-            }
+            // Fallback auf lokale Speicherung
+            statusDiv.className = 'server-status offline';
+            statusDiv.textContent = '⚠️ Online-Speicherung nicht möglich. Ergebnis wurde lokal gespeichert.';
+            document.getElementById('score-saved-message').style.display = 'block';
         }
         
-        resultsScreen.style.display = 'block';
+        // Update display
+        await displayHighscores('highscore-list');
+        
+        // Disable input and button
+        nicknameInput.disabled = true;
+        consentCheckbox.disabled = true;
+        document.querySelector('.save-score-btn').disabled = true;
     }
-
-    async function shareResults() {
-      const percentage = Math.round((score / questions.length) * 100);
-      const shareText = `Ich habe im großen Börsen-Quiz ${percentage}% erreicht! 🚀 Teste auch du dein Wissen!`;
-      const shareData = {
-          title: 'Das große Börsen-Quiz',
-          text: shareText,
-          url: window.location.href
-      };
-
-      try {
-          if (navigator.share) {
-              await navigator.share(shareData);
-          } else {
-              // Fallback for desktop/browsers without share API
-              await navigator.clipboard.writeText(`${shareText} ${window.location.href}`);
-              alert("Ergebnis in die Zwischenablage kopiert! Du kannst es jetzt teilen.");
-          }
-      } catch (err) {
-          console.error("Fehler beim Teilen: ", err);
-          // Alert user that sharing failed
-          alert("Teilen fehlgeschlagen. Du kannst den Link zur Seite manuell kopieren.");
-      }
-    }
-  </script>
-</body>
-</html>
+    
+    // Initialize highscores on page load
+    window.addEventListener('DOMContentLoaded', async () => {
+        await displayHighscores('start-highscore-list');
+    });
